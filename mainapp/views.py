@@ -149,7 +149,7 @@ def join_group(request):
         
         request.session['member_id'] = member.member_id
         messages.success(request, f'You have successfully joined the group as {name}.')
-        return redirect('group', group_id=group_id)
+        return render(request, 'mainapp/group_joined.html', {'group': group, 'member': member})
     return redirect('grouporder')
 
 def calculate_price_per_id(member_count):
