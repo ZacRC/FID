@@ -11,6 +11,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from .models import Order, Group, GroupMember, GroupMemberOrderInfo, VenmoPayment
+from django.urls import reverse
 
 logger = logging.getLogger(__name__)
 
@@ -75,14 +76,16 @@ def checkout(request):
         logger.error(f"Error in checkout: {str(e)}", exc_info=True)
         return render(request, 'mainapp/error.html', {'error_message': f'An error occurred during checkout. Please try again. Error: {str(e)}'})
 
-@require_POST
 def payment(request):
-    return render(request, 'mainapp/payment.html')
+    order_id = request.session.get('order_id')
+    if not order_id:
+        return redirect('order')
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'mainapp/payment.html', {'order': order})
 
 def generate_tracking_number():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
 
-@require_POST
 def confirmed(request):
     order_id = request.session.get('order_id')
     if order_id:
@@ -436,15 +439,9 @@ def confirm_individual_payment(request):
             )
             order.paid = True
             order.save()
-            return JsonResponse({'success': True})
+            return JsonResponse({'success': True, 'redirect_url': reverse('confirmed')})
         else:
             return JsonResponse({'success': False, 'error': 'No screenshot provided'})
 
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
-def payment(request):
-    order_id = request.session.get('order_id')
-    if not order_id:
-        return redirect('order')
-    order = get_object_or_404(Order, id=order_id)
-    return render(request, 'mainapp/payment.html', {'order': order})
