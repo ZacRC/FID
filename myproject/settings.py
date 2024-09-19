@@ -22,8 +22,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
-
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',') + ['nafakes.club', 'www.nafakes.club']
 # Application definition
 
 INSTALLED_APPS = [
