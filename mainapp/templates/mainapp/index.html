@@ -1,118 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAFakes - Premium Fake Products for Kids</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-        }
-        .hero {
-            background: linear-gradient(135deg, #6e8efb, #a777e3);
-            color: white;
-            padding: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .hero-content {
-            max-width: 600px;
-        }
-        .hero h1 {
-            font-size: 3.5em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        .hero p {
-            font-size: 1.2em;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        .cta-button {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: #ff6b6b;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            text-transform: uppercase;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .cta-button:hover {
-            background-color: #ff8787;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
-        }
-        .hero-image {
-            max-width: 500px;
-            width: 100%;
-            height: auto;
-        }
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-        }
-        .shape-1 {
-            top: -50px;
-            left: -50px;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background-color: white;
-        }
-        .shape-2 {
-            bottom: -100px;
-            right: -100px;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background-color: white;
-        }
-        @media (max-width: 768px) {
-            .hero-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            .hero-content {
-                margin-bottom: 40px;
-            }
-            .hero h1 {
-                font-size: 2.5em;
-            }
-            .hero-image {
-                max-width: 100%;
-            }
-        }
-    </style>
-</head>
-<body>
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>Welcome to NAFakes</h1>
-                <p>Discover premium, imaginary products that spark joy and creativity in children. Our not-so-real items are perfect for make-believe play!</p>
-                <a href="#" class="cta-button">Explore Collection</a>
-            </div>
-            <img src="https://via.placeholder.com/500x400" alt="NAFakes Products" class="hero-image">
+{% extends 'mainapp/base.html' %}
+
+{% block title %}NAFakes - Premium Fake Products for Kids{% endblock %}
+
+{% block extra_styles %}
+<style>
+    /* ... (keep existing styles) ... */
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <h1>Welcome to NAFakes</h1>
+            <p>Discover premium, imaginary products that spark joy and creativity in children. Our not-so-real items are perfect for make-believe play!</p>
+            <a href="#" class="cta-button">Explore Collection</a>
         </div>
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-    </section>
-</body>
-</html>
+        <img src="https://via.placeholder.com/500x400" alt="NAFakes Products" class="hero-image">
+    </div>
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+</section>
+{% endblock %}

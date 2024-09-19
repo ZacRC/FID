@@ -4,3 +4,15 @@ from django.shortcuts import render
 
 def index(request):
     return render(request, 'mainapp/index.html')
+
+def about(request):
+    return render(request, 'mainapp/about.html')
+
+def pricing(request):
+    return render(request, 'mainapp/pricing.html')
+
+def faq(request):
+    return render(request, 'mainapp/faq.html')
+
+def reviews(request):
+    return render(request, 'mainapp/reviews.html')
