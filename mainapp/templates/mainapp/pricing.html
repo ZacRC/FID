@@ -12,32 +12,32 @@
                 <p class="text-3xl font-bold">$49.99</p>
             </div>
             <div class="p-6">
-                <div class="flex items-center justify-center mb-6">
-                    <img src="{% static 'images/drivers_license_normal.png' %}" alt="Normal Driver's License" class="w-48 h-auto">
+                <div class="flex items-center justify-center mb-6 text-6xl text-primary">
+                    <i class="fas fa-id-card"></i>
                 </div>
                 <ul class="mb-6 space-y-2">
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         Scannable
                     </li>
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         UV Test
                     </li>
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         Bend Test
                     </li>
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         All 50 States
                     </li>
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         Barstool Approved
                     </li>
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         Shipping Time 7-14 days
                     </li>
                 </ul>
@@ -50,84 +50,52 @@
                 <p class="text-3xl font-bold">$79.99</p>
             </div>
             <div class="p-6">
-                <div class="flex items-center justify-center mb-6">
-                    <img src="{% static 'images/drivers_license_expedited.png' %}" alt="Expedited Driver's License" class="w-48 h-auto">
+                <div class="flex items-center justify-center mb-6 text-6xl text-accent">
+                    <i class="fas fa-id-card"></i>
                 </div>
                 <ul class="mb-6 space-y-2">
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         Scannable
                     </li>
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         UV Test
                     </li>
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         Bend Test
                     </li>
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <i class="fas fa-check text-green-500 mr-2"></i>
                         All 50 States
                     </li>
-{% extends 'mainapp/base.html' %}
-
-{% block title %}Pricing - NAFakes{% endblock %}
-
-{% block content %}
-<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Our Pricing Plans</h1>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
-            <div class="bg-primary text-secondary p-6">
-                <h2 class="text-2xl font-semibold mb-2">Basic Imagination</h2>
-                <p class="text-3xl font-bold">$9.99<span class="text-sm font-normal">/month</span></p>
-            </div>
-            <div class="p-6">
-                <ul class="mb-6 space-y-2">
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Access to 5 imaginary products
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        Barstool Approved
                     </li>
                     <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Monthly new product updates
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Basic support
+                        <i class="fas fa-check text-green-500 mr-2"></i>
+                        Shipping Time 3-5 days
                     </li>
                 </ul>
-                <a href="{% url 'order' %}" class="block text-center bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300">Choose Plan</a>
-            </div>
-        </div>
-        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
-            <div class="bg-accent text-secondary p-6">
-                <h2 class="text-2xl font-semibold mb-2">Premium Fantasies</h2>
-                <p class="text-3xl font-bold">$19.99<span class="text-sm font-normal">/month</span></p>
-            </div>
-            <div class="p-6">
-                <ul class="mb-6 space-y-2">
-                    <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Access to all imaginary products
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Weekly new product updates
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Priority support
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Exclusive virtual events
-                    </li>
-                </ul>
-                <a href="{% url 'order' %}" class="block text-center bg-accent text-secondary px-4 py-2 rounded-full hover:bg-primary transition duration-300">Choose Plan</a>
+                <a href="{% url 'order' %}?shipping=expedited" class="block text-center bg-accent text-secondary px-4 py-2 rounded-full hover:bg-primary transition duration-300">Choose Expedited Shipping</a>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const cards = document.querySelectorAll('.transform');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('scale-105');
+            });
+            card.addEventListener('mouseleave', () => {
+                card.classList.remove('scale-105');
+            });
+        });
+    });
+</script>
 {% endblock %}
