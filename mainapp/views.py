@@ -141,6 +141,11 @@ def join_group(request):
             messages.error(request, 'This group is already full.')
             return redirect('group', group_id=group_id)
 
+        # Check if the name is already taken in this group
+        if GroupMember.objects.filter(group=group, name=name).exists():
+            messages.error(request, 'This name is already taken in the group. Please choose a different name.')
+            return redirect('group', group_id=group_id)
+
         member = GroupMember.objects.create(
             group=group,
             name=name,
@@ -198,22 +203,30 @@ def group(request, group_id):
     return render(request, 'mainapp/group.html', context)
 
 def calculate_price_per_id(member_count):
-    # Implement your pricing logic here
-    # This is just an example
-    if member_count < 5:
+    if member_count >= 20:
+        return 45
+    elif member_count >= 10:
+        return 60
+    elif member_count >= 5:
+        return 70
+    elif member_count >= 3:
+        return 85
+    elif member_count >= 2:
         return 100
-    elif member_count < 10:
-        return 90
     else:
-        return 80
+        return 120
 
 def get_next_price_threshold(member_count):
-    # Implement your pricing threshold logic here
-    # This is just an example
-    if member_count < 5:
+    if member_count < 2:
+        return 2
+    elif member_count < 3:
+        return 3
+    elif member_count < 5:
         return 5
     elif member_count < 10:
         return 10
+    elif member_count < 20:
+        return 20
     else:
         return None
 
