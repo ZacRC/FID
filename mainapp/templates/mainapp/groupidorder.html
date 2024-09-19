@@ -1,0 +1,73 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Order ID - NAFakes{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100 min-h-screen py-12">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h1 class="text-4xl font-bold mb-8 text-center text-primary">Order ID</h1>
+        
+        <!-- Order Info Popup -->
+        <div id="orderInfoPopup" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+            <div class="bg-white p-8 rounded-lg shadow-xl max-w-md">
+                <h2 class="text-2xl font-bold mb-4">Your Order Information</h2>
+                <p><strong>Name:</strong> {{ order_info.first_name }} {{ order_info.middle_name }} {{ order_info.last_name }}</p>
+                <p><strong>Date of Birth:</strong> {{ order_info.date_of_birth }}</p>
+                <p><strong>State:</strong> {{ order_info.state }}</p>
+                <!-- Add more fields as needed -->
+                
+                <div class="mt-6">
+                    <label class="inline-flex items-center">
+                        <input type="checkbox" id="confirmInfo" class="form-checkbox">
+                        <span class="ml-2">Is this the information you would like to use?</span>
+                    </label>
+                </div>
+                
+                <button id="confirmButton" class="mt-4 bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300">Confirm</button>
+            </div>
+        </div>
+        
+        <!-- Payment Options -->
+        <div id="paymentOptions" class="hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-semibold mb-4 text-primary">Bitcoin</h2>
+                        <p class="text-gray-600 mb-4">Pay with cryptocurrency!</p>
+                        <button onclick="selectPayment('bitcoin')" class="w-full bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300">Pay with Bitcoin</button>
+                    </div>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-semibold mb-4 text-primary">PayPal</h2>
+                        <p class="text-gray-600 mb-4">Use your PayPal account!</p>
+                        <button onclick="selectPayment('paypal')" class="w-full bg-accent text-secondary px-4 py-2 rounded-full hover:bg-primary transition duration-300">Pay with PayPal</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 text-center">
+                <form action="{% url 'confirm_group_payment' group.id %}" method="post" class="inline-block">
+                    {% csrf_token %}
+                    <input type="hidden" id="paymentMethod" name="payment_method" value="">
+                    <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition duration-300 text-lg font-semibold">Confirm Purchase</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('confirmButton').addEventListener('click', function() {
+        if (document.getElementById('confirmInfo').checked) {
+            document.getElementById('orderInfoPopup').classList.add('hidden');
+            document.getElementById('paymentOptions').classList.remove('hidden');
+        } else {
+            alert('Please confirm that this is the information you would like to use.');
+        }
+    });
+
+    function selectPayment(method) {
+        document.getElementById('paymentMethod').value = method;
+    }
+</script>
+{% endblock %}

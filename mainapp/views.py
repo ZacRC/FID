@@ -261,3 +261,32 @@ def edit_group_order_info(request, group_id):
         'order_info': order_info,
         'is_edit': True
     })
+
+def group_id_order(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+    current_member_id = request.session.get('member_id')
+    current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+    order_info = GroupMemberOrderInfo.objects.get(member=current_member)
+
+    return render(request, 'mainapp/groupidorder.html', {
+        'group': group,
+        'order_info': order_info,
+    })
+
+def confirm_group_payment(request, group_id):
+    if request.method == 'POST':
+        group = get_object_or_404(Group, id=group_id)
+        current_member_id = request.session.get('member_id')
+        current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+        
+        payment_method = request.POST.get('payment_method')
+        
+        # Here you would typically process the payment
+        # For this example, we'll just mark the member as paid
+        current_member.paid = True
+        current_member.save()
+        
+        messages.success(request, f'Payment confirmed using {payment_method}.')
+        return redirect('group', group_id=group_id)
+    
+    return redirect('group', group_id=group_id)

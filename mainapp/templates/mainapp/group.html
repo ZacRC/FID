@@ -62,12 +62,18 @@
                                     {% else %}
                                         <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Info Not Completed</span>
                                     {% endif %}
+                                    {% if member.paid %}
+                                        <span class="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Paid ✓</span>
+                                    {% endif %}
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex space-x-2">
                                         {% if member.member_id == current_member.member_id %}
                                             {% if member.order_info_completed %}
                                                 <a href="{% url 'edit_group_order_info' group.id %}" class="bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300">Edit Info</a>
+                                                {% if not member.paid %}
+                                                    <a href="{% url 'group_id_order' group.id %}" class="bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300">Order ID</a>
+                                                {% endif %}
                                             {% else %}
                                                 <a href="{% url 'add_group_order_info' group.id %}" class="bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300">Add Info</a>
                                             {% endif %}

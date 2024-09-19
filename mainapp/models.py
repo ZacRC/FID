@@ -42,6 +42,7 @@ class GroupMember(models.Model):
     member_id = models.CharField(max_length=8, unique=True)
     joined_at = models.DateTimeField(auto_now_add=True)
     order_info_completed = models.BooleanField(default=False)
+    paid = models.BooleanField(default=False)  # New field
 
     class Meta:
         unique_together = ('group', 'name')
