@@ -1,25 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment - NAFakes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#1a202c',
-                        secondary: '#edf2f7',
-                        accent: '#4a5568',
-                    },
-                }
-            }
-        }
-    </script>
-</head>
-<body class="bg-secondary min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Payment - NAFakes{% endblock %}
+
+{% block content %}
+<div class="bg-secondary min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <h1 class="text-4xl font-bold mb-8 text-center text-primary">Choose Payment Method</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -32,39 +16,161 @@
                         <li>Decentralized payment method</li>
                         <li>Low transaction fees</li>
                     </ul>
-                    <button onclick="bitcoinPayment()" class="w-full bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300">Pay with Bitcoin</button>
+                    <button onclick="selectPayment('bitcoin')" class="w-full bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300">Pay with Bitcoin</button>
                 </div>
             </div>
             <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
                 <div class="p-6">
-                    <h2 class="text-2xl font-semibold mb-4 text-primary">PayPal</h2>
-                    <p class="text-gray-600 mb-4">Use your PayPal account!</p>
+                    <h2 class="text-2xl font-semibold mb-4 text-primary">Venmo</h2>
+                    <p class="text-gray-600 mb-4">Pay with Venmo!</p>
                     <ul class="list-disc list-inside text-gray-700 mb-4">
                         <li>Easy and convenient</li>
-                        <li>Buyer protection</li>
-                        <li>Accepted worldwide</li>
+                        <li>Fast mobile payments</li>
+                        <li>Secure transactions</li>
                     </ul>
-                    <button onclick="paypalPayment()" class="w-full bg-accent text-secondary px-4 py-2 rounded-full hover:bg-primary transition duration-300">Pay with PayPal</button>
+                    <button onclick="showVenmoModal()" class="w-full bg-accent text-secondary px-4 py-2 rounded-full hover:bg-primary transition duration-300">Pay with Venmo</button>
                 </div>
             </div>
         </div>
-        <div class="mt-8 text-center">
-            <form action="{% url 'confirmed' %}" method="post" class="inline-block">
-                {% csrf_token %}
-                <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition duration-300 text-lg font-semibold">Confirm Payment</button>
-            </form>
-        </div>
         <p class="mt-8 text-center text-gray-600 bg-yellow-100 p-4 rounded-lg">Remember, all transactions are imaginary. No real money will be charged.</p>
     </div>
+</div>
 
-    <script>
-        function bitcoinPayment() {
-            alert("Initiating Bitcoin payment... (Remember, this is just imaginary!)");
+<!-- Venmo Modal -->
+<div id="venmoModal" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-primary px-4 py-3 sm:px-6 flex justify-between items-center">
+                <h3 class="text-lg leading-6 font-medium text-secondary" id="modal-title">
+                    Venmo Payment Instructions
+                </h3>
+                <button type="button" onclick="closeVenmoModal()" class="text-secondary hover:text-accent focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div class="sm:flex sm:items-start">
+                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-accent sm:mx-0 sm:h-10 sm:w-10">
+                        <svg class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                    <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                        <div class="mt-2">
+                            <p class="text-sm text-gray-500">
+                                1. Send payment to: <strong class="text-primary">@NAIDOrder</strong>
+                            </p>
+                            <p class="text-sm text-gray-500 mt-2">
+                                Or use this link: <a href="https://www.venmo.com/u/NAIDOrder" target="_blank" class="text-accent hover:underline">https://www.venmo.com/u/NAIDOrder</a>
+                            </p>
+                            <p class="text-sm text-gray-500 mt-2">
+                                2. Include this Order ID in the payment message:
+                            </p>
+                            <p class="text-lg font-bold text-primary mt-1" id="orderId"></p>
+                            <p class="text-sm text-gray-500 mt-4">
+                                3. Screenshot your payment confirmation and upload it below:
+                            </p>
+                            <div class="mt-2">
+                                <label for="paymentScreenshot" class="block text-sm font-medium text-gray-700">
+                                    Upload Screenshot
+                                </label>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-accent transition-colors duration-300" onclick="document.getElementById('paymentScreenshot').click();">
+                                    <div class="space-y-1 text-center">
+                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <div class="flex text-sm text-gray-600 justify-center">
+                                            <span class="relative bg-white rounded-md font-medium text-accent hover:text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-accent">
+                                                Upload a file
+                                            </span>
+                                            <p class="pl-1">or drag and drop</p>
+                                        </div>
+                                        <p class="text-xs text-gray-500" id="fileNameDisplay">
+                                            PNG, JPG, GIF up to 10MB
+                                        </p>
+                                    </div>
+                                </div>
+                                <input id="paymentScreenshot" name="paymentScreenshot" type="file" accept="image/*" class="sr-only" onchange="updateFileInput()">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" onclick="confirmVenmoPayment()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-accent text-base font-medium text-secondary hover:bg-primary focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent sm:ml-3 sm:w-auto sm:text-sm">
+                    Confirm Payment
+                </button>
+                <button type="button" onclick="closeVenmoModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function selectPayment(method) {
+        // Handle Bitcoin payment (you can implement this as needed)
+        alert(`${method} payment selected. This is just a placeholder.`);
+    }
+
+    function showVenmoModal() {
+        const modal = document.getElementById('venmoModal');
+        modal.classList.remove('hidden');
+        const orderId = generateOrderId();
+        document.getElementById('orderId').textContent = orderId;
+    }
+
+    function closeVenmoModal() {
+        const modal = document.getElementById('venmoModal');
+        modal.classList.add('hidden');
+    }
+
+    function generateOrderId() {
+        return 'IND-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    }
+
+    function confirmVenmoPayment() {
+        const screenshot = document.getElementById('paymentScreenshot').files[0];
+        if (!screenshot) {
+            alert('Please upload a screenshot of your payment confirmation.');
+            return;
         }
 
-        function paypalPayment() {
-            alert("Redirecting to PayPal... (Remember, this is just imaginary!)");
+        const formData = new FormData();
+        formData.append('payment_method', 'venmo');
+        formData.append('order_id', document.getElementById('orderId').textContent);
+        formData.append('screenshot', screenshot);
+
+        fetch('{% url 'confirm_individual_payment' %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        }).then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.href = '{% url 'confirmed' %}';
+            } else {
+                alert('Error confirming payment. Please try again.');
+            }
+        });
+    }
+
+    function updateFileInput() {
+        const fileInput = document.getElementById('paymentScreenshot');
+        const fileNameDisplay = document.getElementById('fileNameDisplay');
+        
+        if (fileInput.files.length > 0) {
+            fileNameDisplay.textContent = fileInput.files[0].name;
+        } else {
+            fileNameDisplay.textContent = 'PNG, JPG, GIF up to 10MB';
         }
-    </script>
-</body>
-</html>
+    }
+</script>
+{% endblock %}

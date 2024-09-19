@@ -418,3 +418,33 @@ def confirm_venmo_payment(request, group_id):
             return JsonResponse({'success': False, 'error': 'No screenshot provided'})
 
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+
+from .models import Order, IndividualVenmoPayment
+
+def confirm_individual_payment(request):
+    if request.method == 'POST':
+        order_id = request.POST.get('order_id')
+        screenshot = request.FILES.get('screenshot')
+        order = Order.objects.get(id=request.session.get('order_id'))
+
+        if screenshot:
+            IndividualVenmoPayment.objects.create(
+                order=order,
+                order_id=order_id,
+                screenshot=screenshot
+            )
+            order.paid = True
+            order.save()
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': 'No screenshot provided'})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+def payment(request):
+    order_id = request.session.get('order_id')
+    if not order_id:
+        return redirect('order')
+    order = get_object_or_404(Order, id=order_id)
+    return render(request, 'mainapp/payment.html', {'order': order})

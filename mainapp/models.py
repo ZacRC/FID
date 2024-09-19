@@ -84,3 +84,12 @@ class VenmoPayment(models.Model):
 
     def __str__(self):
         return f"Venmo payment for {self.member.name} in {self.group}"
+    
+class IndividualVenmoPayment(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    order_id = models.CharField(max_length=20)
+    screenshot = models.ImageField(upload_to='individual_venmo_screenshots/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Individual Venmo payment for Order {self.order.id}"
