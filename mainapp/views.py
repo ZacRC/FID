@@ -3,6 +3,8 @@ from django.views.decorators.http import require_POST
 from .models import Order
 import logging
 from datetime import datetime
+import random
+import string
 
 logger = logging.getLogger(__name__)
 
@@ -69,6 +71,25 @@ def checkout(request):
 def payment(request):
     return render(request, 'mainapp/payment.html')
 
+def generate_tracking_number():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=12))
+
 @require_POST
 def confirmed(request):
-    return render(request, 'mainapp/confirmed.html')
+    order_id = request.session.get('order_id')
+    if order_id:
+        order = Order.objects.get(id=order_id)
+        order.tracking_number = generate_tracking_number()
+        order.save()
+        return render(request, 'mainapp/confirmed.html', {'order': order})
+    return redirect('index')
+
+def track(request):
+    if request.method == 'POST':
+        tracking_number = request.POST.get('tracking_number')
+        try:
+            order = Order.objects.get(tracking_number=tracking_number)
+            return render(request, 'mainapp/track.html', {'order': order})
+        except Order.DoesNotExist:
+            return render(request, 'mainapp/track.html', {'error': 'Invalid tracking number'})
+    return render(request, 'mainapp/track.html')

@@ -13,4 +13,5 @@ urlpatterns = [
     path('checkout/', views.checkout, name='checkout'),
     path('payment/', views.payment, name='payment'),
     path('confirmed/', views.confirmed, name='confirmed'),
+    path('track/', views.track, name='track'),
 ]
