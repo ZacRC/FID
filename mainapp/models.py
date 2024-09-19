@@ -93,3 +93,11 @@ class IndividualVenmoPayment(models.Model):
 
     def __str__(self):
         return f"Individual Venmo payment for Order {self.order.id}"
+    
+class IndividualBitcoinPayment(models.Model):
+    order = models.OneToOneField(Order, on_delete=models.CASCADE)
+    screenshot = models.ImageField(upload_to='individual_bitcoin_screenshots/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Individual Bitcoin payment for Order {self.order.id}"

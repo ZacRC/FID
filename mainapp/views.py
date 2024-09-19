@@ -423,20 +423,30 @@ def confirm_venmo_payment(request, group_id):
     return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 
-from .models import Order, IndividualVenmoPayment
+from .models import Order, IndividualVenmoPayment, IndividualBitcoinPayment
 
 def confirm_individual_payment(request):
     if request.method == 'POST':
-        venmo_order_id = request.POST.get('order_id')
+        payment_method = request.POST.get('payment_method')
         screenshot = request.FILES.get('screenshot')
         order = Order.objects.get(id=request.session.get('order_id'))
 
         if screenshot:
-            IndividualVenmoPayment.objects.create(
-                order=order,
-                venmo_order_id=venmo_order_id,
-                screenshot=screenshot
-            )
+            if payment_method == 'venmo':
+                venmo_order_id = request.POST.get('order_id')
+                IndividualVenmoPayment.objects.create(
+                    order=order,
+                    venmo_order_id=venmo_order_id,
+                    screenshot=screenshot
+                )
+            elif payment_method == 'bitcoin':
+                IndividualBitcoinPayment.objects.create(
+                    order=order,
+                    screenshot=screenshot
+                )
+            else:
+                return JsonResponse({'success': False, 'error': 'Invalid payment method'})
+
             order.paid = True
             order.save()
             return JsonResponse({'success': True, 'redirect_url': reverse('confirmed')})
