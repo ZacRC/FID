@@ -125,13 +125,17 @@ def join_group(request):
 
 def group(request, group_id):
     group = get_object_or_404(Group, id=group_id)
-    creator = group.members.get(member_id=group.creator_member_id)
+    creator = GroupMember.objects.get(member_id=group.creator_member_id)
     current_member_id = request.session.get('member_id')
     current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+    
+    members = group.members.all().select_related('order_info')
+    
     return render(request, 'mainapp/group.html', {
         'group': group,
         'creator': creator,
-        'current_member': current_member
+        'current_member': current_member,
+        'members': members,
     })
 
 def change_name(request, group_id, member_id):
