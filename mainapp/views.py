@@ -242,3 +242,22 @@ def save_group_order_info(request, group_id):
         return redirect('group', group_id=group_id)
 
     return redirect('add_group_order_info', group_id=group_id)
+
+def edit_group_order_info(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+    current_member_id = request.session.get('member_id')
+    current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+    order_info = GroupMemberOrderInfo.objects.get(member=current_member)
+
+    if request.method == 'POST':
+        # Handle form submission (similar to save_group_order_info)
+        # Update the existing order_info object
+        # Redirect to group page after saving
+        return redirect('group', group_id=group_id)
+
+    return render(request, 'mainapp/grouporderinfo.html', {
+        'group': group,
+        'member': current_member,
+        'order_info': order_info,
+        'is_edit': True
+    })
