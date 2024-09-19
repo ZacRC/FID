@@ -8,7 +8,6 @@
     <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
         <h2 class="text-2xl font-semibold mb-4">Group Information</h2>
         <p class="mb-2"><strong>Group ID:</strong> {{ group.id }}</p>
-        <p class="mb-2"><strong>Created by:</strong> {{ group.creator.username }}</p>
         <p class="mb-2"><strong>Members:</strong> {{ group.members.count }}</p>
     </div>
     <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
@@ -17,22 +16,17 @@
             {% for member in group.members.all %}
             <li class="flex justify-between items-center">
                 <span>{{ member.name }}</span>
-                {% if user == group.creator %}
                 <div class="space-x-2">
-                    <button class="change-name-btn bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300" data-member-id="{{ member.id }}">Change Name</button>
-                    {% if member.user != group.creator %}
+                    <button class="change-name-btn bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600 transition duration-300" data-member-id="{{ member.id }}">Change Name</button>
                     <form action="{% url 'kick_member' group.id member.id %}" method="post" class="inline">
                         {% csrf_token %}
                         <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition duration-300">Kick</button>
                     </form>
-                    {% endif %}
+                    <form action="{% url 'leave_group' group.id member.id %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="bg-yellow-500 text-white px-3 py-1 rounded-full hover:bg-yellow-600 transition duration-300">Leave</button>
+                    </form>
                 </div>
-                {% elif user == member.user %}
-                <form action="{% url 'leave_group' group.id %}" method="post" class="inline">
-                    {% csrf_token %}
-                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition duration-300">Leave Group</button>
-                </form>
-                {% endif %}
             </li>
             {% endfor %}
         </ul>

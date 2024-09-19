@@ -100,35 +100,29 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Group, GroupMember
 
-def grouporder(request):
-    return render(request, 'mainapp/grouporder.html')
-
 def create_group(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         group = Group.objects.create()
-        member = GroupMember.objects.create(group=group, name=name)
-        return render(request, 'mainapp/group_created.html', {'group': group, 'member_id': member.member_id})
+        member = GroupMember.objects.create(group=group, name=name, member_id=generate_member_id())
+        return render(request, 'mainapp/group_created.html', {'group': group, 'member': member})
     return render(request, 'mainapp/create_group.html')
 
-@login_required
 def join_group(request):
     if request.method == 'POST':
         group = get_object_or_404(Group, id=request.POST['group_id'])
-        if not GroupMember.objects.filter(group=group, name=request.POST['user_name']).exists():
-            GroupMember.objects.create(group=group, user=request.user, name=request.POST['user_name'])
-            return redirect('group', group_id=group.id)
+        name = request.POST['user_name']
+        if not GroupMember.objects.filter(group=group, name=name).exists():
+            member = GroupMember.objects.create(group=group, name=name, member_id=generate_member_id())
+            return render(request, 'mainapp/group_joined.html', {'group': group, 'member': member})
         else:
             return render(request, 'mainapp/grouporder.html', {'error': 'Name already taken in this group'})
     return redirect('grouporder')
 
-@login_required
 def group(request, group_id):
     group = get_object_or_404(Group, id=group_id)
-    user_member = group.members.get(user=request.user)
-    return render(request, 'mainapp/group.html', {'group': group, 'user': user_member})
+    return render(request, 'mainapp/group.html', {'group': group})
 
-@login_required
 def change_name(request, group_id, member_id):
     if request.method == 'POST':
         group = get_object_or_404(Group, id=group_id)
@@ -139,26 +133,21 @@ def change_name(request, group_id, member_id):
             member.save()
     return redirect('group', group_id=group_id)
 
-@login_required
 def kick_member(request, group_id, member_id):
     if request.method == 'POST':
-        group = get_object_or_404(Group, id=group_id, creator=request.user)
+        group = get_object_or_404(Group, id=group_id)
         member = get_object_or_404(GroupMember, id=member_id, group=group)
-        if member.user != group.creator:
-            member.delete()
+        member.delete()
     return redirect('group', group_id=group_id)
 
-@login_required
-def leave_group(request, group_id):
+def leave_group(request, group_id, member_id):
     if request.method == 'POST':
         group = get_object_or_404(Group, id=group_id)
-        member = get_object_or_404(GroupMember, group=group, user=request.user)
-        if member.user != group.creator:
-            member.delete()
-        else:
-            # If the creator leaves, delete the entire group
+        member = get_object_or_404(GroupMember, id=member_id, group=group)
+        member.delete()
+        if group.members.count() == 0:
             group.delete()
-        return redirect('grouporder')
+            return redirect('grouporder')
     return redirect('group', group_id=group_id)
 
 def my_group(request):
@@ -171,19 +160,5 @@ def my_group(request):
             return render(request, 'mainapp/grouporder.html', {'error': 'Invalid Member ID'})
     return redirect('grouporder')
 
-from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
-
-def user_login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('grouporder')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'mainapp/login.html', {'form': form})
+def generate_member_id():
+    return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
