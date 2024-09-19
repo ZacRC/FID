@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add ID Information - NAFakes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <h1 class="text-4xl font-bold mb-8 text-center text-blue-600">Add ID Information</h1>
+        <form action="{% url 'save_group_order_info' group.id %}" method="post" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-8">
+            {% csrf_token %}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Quantity: *</label>
+                    <input type="number" id="quantity" name="quantity" min="1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.quantity|default:1 }}">
+                </div>
+                <div>
+                    <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name: *</label>
+                    <input type="text" id="first_name" name="first_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.first_name|default:'' }}">
+                </div>
+                <div>
+                    <label for="middle_name" class="block text-sm font-medium text-gray-700 mb-2">Middle Name:</label>
+                    <input type="text" id="middle_name" name="middle_name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.middle_name|default:'' }}">
+                </div>
+                <div>
+                    <label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">Last Name: *</label>
+                    <input type="text" id="last_name" name="last_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.last_name|default:'' }}">
+                </div>
+                <div>
+                    <label for="date_of_birth" class="block text-sm font-medium text-gray-700 mb-2">Date of Birth (MM/DD/YYYY): *</label>
+                    <input type="text" id="date_of_birth" name="date_of_birth" required pattern="\d{2}/\d{2}/\d{4}" placeholder="MM/DD/YYYY" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.date_of_birth|default:'' }}">
+                </div>
+                <div>
+                    <label for="state" class="block text-sm font-medium text-gray-700 mb-2">State: *</label>
+                    <select id="state" name="state" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Choose a state</option>
+                        <option value="AL" {% if order_info.state == 'AL' %}selected{% endif %}>Alabama</option>
+                        <option value="AK" {% if order_info.state == 'AK' %}selected{% endif %}>Alaska</option>
+                        <option value="AZ" {% if order_info.state == 'AZ' %}selected{% endif %}>Arizona</option>
+                        <option value="AR" {% if order_info.state == 'AR' %}selected{% endif %}>Arkansas</option>
+                        <option value="CA" {% if order_info.state == 'CA' %}selected{% endif %}>California</option>
+                        <option value="CO" {% if order_info.state == 'CO' %}selected{% endif %}>Colorado</option>
+                        <option value="CT" {% if order_info.state == 'CT' %}selected{% endif %}>Connecticut</option>
+                        <option value="DE" {% if order_info.state == 'DE' %}selected{% endif %}>Delaware</option>
+                        <option value="FL" {% if order_info.state == 'FL' %}selected{% endif %}>Florida</option>
+                        <option value="GA" {% if order_info.state == 'GA' %}selected{% endif %}>Georgia</option>
+                        <option value="HI" {% if order_info.state == 'HI' %}selected{% endif %}>Hawaii</option>
+                        <option value="ID" {% if order_info.state == 'ID' %}selected{% endif %}>Idaho</option>
+                        <option value="IL" {% if order_info.state == 'IL' %}selected{% endif %}>Illinois</option>
+                        <option value="IN" {% if order_info.state == 'IN' %}selected{% endif %}>Indiana</option>
+                        <option value="IA" {% if order_info.state == 'IA' %}selected{% endif %}>Iowa</option>
+                        <option value="KS" {% if order_info.state == 'KS' %}selected{% endif %}>Kansas</option>
+                        <option value="KY" {% if order_info.state == 'KY' %}selected{% endif %}>Kentucky</option>
+                        <option value="LA" {% if order_info.state == 'LA' %}selected{% endif %}>Louisiana</option>
+                        <option value="ME" {% if order_info.state == 'ME' %}selected{% endif %}>Maine</option>
+                        <option value="MD" {% if order_info.state == 'MD' %}selected{% endif %}>Maryland</option>
+                        <option value="MA" {% if order_info.state == 'MA' %}selected{% endif %}>Massachusetts</option>
+                        <option value="MI" {% if order_info.state == 'MI' %}selected{% endif %}>Michigan</option>
+                        <option value="MN" {% if order_info.state == 'MN' %}selected{% endif %}>Minnesota</option>
+                        <option value="MS" {% if order_info.state == 'MS' %}selected{% endif %}>Mississippi</option>
+                        <option value="MO" {% if order_info.state == 'MO' %}selected{% endif %}>Missouri</option>
+                        <option value="MT" {% if order_info.state == 'MT' %}selected{% endif %}>Montana</option>
+                        <option value="NE" {% if order_info.state == 'NE' %}selected{% endif %}>Nebraska</option>
+                        <option value="NV" {% if order_info.state == 'NV' %}selected{% endif %}>Nevada</option>
+                        <option value="NH" {% if order_info.state == 'NH' %}selected{% endif %}>New Hampshire</option>
+                        <option value="NJ" {% if order_info.state == 'NJ' %}selected{% endif %}>New Jersey</option>
+                        <option value="NM" {% if order_info.state == 'NM' %}selected{% endif %}>New Mexico</option>
+                        <option value="NY" {% if order_info.state == 'NY' %}selected{% endif %}>New York</option>
+                        <option value="NC" {% if order_info.state == 'NC' %}selected{% endif %}>North Carolina</option>
+                        <option value="ND" {% if order_info.state == 'ND' %}selected{% endif %}>North Dakota</option>
+                        <option value="OH" {% if order_info.state == 'OH' %}selected{% endif %}>Ohio</option>
+                        <option value="OK" {% if order_info.state == 'OK' %}selected{% endif %}>Oklahoma</option>
+                        <option value="OR" {% if order_info.state == 'OR' %}selected{% endif %}>Oregon</option>
+                        <option value="PA" {% if order_info.state == 'PA' %}selected{% endif %}>Pennsylvania</option>
+                        <option value="RI" {% if order_info.state == 'RI' %}selected{% endif %}>Rhode Island</option>
+                        <option value="SC" {% if order_info.state == 'SC' %}selected{% endif %}>South Carolina</option>
+                        <option value="SD" {% if order_info.state == 'SD' %}selected{% endif %}>South Dakota</option>
+                        <option value="TN" {% if order_info.state == 'TN' %}selected{% endif %}>Tennessee</option>
+                        <option value="TX" {% if order_info.state == 'TX' %}selected{% endif %}>Texas</option>
+                        <option value="UT" {% if order_info.state == 'UT' %}selected{% endif %}>Utah</option>
+                        <option value="VT" {% if order_info.state == 'VT' %}selected{% endif %}>Vermont</option>
+                        <option value="VA" {% if order_info.state == 'VA' %}selected{% endif %}>Virginia</option>
+                        <option value="WA" {% if order_info.state == 'WA' %}selected{% endif %}>Washington</option>
+                        <option value="WV" {% if order_info.state == 'WV' %}selected{% endif %}>West Virginia</option>
+                        <option value="WI" {% if order_info.state == 'WI' %}selected{% endif %}>Wisconsin</option>
+                        <option value="WY" {% if order_info.state == 'WY' %}selected{% endif %}>Wyoming</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="height_feet" class="block text-sm font-medium text-gray-700 mb-2">Height (feet): *</label>
+                    <input type="number" id="height_feet" name="height_feet" min="1" max="8" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.height_feet|default:'' }}">
+                </div>
+                <div>
+                    <label for="height_inches" class="block text-sm font-medium text-gray-700 mb-2">Height (inches): *</label>
+                    <input type="number" id="height_inches" name="height_inches" min="0" max="11" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.height_inches|default:'' }}">
+                </div>
+                <div>
+                    <label for="weight" class="block text-sm font-medium text-gray-700 mb-2">Weight (lbs): *</label>
+                    <input type="number" id="weight" name="weight" min="1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.weight|default:'' }}">
+                </div>
+                <div>
+                    <label for="eyes" class="block text-sm font-medium text-gray-700 mb-2">Eye Color: *</label>
+                    <input type="text" id="eyes" name="eyes" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.eyes|default:'' }}">
+                </div>
+                <div>
+                    <label for="hair" class="block text-sm font-medium text-gray-700 mb-2">Hair Color: *</label>
+                    <input type="text" id="hair" name="hair" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.hair|default:'' }}">
+                </div>
+                <div>
+                    <label for="gender" class="block text-sm font-medium text-gray-700 mb-2">Gender: *</label>
+                    <select id="gender" name="gender" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Choose gender</option>
+                        <option value="Male" {% if order_info.gender == 'Male' %}selected{% endif %}>Male</option>
+                        <option value="Female" {% if order_info.gender == 'Female' %}selected{% endif %}>Female</option>
+                        <option value="Other" {% if order_info.gender == 'Other' %}selected{% endif %}>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="address1" class="block text-sm font-medium text-gray-700 mb-2">Address 1: *</label>
+                    <input type="text" id="address1" name="address1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.address1|default:'' }}">
+                </div>
+                <div>
+                    <label for="address2" class="block text-sm font-medium text-gray-700 mb-2">Address 2:</label>
+                    <input type="text" id="address2" name="address2" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.address2|default:'' }}">
+                </div>
+                <div>
+                    <label for="city" class="block text-sm font-medium text-gray-700 mb-2">City: *</label>
+                    <input type="text" id="city" name="city" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.city|default:'' }}">
+                </div>
+                <div>
+                    <label for="zip" class="block text-sm font-medium text-gray-700 mb-2">Zip: *</label>
+                    <input type="text" id="zip" name="zip" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.zip_code|default:'' }}">
+                </div>
+                <div>
+                    <label for="picture" class="block text-sm font-medium text-gray-700 mb-2">Picture: *</label>
+                    <input type="file" id="picture" name="picture" {% if not order_info.picture %}required{% endif %} class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% if order_info.picture %}
+                        <p class="mt-2 text-sm text-gray-500">Current picture: {{ order_info.picture.name }}</p>
+                    {% endif %}
+                </div>
+                <div>
+                    <label for="signature" class="block text-sm font-medium text-gray-700 mb-2">Signature:</label>
+                    <input type="file" id="signature" name="signature" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    {% if order_info.signature %}
+                        <p class="mt-2 text-sm text-gray-500">Current signature: {{ order_info.signature.name }}</p>
+                    {% endif %}
+                </div>
+                <div class="col-span-2">
+                    <label for="additional" class="block text-sm font-medium text-gray-700 mb-2">Additional Information:</label>
+                    <textarea id="additional" name="additional" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">{{ order_info.additional|default:'' }}</textarea>
+                </div>
+            </div>
+            <div class="mt-8">
+                <button type="submit" class="w-full bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition duration-300 text-lg font-semibold">Save Information</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

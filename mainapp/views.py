@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-from .models import Order
+from .models import Order, Group, GroupMember, GroupMemberOrderInfo
 import logging
 from datetime import datetime
 import random
 import string
+from django.contrib import messages
 
 logger = logging.getLogger(__name__)
 
@@ -96,10 +97,6 @@ def track(request):
             return render(request, 'mainapp/track.html', {'error': 'Invalid tracking number'})
     return render(request, 'mainapp/track.html')
 
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
-from .models import Group, GroupMember
-
 def grouporder(request):
     return render(request, 'mainapp/grouporder.html')
 
@@ -180,3 +177,61 @@ def my_group(request):
 
 def generate_member_id():
     return ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+
+def add_group_order_info(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+    current_member_id = request.session.get('member_id')
+    current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+    
+    try:
+        order_info = current_member.order_info
+    except GroupMemberOrderInfo.DoesNotExist:
+        order_info = None
+
+    return render(request, 'mainapp/grouporderinfo.html', {
+        'group': group,
+        'member': current_member,
+        'order_info': order_info
+    })
+
+def save_group_order_info(request, group_id):
+    if request.method == 'POST':
+        group = get_object_or_404(Group, id=group_id)
+        current_member_id = request.session.get('member_id')
+        current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+
+        order_info, created = GroupMemberOrderInfo.objects.get_or_create(member=current_member)
+        
+        # Update order info fields
+        order_info.quantity = request.POST.get('quantity')
+        order_info.first_name = request.POST.get('first_name')
+        order_info.middle_name = request.POST.get('middle_name')
+        order_info.last_name = request.POST.get('last_name')
+        order_info.date_of_birth = request.POST.get('date_of_birth')
+        order_info.state = request.POST.get('state')
+        order_info.height_feet = request.POST.get('height_feet')
+        order_info.height_inches = request.POST.get('height_inches')
+        order_info.weight = request.POST.get('weight')
+        order_info.eyes = request.POST.get('eyes')
+        order_info.hair = request.POST.get('hair')
+        order_info.gender = request.POST.get('gender')
+        order_info.address1 = request.POST.get('address1')
+        order_info.address2 = request.POST.get('address2')
+        order_info.city = request.POST.get('city')
+        order_info.zip_code = request.POST.get('zip')
+        
+        if 'picture' in request.FILES:
+            order_info.picture = request.FILES['picture']
+        if 'signature' in request.FILES:
+            order_info.signature = request.FILES['signature']
+        
+        order_info.additional = request.POST.get('additional')
+        order_info.save()
+
+        current_member.order_info_completed = True
+        current_member.save()
+
+        messages.success(request, 'Order information saved successfully.')
+        return redirect('group', group_id=group_id)
+
+    return redirect('add_group_order_info', group_id=group_id)

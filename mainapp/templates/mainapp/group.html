@@ -29,6 +29,13 @@
                             <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition duration-300">Kick</button>
                         </form>
                     {% endif %}
+                    {% if member.member_id == current_member.member_id %}
+                        {% if member.order_info_completed %}
+                            <span class="bg-green-500 text-white px-3 py-1 rounded-full">✓ Info Added</span>
+                        {% else %}
+                            <a href="{% url 'add_group_order_info' group.id %}" class="bg-yellow-500 text-white px-3 py-1 rounded-full hover:bg-yellow-600 transition duration-300">Add ID Information</a>
+                        {% endif %}
+                    {% endif %}
                     {% if member.member_id == current_member.member_id and member.member_id != group.creator_member_id %}
                         <form action="{% url 'leave_group' group.id member.id %}" method="post" class="inline">
                             {% csrf_token %}
