@@ -95,3 +95,69 @@ def track(request):
         except Order.DoesNotExist:
             return render(request, 'mainapp/track.html', {'error': 'Invalid tracking number'})
     return render(request, 'mainapp/track.html')
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from .models import Group, GroupMember
+
+def grouporder(request):
+    return render(request, 'mainapp/grouporder.html')
+
+@login_required
+def create_group(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        group = Group.objects.create(creator=request.user)
+        GroupMember.objects.create(group=group, user=request.user, name=name)
+        return redirect('group', group_id=group.id)
+    return render(request, 'mainapp/create_group.html')
+
+@login_required
+def join_group(request):
+    if request.method == 'POST':
+        group = get_object_or_404(Group, id=request.POST['group_id'])
+        if not GroupMember.objects.filter(group=group, name=request.POST['user_name']).exists():
+            GroupMember.objects.create(group=group, user=request.user, name=request.POST['user_name'])
+            return redirect('group', group_id=group.id)
+        else:
+            return render(request, 'mainapp/grouporder.html', {'error': 'Name already taken in this group'})
+    return redirect('grouporder')
+
+@login_required
+def group(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+    user_member = group.members.get(user=request.user)
+    return render(request, 'mainapp/group.html', {'group': group, 'user': user_member})
+
+@login_required
+def change_name(request, group_id, member_id):
+    if request.method == 'POST':
+        group = get_object_or_404(Group, id=group_id)
+        member = get_object_or_404(GroupMember, id=member_id, group=group)
+        new_name = request.POST['new_name']
+        if not GroupMember.objects.filter(group=group, name=new_name).exists():
+            member.name = new_name
+            member.save()
+    return redirect('group', group_id=group_id)
+
+@login_required
+def kick_member(request, group_id, member_id):
+    if request.method == 'POST':
+        group = get_object_or_404(Group, id=group_id, creator=request.user)
+        member = get_object_or_404(GroupMember, id=member_id, group=group)
+        if member.user != group.creator:
+            member.delete()
+    return redirect('group', group_id=group_id)
+
+@login_required
+def leave_group(request, group_id):
+    if request.method == 'POST':
+        group = get_object_or_404(Group, id=group_id)
+        member = get_object_or_404(GroupMember, group=group, user=request.user)
+        if member.user != group.creator:
+            member.delete()
+        else:
+            # If the creator leaves, delete the entire group
+            group.delete()
+        return redirect('grouporder')
+    return redirect('group', group_id=group_id)

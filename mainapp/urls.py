@@ -14,4 +14,11 @@ urlpatterns = [
     path('payment/', views.payment, name='payment'),
     path('confirmed/', views.confirmed, name='confirmed'),
     path('track/', views.track, name='track'),
+    path('grouporder/', views.grouporder, name='grouporder'),
+    path('create-group/', views.create_group, name='create_group'),
+    path('join-group/', views.join_group, name='join_group'),
+    path('group/<int:group_id>/', views.group, name='group'),
+    path('group/<int:group_id>/change-name/<int:member_id>/', views.change_name, name='change_name'),
+    path('group/<int:group_id>/kick/<int:member_id>/', views.kick_member, name='kick_member'),
+    path('group/<int:group_id>/leave/', views.leave_group, name='leave_group'),
 ]

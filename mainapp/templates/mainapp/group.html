@@ -1,0 +1,60 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Group {{ group.id }} - NAFakes{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Group {{ group.id }}</h1>
+    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Group Information</h2>
+        <p class="mb-2"><strong>Group ID:</strong> {{ group.id }}</p>
+        <p class="mb-2"><strong>Created by:</strong> {{ group.creator.username }}</p>
+        <p class="mb-2"><strong>Members:</strong> {{ group.members.count }}</p>
+    </div>
+    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <h2 class="text-2xl font-semibold mb-4">Members</h2>
+        <ul class="space-y-2">
+            {% for member in group.members.all %}
+            <li class="flex justify-between items-center">
+                <span>{{ member.name }}</span>
+                {% if user == group.creator %}
+                <div class="space-x-2">
+                    <button class="change-name-btn bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300" data-member-id="{{ member.id }}">Change Name</button>
+                    {% if member.user != group.creator %}
+                    <form action="{% url 'kick_member' group.id member.id %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition duration-300">Kick</button>
+                    </form>
+                    {% endif %}
+                </div>
+                {% elif user == member.user %}
+                <form action="{% url 'leave_group' group.id %}" method="post" class="inline">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition duration-300">Leave Group</button>
+                </form>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.change-name-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const memberId = this.dataset.memberId;
+            const newName = prompt('Enter new name:');
+            if (newName) {
+                fetch(`{% url 'change_name' group.id 0 %}`.replace('0', memberId), {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: `new_name=${encodeURIComponent(newName)}`
+                }).then(() => location.reload());
+            }
+        });
+    });
+</script>
+{% endblock %}
