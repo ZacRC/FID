@@ -87,7 +87,7 @@ class VenmoPayment(models.Model):
     
 class IndividualVenmoPayment(models.Model):
     order = models.OneToOneField(Order, on_delete=models.CASCADE)
-    order_id = models.CharField(max_length=20)
+    venmo_order_id = models.CharField(max_length=20)
     screenshot = models.ImageField(upload_to='individual_venmo_screenshots/')
     created_at = models.DateTimeField(auto_now_add=True)
 

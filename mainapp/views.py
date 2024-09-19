@@ -424,14 +424,14 @@ from .models import Order, IndividualVenmoPayment
 
 def confirm_individual_payment(request):
     if request.method == 'POST':
-        order_id = request.POST.get('order_id')
+        venmo_order_id = request.POST.get('order_id')
         screenshot = request.FILES.get('screenshot')
         order = Order.objects.get(id=request.session.get('order_id'))
 
         if screenshot:
             IndividualVenmoPayment.objects.create(
                 order=order,
-                order_id=order_id,
+                venmo_order_id=venmo_order_id,
                 screenshot=screenshot
             )
             order.paid = True
