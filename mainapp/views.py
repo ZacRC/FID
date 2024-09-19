@@ -109,6 +109,7 @@ def create_group(request):
         member_id = generate_member_id()
         group = Group.objects.create(creator_member_id=member_id)
         member = GroupMember.objects.create(group=group, name=name, member_id=member_id)
+        request.session['member_id'] = member_id
         return render(request, 'mainapp/group_created.html', {'group': group, 'member': member})
     return render(request, 'mainapp/create_group.html')
 
@@ -117,7 +118,9 @@ def join_group(request):
         group = get_object_or_404(Group, id=request.POST['group_id'])
         name = request.POST['user_name']
         if not GroupMember.objects.filter(group=group, name=name).exists():
-            member = GroupMember.objects.create(group=group, name=name, member_id=generate_member_id())
+            member_id = generate_member_id()
+            member = GroupMember.objects.create(group=group, name=name, member_id=member_id)
+            request.session['member_id'] = member_id
             return render(request, 'mainapp/group_joined.html', {'group': group, 'member': member})
         else:
             return render(request, 'mainapp/grouporder.html', {'error': 'Name already taken in this group'})
@@ -126,7 +129,12 @@ def join_group(request):
 def group(request, group_id):
     group = get_object_or_404(Group, id=group_id)
     creator = group.members.get(member_id=group.creator_member_id)
-    return render(request, 'mainapp/group.html', {'group': group, 'creator': creator})
+    current_member_id = request.session.get('member_id')
+    return render(request, 'mainapp/group.html', {
+        'group': group,
+        'creator': creator,
+        'current_member_id': current_member_id
+    })
 
 def change_name(request, group_id, member_id):
     if request.method == 'POST':
