@@ -128,15 +128,28 @@ def create_group(request):
 
 def join_group(request):
     if request.method == 'POST':
-        group = get_object_or_404(Group, id=request.POST['group_id'])
-        name = request.POST['user_name']
-        if not GroupMember.objects.filter(group=group, name=name).exists():
-            member_id = generate_member_id()
-            member = GroupMember.objects.create(group=group, name=name, member_id=member_id)
-            request.session['member_id'] = member_id
-            return render(request, 'mainapp/group_joined.html', {'group': group, 'member': member})
-        else:
-            return render(request, 'mainapp/grouporder.html', {'error': 'Name already taken in this group'})
+        group_id = request.POST.get('group_id')
+        name = request.POST.get('name')
+        
+        if not group_id or not name:
+            messages.error(request, 'Invalid group ID or name.')
+            return redirect('grouporder')
+
+        group = get_object_or_404(Group, id=group_id)
+        
+        if group.members.count() >= 10:
+            messages.error(request, 'This group is already full.')
+            return redirect('group', group_id=group_id)
+
+        member = GroupMember.objects.create(
+            group=group,
+            name=name,
+            member_id=''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+        )
+        
+        request.session['member_id'] = member.member_id
+        messages.success(request, f'You have successfully joined the group as {name}.')
+        return redirect('group', group_id=group_id)
     return redirect('grouporder')
 
 def calculate_price_per_id(member_count):
@@ -155,21 +168,54 @@ def calculate_price_per_id(member_count):
 
 def group(request, group_id):
     group = get_object_or_404(Group, id=group_id)
-    creator = GroupMember.objects.get(member_id=group.creator_member_id)
-    current_member_id = request.session.get('member_id')
-    current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+    creator = GroupMember.objects.get(group=group, member_id=group.creator_member_id)
+    members = GroupMember.objects.filter(group=group)
     
-    members = group.members.all().select_related('order_info')
-    member_count = members.count()
+    # Check if the user is a member of the group
+    is_member = False
+    current_member = None
+    if 'member_id' in request.session:
+        current_member = GroupMember.objects.filter(group=group, member_id=request.session['member_id']).first()
+        is_member = current_member is not None
+
+    # Calculate price per ID based on member count
+    member_count = group.members.count()
     price_per_id = calculate_price_per_id(member_count)
-    
-    return render(request, 'mainapp/group.html', {
+
+    # Calculate members needed for next price drop
+    next_price_threshold = get_next_price_threshold(member_count)
+    members_needed_for_next_price = next_price_threshold - member_count if next_price_threshold else 0
+
+    context = {
         'group': group,
         'creator': creator,
-        'current_member': current_member,
         'members': members,
+        'current_member': current_member,
+        'is_member': is_member,
         'price_per_id': price_per_id,
-    })
+        'members_needed_for_next_price': members_needed_for_next_price,
+    }
+    return render(request, 'mainapp/group.html', context)
+
+def calculate_price_per_id(member_count):
+    # Implement your pricing logic here
+    # This is just an example
+    if member_count < 5:
+        return 100
+    elif member_count < 10:
+        return 90
+    else:
+        return 80
+
+def get_next_price_threshold(member_count):
+    # Implement your pricing threshold logic here
+    # This is just an example
+    if member_count < 5:
+        return 5
+    elif member_count < 10:
+        return 10
+    else:
+        return None
 
 def change_name(request, group_id, member_id):
     if request.method == 'POST':
