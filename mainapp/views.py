@@ -16,3 +16,12 @@ def faq(request):
 
 def reviews(request):
     return render(request, 'mainapp/reviews.html')
+
+def products(request):
+    return render(request, 'mainapp/products.html')
+
+def order(request):
+    return render(request, 'mainapp/order.html')
+
+def how_to_pay(request):
+    return render(request, 'mainapp/howtopay.html')

@@ -1,0 +1,31 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Place an Order - NAFakes{% endblock %}
+
+{% block content %}
+<h1>Place Your Order</h1>
+<form class="order-form">
+    <div class="form-group">
+        <label for="product">Select Product:</label>
+        <select id="product" name="product" required>
+            <option value="">Choose a product</option>
+            <option value="invisible-bike">Invisible Bike</option>
+            <option value="imaginary-friend">Imaginary Friend</option>
+            <option value="dream-catcher">Dream Catcher 3000</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required>
+    </div>
+    <div class="form-group">
+        <label for="name">Your Name:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <button type="submit" class="submit-btn">Place Order</button>
+</form>
+{% endblock %}
