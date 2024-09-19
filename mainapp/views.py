@@ -366,40 +366,42 @@ def purchase_group_order(request, group_id):
 
     return render(request, 'mainapp/purchasegrouporder.html', context)
 
+@require_POST
 def confirm_group_purchase(request, group_id):
-    if request.method == 'POST':
-        group = get_object_or_404(Group, id=group_id)
-        current_member_id = request.session.get('member_id')
-        current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+    group = get_object_or_404(Group, id=group_id)
+    current_member_id = request.session.get('member_id')
+    current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
 
-        if current_member.member_id != group.creator_member_id:
-            return JsonResponse({'success': False, 'error': "Only the group creator can purchase group orders."})
+    payment_method = request.POST.get('payment_method')
+    screenshot = request.FILES.get('screenshot')
 
-        payment_method = request.POST.get('payment_method')
-        
+    if screenshot:
         if payment_method == 'venmo':
             order_id = request.POST.get('order_id')
-            screenshot = request.FILES.get('screenshot')
-            
-            if not screenshot:
-                return JsonResponse({'success': False, 'error': 'No screenshot provided'})
-            
             VenmoPayment.objects.create(
                 group=group,
                 member=current_member,
                 order_id=order_id,
                 screenshot=screenshot
             )
+        elif payment_method == 'bitcoin':
+            BitcoinPayment.objects.create(
+                group=group,
+                member=current_member,
+                screenshot=screenshot
+            )
+        else:
+            return JsonResponse({'success': False, 'error': 'Invalid payment method'})
 
-        # Mark all unpaid members as paid
+        # Mark all unpaid members as paid for group purchase
         unpaid_members = GroupMember.objects.filter(group=group, order_info_completed=True, paid=False)
         for member in unpaid_members:
             member.paid = True
             member.save()
 
-        return JsonResponse({'success': True, 'message': f'Group order payment confirmed using {payment_method}. All members have been marked as paid.'})
-
-    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+        return JsonResponse({'success': True})
+    else:
+        return JsonResponse({'success': False, 'error': 'No screenshot provided'})
 
 import json
 from django.http import JsonResponse
