@@ -204,34 +204,37 @@ def save_group_order_info(request, group_id):
         
         # Update order info fields
         order_info.quantity = int(request.POST.get('quantity', 1))
-        order_info.first_name = request.POST.get('first_name')
-        order_info.middle_name = request.POST.get('middle_name')
-        order_info.last_name = request.POST.get('last_name')
-        order_info.date_of_birth = request.POST.get('date_of_birth')
-        order_info.state = request.POST.get('state')
-        order_info.height_feet = int(request.POST.get('height_feet'))
-        order_info.height_inches = int(request.POST.get('height_inches'))
-        order_info.weight = int(request.POST.get('weight'))
-        order_info.eyes = request.POST.get('eyes')
-        order_info.hair = request.POST.get('hair')
-        order_info.gender = request.POST.get('gender')
-        order_info.address1 = request.POST.get('address1')
-        order_info.address2 = request.POST.get('address2')
-        order_info.city = request.POST.get('city')
-        order_info.zip_code = request.POST.get('zip')
+        order_info.first_name = request.POST.get('first_name', '')
+        order_info.middle_name = request.POST.get('middle_name', '')
+        order_info.last_name = request.POST.get('last_name', '')
+        order_info.date_of_birth = request.POST.get('date_of_birth', '')
+        order_info.state = request.POST.get('state', '')
+        order_info.height_feet = int(request.POST.get('height_feet', 0))
+        order_info.height_inches = int(request.POST.get('height_inches', 0))
+        order_info.weight = int(request.POST.get('weight', 0))
+        order_info.eyes = request.POST.get('eyes', '')
+        order_info.hair = request.POST.get('hair', '')
+        order_info.gender = request.POST.get('gender', '')
+        order_info.address1 = request.POST.get('address1', '')
+        order_info.address2 = request.POST.get('address2', '')
+        order_info.city = request.POST.get('city', '')
+        order_info.zip_code = request.POST.get('zip', '')
         
         if 'picture' in request.FILES:
             order_info.picture = request.FILES['picture']
         if 'signature' in request.FILES:
             order_info.signature = request.FILES['signature']
         
-        order_info.additional = request.POST.get('additional')
-        order_info.save()
-
-        current_member.order_info_completed = True
-        current_member.save()
-
-        messages.success(request, 'Order information saved successfully.')
+        order_info.additional = request.POST.get('additional', '')
+        
+        try:
+            order_info.save()
+            current_member.order_info_completed = True
+            current_member.save()
+            messages.success(request, 'Order information saved successfully.')
+        except Exception as e:
+            messages.error(request, f'Error saving order information: {str(e)}')
+        
         return redirect('group', group_id=group_id)
 
     return redirect('add_group_order_info', group_id=group_id)

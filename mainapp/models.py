@@ -57,7 +57,7 @@ class GroupMemberOrderInfo(models.Model):
     last_name = models.CharField(max_length=50)
     date_of_birth = models.CharField(max_length=10)
     state = models.CharField(max_length=2)
-    height_feet = models.IntegerField()
+    height_feet = models.IntegerField(null=True, blank=True, default=0)
     height_inches = models.IntegerField()
     weight = models.IntegerField()
     eyes = models.CharField(max_length=20)
