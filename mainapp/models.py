@@ -101,3 +101,12 @@ class IndividualBitcoinPayment(models.Model):
 
     def __str__(self):
         return f"Individual Bitcoin payment for Order {self.order.id}"
+    
+class BitcoinPayment(models.Model):
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    member = models.ForeignKey(GroupMember, on_delete=models.CASCADE)
+    screenshot = models.ImageField(upload_to='bitcoin_screenshots/')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Bitcoin payment for {self.member.name} in {self.group}"

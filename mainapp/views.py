@@ -10,7 +10,7 @@ import json
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-from .models import Order, Group, GroupMember, GroupMemberOrderInfo, VenmoPayment
+from .models import Order, Group, GroupMember, GroupMemberOrderInfo, VenmoPayment, BitcoinPayment
 from django.urls import reverse
 
 logger = logging.getLogger(__name__)
@@ -304,23 +304,40 @@ def group_id_order(request, group_id):
         'total_price': total_price,
     })
 
+@require_POST
 def confirm_group_payment(request, group_id):
     if request.method == 'POST':
-        group = get_object_or_404(Group, id=group_id)
-        current_member_id = request.session.get('member_id')
-        current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
-        
         payment_method = request.POST.get('payment_method')
-        
-        # Here you would typically process the payment
-        # For this example, we'll just mark the member as paid
-        current_member.paid = True
-        current_member.save()
-        
-        messages.success(request, f'Payment confirmed using {payment_method}.')
-        return redirect('group', group_id=group_id)
-    
-    return redirect('group', group_id=group_id)
+        screenshot = request.FILES.get('screenshot')
+        group = get_object_or_404(Group, id=group_id)
+        current_member = get_object_or_404(GroupMember, group=group, member_id=request.session.get('member_id'))
+
+        if screenshot:
+            if payment_method == 'venmo':
+                venmo_order_id = request.POST.get('order_id')
+                VenmoPayment.objects.create(
+                    group=group,
+                    member=current_member,
+                    order_id=venmo_order_id,
+                    screenshot=screenshot
+                )
+            elif payment_method == 'bitcoin':
+                BitcoinPayment.objects.create(
+                    group=group,
+                    member=current_member,
+                    screenshot=screenshot
+                )
+            else:
+                return JsonResponse({'success': False, 'error': 'Invalid payment method'})
+
+            current_member.paid = True
+            current_member.save()
+
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': 'No screenshot provided'})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
 
 def purchase_group_order(request, group_id):
     group = get_object_or_404(Group, id=group_id)
