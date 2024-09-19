@@ -25,6 +25,7 @@ class Order(models.Model):
     additional = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     tracking_number = models.CharField(max_length=20, unique=True, null=True, blank=True)
+    shipping = models.CharField(max_length=10, choices=[('normal', 'Normal'), ('expedited', 'Expedited')])
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

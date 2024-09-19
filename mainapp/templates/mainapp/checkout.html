@@ -81,6 +81,16 @@
                                 <dd class="mt-1 text-sm text-gray-900">{{ order.additional }}</dd>
                             </div>
                             {% endif %}
+                            <div class="sm:col-span-2">
+                                <dt class="text-sm font-medium text-gray-500">Shipping Option</dt>
+                                <dd class="mt-1 text-sm text-gray-900">
+                                    {% if order.shipping == 'normal' %}
+                                        Normal Shipping (1-2 weeks) - $100
+                                    {% else %}
+                                        Expedited Shipping (2-5 days) - $120
+                                    {% endif %}
+                                </dd>
+                            </div>
                         </dl>
                     </div>
                 </div>

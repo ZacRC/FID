@@ -11,11 +11,6 @@
                 <div class="p-6">
                     <h2 class="text-2xl font-semibold mb-4 text-primary">Bitcoin</h2>
                     <p class="text-gray-600 mb-4">Pay with cryptocurrency!</p>
-                    <ul class="list-disc list-inside text-gray-700 mb-4">
-                        <li>Fast and secure transactions</li>
-                        <li>Decentralized payment method</li>
-                        <li>Low transaction fees</li>
-                    </ul>
                     <button onclick="showBitcoinModal()" class="w-full bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300">Pay with Bitcoin</button>
                 </div>
             </div>
@@ -23,14 +18,19 @@
                 <div class="p-6">
                     <h2 class="text-2xl font-semibold mb-4 text-primary">Venmo</h2>
                     <p class="text-gray-600 mb-4">Pay with Venmo!</p>
-                    <ul class="list-disc list-inside text-gray-700 mb-4">
-                        <li>Easy and convenient</li>
-                        <li>Fast mobile payments</li>
-                        <li>Secure transactions</li>
-                    </ul>
                     <button onclick="showVenmoModal()" class="w-full bg-accent text-secondary px-4 py-2 rounded-full hover:bg-primary transition duration-300">Pay with Venmo</button>
                 </div>
             </div>
+        </div>
+        <div class="mt-8 text-center">
+            <h2 class="text-2xl font-semibold text-primary">Total Amount to Pay</h2>
+            <p class="text-3xl font-bold text-accent mt-2">
+                {% if order.shipping == 'normal' %}
+                    $100
+                {% else %}
+                    $120
+                {% endif %}
+            </p>
         </div>
         <p class="mt-8 text-center text-gray-600 bg-yellow-100 p-4 rounded-lg">Remember, all transactions are imaginary. No real money will be charged.</p>
     </div>
@@ -54,11 +54,6 @@
             </div>
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
-                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-accent sm:mx-0 sm:h-10 sm:w-10">
-                        <svg class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                    </div>
                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <div class="mt-2">
                             <p class="text-sm text-gray-500">
@@ -78,23 +73,25 @@
                                 <label for="paymentScreenshot" class="block text-sm font-medium text-gray-700">
                                     Upload Screenshot
                                 </label>
-                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-accent transition-colors duration-300" onclick="document.getElementById('paymentScreenshot').click();">
-                                    <div class="space-y-1 text-center">
-                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                        <div class="flex text-sm text-gray-600 justify-center">
-                                            <span class="relative bg-white rounded-md font-medium text-accent hover:text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-accent">
-                                                Upload a file
-                                            </span>
-                                            <p class="pl-1">or drag and drop</p>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                    <label for="paymentScreenshot" class="w-full h-full cursor-pointer">
+                                        <div class="space-y-1 text-center">
+                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                            <div class="flex text-sm text-gray-600 justify-center">
+                                                <span class="relative bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                    Upload a file
+                                                </span>
+                                                <p class="pl-1">or drag and drop</p>
+                                            </div>
+                                            <p class="text-xs text-gray-500" id="fileNameDisplay">
+                                                PNG, JPG, GIF up to 10MB
+                                            </p>
                                         </div>
-                                        <p class="text-xs text-gray-500" id="fileNameDisplay">
-                                            PNG, JPG, GIF up to 10MB
-                                        </p>
-                                    </div>
+                                        <input id="paymentScreenshot" name="paymentScreenshot" type="file" class="sr-only" accept="image/*" onchange="updateFileInput()">
+                                    </label>
                                 </div>
-                                <input id="paymentScreenshot" name="paymentScreenshot" type="file" accept="image/*" class="sr-only" onchange="updateFileInput()">
                             </div>
                         </div>
                     </div>
@@ -130,19 +127,12 @@
             </div>
             <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div class="sm:flex sm:items-start">
-                    <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-accent sm:mx-0 sm:h-10 sm:w-10">
-                        <svg class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                        </svg>
-                    </div>
                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <div class="mt-2">
                             <p class="text-sm text-gray-500">
                                 1. Send payment to this Bitcoin address:
                             </p>
-                            <p class="text-sm font-bold text-primary mt-1">
-                                bc1qad092tx7hregfvzg29vrt8e9d6k0c2hxz2v7xw
-                            </p>
+                            <p class="text-lg font-bold text-primary mt-1">bc1qad092tx7hregfvzg29vrt8e9d6k0c2hxz2v7xw</p>
                             <p class="text-sm text-gray-500 mt-4">
                                 2. Screenshot your payment confirmation and upload it below:
                             </p>
@@ -150,23 +140,25 @@
                                 <label for="bitcoinPaymentScreenshot" class="block text-sm font-medium text-gray-700">
                                     Upload Screenshot
                                 </label>
-                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md cursor-pointer hover:border-accent transition-colors duration-300" onclick="document.getElementById('bitcoinPaymentScreenshot').click();">
-                                    <div class="space-y-1 text-center">
-                                        <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
-                                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                        <div class="flex text-sm text-gray-600 justify-center">
-                                            <span class="relative bg-white rounded-md font-medium text-accent hover:text-primary focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-accent">
-                                                Upload a file
-                                            </span>
-                                            <p class="pl-1">or drag and drop</p>
+                                <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                                    <label for="bitcoinPaymentScreenshot" class="w-full h-full cursor-pointer">
+                                        <div class="space-y-1 text-center">
+                                            <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                                <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                            <div class="flex text-sm text-gray-600 justify-center">
+                                                <span class="relative bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                                    Upload a file
+                                                </span>
+                                                <p class="pl-1">or drag and drop</p>
+                                            </div>
+                                            <p class="text-xs text-gray-500" id="bitcoinFileNameDisplay">
+                                                PNG, JPG, GIF up to 10MB
+                                            </p>
                                         </div>
-                                        <p class="text-xs text-gray-500" id="bitcoinFileNameDisplay">
-                                            PNG, JPG, GIF up to 10MB
-                                        </p>
-                                    </div>
+                                        <input id="bitcoinPaymentScreenshot" name="bitcoinPaymentScreenshot" type="file" class="sr-only" accept="image/*" onchange="updateBitcoinFileInput()">
+                                    </label>
                                 </div>
-                                <input id="bitcoinPaymentScreenshot" name="bitcoinPaymentScreenshot" type="file" accept="image/*" class="sr-only" onchange="updateBitcoinFileInput()">
                             </div>
                         </div>
                     </div>

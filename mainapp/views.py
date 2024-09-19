@@ -67,14 +67,14 @@ def checkout(request):
             picture=request.FILES['picture'],
             signature=request.FILES.get('signature'),
             additional=request.POST['additional'],
-            tracking_number=generate_tracking_number()
+            shipping=request.POST['shipping']
         )
         order.save()
         request.session['order_id'] = order.id
         return render(request, 'mainapp/checkout.html', {'order': order})
     except Exception as e:
-        logger.error(f"Error in checkout: {str(e)}", exc_info=True)
-        return render(request, 'mainapp/error.html', {'error_message': f'An error occurred during checkout. Please try again. Error: {str(e)}'})
+        logger.error(f"Error in checkout view: {str(e)}")
+        return render(request, 'mainapp/error.html', {'error_message': 'An error occurred during checkout. Please try again.'})
 
 def payment(request):
     order_id = request.session.get('order_id')
