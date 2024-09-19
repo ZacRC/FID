@@ -195,8 +195,56 @@
                 <label for="shipping_state" class="block text-sm font-medium text-gray-700 mb-2">State: *</label>
                 <select id="shipping_state" name="shipping_state" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <option value="">Choose a state</option>
-                    <!-- Add all state options here, similar to the existing state dropdown -->
-                </select>
+                    <option value="AL" {% if order_info.state == 'AL' %}selected{% endif %}>Alabama</option>
+                    <option value="AK" {% if order_info.state == 'AK' %}selected{% endif %}>Alaska</option>
+                    <option value="AZ" {% if order_info.state == 'AZ' %}selected{% endif %}>Arizona</option>
+                    <option value="AR" {% if order_info.state == 'AR' %}selected{% endif %}>Arkansas</option>
+                    <option value="CA" {% if order_info.state == 'CA' %}selected{% endif %}>California</option>
+                    <option value="CO" {% if order_info.state == 'CO' %}selected{% endif %}>Colorado</option>
+                    <option value="CT" {% if order_info.state == 'CT' %}selected{% endif %}>Connecticut</option>
+                    <option value="DE" {% if order_info.state == 'DE' %}selected{% endif %}>Delaware</option>
+                    <option value="FL" {% if order_info.state == 'FL' %}selected{% endif %}>Florida</option>
+                    <option value="GA" {% if order_info.state == 'GA' %}selected{% endif %}>Georgia</option>
+                    <option value="HI" {% if order_info.state == 'HI' %}selected{% endif %}>Hawaii</option>
+                    <option value="ID" {% if order_info.state == 'ID' %}selected{% endif %}>Idaho</option>
+                    <option value="IL" {% if order_info.state == 'IL' %}selected{% endif %}>Illinois</option>
+                    <option value="IN" {% if order_info.state == 'IN' %}selected{% endif %}>Indiana</option>
+                    <option value="IA" {% if order_info.state == 'IA' %}selected{% endif %}>Iowa</option>
+                    <option value="KS" {% if order_info.state == 'KS' %}selected{% endif %}>Kansas</option>
+                    <option value="KY" {% if order_info.state == 'KY' %}selected{% endif %}>Kentucky</option>
+                    <option value="LA" {% if order_info.state == 'LA' %}selected{% endif %}>Louisiana</option>
+                    <option value="ME" {% if order_info.state == 'ME' %}selected{% endif %}>Maine</option>
+                    <option value="MD" {% if order_info.state == 'MD' %}selected{% endif %}>Maryland</option>
+                    <option value="MA" {% if order_info.state == 'MA' %}selected{% endif %}>Massachusetts</option>
+                    <option value="MI" {% if order_info.state == 'MI' %}selected{% endif %}>Michigan</option>
+                    <option value="MN" {% if order_info.state == 'MN' %}selected{% endif %}>Minnesota</option>
+                    <option value="MS" {% if order_info.state == 'MS' %}selected{% endif %}>Mississippi</option>
+                    <option value="MO" {% if order_info.state == 'MO' %}selected{% endif %}>Missouri</option>
+                    <option value="MT" {% if order_info.state == 'MT' %}selected{% endif %}>Montana</option>
+                    <option value="NE" {% if order_info.state == 'NE' %}selected{% endif %}>Nebraska</option>
+                    <option value="NV" {% if order_info.state == 'NV' %}selected{% endif %}>Nevada</option>
+                    <option value="NH" {% if order_info.state == 'NH' %}selected{% endif %}>New Hampshire</option>
+                    <option value="NJ" {% if order_info.state == 'NJ' %}selected{% endif %}>New Jersey</option>
+                    <option value="NM" {% if order_info.state == 'NM' %}selected{% endif %}>New Mexico</option>
+                    <option value="NY" {% if order_info.state == 'NY' %}selected{% endif %}>New York</option>
+                    <option value="NC" {% if order_info.state == 'NC' %}selected{% endif %}>North Carolina</option>
+                    <option value="ND" {% if order_info.state == 'ND' %}selected{% endif %}>North Dakota</option>
+                    <option value="OH" {% if order_info.state == 'OH' %}selected{% endif %}>Ohio</option>
+                    <option value="OK" {% if order_info.state == 'OK' %}selected{% endif %}>Oklahoma</option>
+                    <option value="OR" {% if order_info.state == 'OR' %}selected{% endif %}>Oregon</option>
+                    <option value="PA" {% if order_info.state == 'PA' %}selected{% endif %}>Pennsylvania</option>
+                    <option value="RI" {% if order_info.state == 'RI' %}selected{% endif %}>Rhode Island</option>
+                    <option value="SC" {% if order_info.state == 'SC' %}selected{% endif %}>South Carolina</option>
+                    <option value="SD" {% if order_info.state == 'SD' %}selected{% endif %}>South Dakota</option>
+                    <option value="TN" {% if order_info.state == 'TN' %}selected{% endif %}>Tennessee</option>
+                    <option value="TX" {% if order_info.state == 'TX' %}selected{% endif %}>Texas</option>
+                    <option value="UT" {% if order_info.state == 'UT' %}selected{% endif %}>Utah</option>
+                    <option value="VT" {% if order_info.state == 'VT' %}selected{% endif %}>Vermont</option>
+                    <option value="VA" {% if order_info.state == 'VA' %}selected{% endif %}>Virginia</option>
+                    <option value="WA" {% if order_info.state == 'WA' %}selected{% endif %}>Washington</option>
+                    <option value="WV" {% if order_info.state == 'WV' %}selected{% endif %}>West Virginia</option>
+                    <option value="WI" {% if order_info.state == 'WI' %}selected{% endif %}>Wisconsin</option>
+                    <option value="WY" {% if order_info.state == 'WY' %}selected{% endif %}>Wyoming</option>                </select>
             </div>
             <div>
                 <label for="shipping_zip" class="block text-sm font-medium text-gray-700 mb-2">Zip: *</label>
