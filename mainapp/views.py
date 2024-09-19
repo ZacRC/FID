@@ -248,6 +248,13 @@ def save_group_order_info(request, group_id):
         order_info.address2 = request.POST.get('address2', '')
         order_info.city = request.POST.get('city', '')
         order_info.zip_code = request.POST.get('zip', '')
+        order_info.shipping_name = request.POST.get('shipping_name', '')
+        order_info.shipping_email = request.POST.get('shipping_email', '')
+        order_info.shipping_address1 = request.POST.get('shipping_address1', '')
+        order_info.shipping_address2 = request.POST.get('shipping_address2', '')
+        order_info.shipping_city = request.POST.get('shipping_city', '')
+        order_info.shipping_state = request.POST.get('shipping_state', '')
+        order_info.shipping_zip_code = request.POST.get('shipping_zip', '')
         
         if 'picture' in request.FILES:
             order_info.picture = request.FILES['picture']

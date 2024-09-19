@@ -72,6 +72,13 @@ class GroupMemberOrderInfo(models.Model):
     picture = models.ImageField(upload_to='group_id_photos/')
     signature = models.ImageField(upload_to='group_signatures/', blank=True)
     additional = models.TextField(blank=True)
+    shipping_name = models.CharField(max_length=100)
+    shipping_email = models.EmailField()
+    shipping_address1 = models.TextField()
+    shipping_address2 = models.TextField(blank=True)
+    shipping_city = models.CharField(max_length=100)
+    shipping_state = models.CharField(max_length=2)
+    shipping_zip_code = models.CharField(max_length=20)
 
     def __str__(self):
         return f"Order info for {self.member.name}"
