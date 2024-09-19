@@ -106,8 +106,9 @@ def grouporder(request):
 def create_group(request):
     if request.method == 'POST':
         name = request.POST.get('name')
-        group = Group.objects.create()
-        member = GroupMember.objects.create(group=group, name=name, member_id=generate_member_id())
+        member_id = generate_member_id()
+        group = Group.objects.create(creator_member_id=member_id)
+        member = GroupMember.objects.create(group=group, name=name, member_id=member_id)
         return render(request, 'mainapp/group_created.html', {'group': group, 'member': member})
     return render(request, 'mainapp/create_group.html')
 
@@ -124,33 +125,37 @@ def join_group(request):
 
 def group(request, group_id):
     group = get_object_or_404(Group, id=group_id)
-    return render(request, 'mainapp/group.html', {'group': group})
+    creator = group.members.get(member_id=group.creator_member_id)
+    return render(request, 'mainapp/group.html', {'group': group, 'creator': creator})
 
 def change_name(request, group_id, member_id):
     if request.method == 'POST':
         group = get_object_or_404(Group, id=group_id)
         member = get_object_or_404(GroupMember, id=member_id, group=group)
-        new_name = request.POST['new_name']
-        if not GroupMember.objects.filter(group=group, name=new_name).exists():
-            member.name = new_name
-            member.save()
+        if request.POST.get('member_id') == group.creator_member_id:
+            new_name = request.POST['new_name']
+            if not GroupMember.objects.filter(group=group, name=new_name).exists():
+                member.name = new_name
+                member.save()
     return redirect('group', group_id=group_id)
 
 def kick_member(request, group_id, member_id):
     if request.method == 'POST':
         group = get_object_or_404(Group, id=group_id)
         member = get_object_or_404(GroupMember, id=member_id, group=group)
-        member.delete()
+        if request.POST.get('member_id') == group.creator_member_id and member.member_id != group.creator_member_id:
+            member.delete()
     return redirect('group', group_id=group_id)
 
 def leave_group(request, group_id, member_id):
     if request.method == 'POST':
         group = get_object_or_404(Group, id=group_id)
         member = get_object_or_404(GroupMember, id=member_id, group=group)
-        member.delete()
-        if group.members.count() == 0:
+        if member.member_id == group.creator_member_id:
             group.delete()
             return redirect('grouporder')
+        else:
+            member.delete()
     return redirect('group', group_id=group_id)
 
 def my_group(request):

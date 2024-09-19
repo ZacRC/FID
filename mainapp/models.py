@@ -31,6 +31,7 @@ class Order(models.Model):
 
 class Group(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
+    creator_member_id = models.CharField(max_length=8)
 
     def __str__(self):
         return f"Group {self.id}"
