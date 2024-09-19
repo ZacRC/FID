@@ -313,3 +313,54 @@ def confirm_group_payment(request, group_id):
         return redirect('group', group_id=group_id)
     
     return redirect('group', group_id=group_id)
+
+def purchase_group_order(request, group_id):
+    group = get_object_or_404(Group, id=group_id)
+    current_member_id = request.session.get('member_id')
+    current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+
+    if current_member.member_id != group.creator_member_id:
+        messages.error(request, "Only the group creator can purchase group orders.")
+        return redirect('group', group_id=group_id)
+
+    members_with_info = GroupMember.objects.filter(group=group, order_info_completed=True, paid=False)
+    total_members = group.members.count()
+    unpaid_members = members_with_info.count()
+
+    total_quantity = sum(member.order_info.quantity for member in members_with_info)
+    price_per_id = calculate_price_per_id(total_members)
+    total_price = price_per_id * total_quantity
+
+    context = {
+        'group': group,
+        'total_members': total_members,
+        'members_with_info': members_with_info.count(),
+        'unpaid_members': unpaid_members,
+        'total_price': total_price,
+    }
+
+    return render(request, 'mainapp/purchasegrouporder.html', context)
+
+def confirm_group_purchase(request, group_id):
+    if request.method == 'POST':
+        group = get_object_or_404(Group, id=group_id)
+        current_member_id = request.session.get('member_id')
+        current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+
+        if current_member.member_id != group.creator_member_id:
+            messages.error(request, "Only the group creator can purchase group orders.")
+            return redirect('group', group_id=group_id)
+
+        payment_method = request.POST.get('payment_method')
+
+        # Here you would typically process the payment
+        # For this example, we'll just mark all unpaid members as paid
+        unpaid_members = GroupMember.objects.filter(group=group, order_info_completed=True, paid=False)
+        for member in unpaid_members:
+            member.paid = True
+            member.save()
+
+        messages.success(request, f'Group order payment confirmed using {payment_method}. All members have been marked as paid.')
+        return redirect('group', group_id=group_id)
+
+    return redirect('group', group_id=group_id)

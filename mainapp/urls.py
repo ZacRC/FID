@@ -27,4 +27,6 @@ urlpatterns = [
     path('group/<int:group_id>/edit-order-info/', views.edit_group_order_info, name='edit_group_order_info'),
     path('group/<int:group_id>/order/', views.group_id_order, name='group_id_order'),
     path('group/<int:group_id>/confirm-payment/', views.confirm_group_payment, name='confirm_group_payment'),
+    path('group/<int:group_id>/purchase-order/', views.purchase_group_order, name='purchase_group_order'),
+    path('group/<int:group_id>/confirm-purchase/', views.confirm_group_purchase, name='confirm_group_purchase'),
 ]
