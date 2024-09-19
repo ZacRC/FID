@@ -161,3 +161,13 @@ def leave_group(request, group_id):
             group.delete()
         return redirect('grouporder')
     return redirect('group', group_id=group_id)
+
+def my_group(request):
+    if request.method == 'POST':
+        member_id = request.POST.get('member_id')
+        try:
+            member = GroupMember.objects.get(member_id=member_id)
+            return redirect('group', group_id=member.group.id)
+        except GroupMember.DoesNotExist:
+            return render(request, 'mainapp/grouporder.html', {'error': 'Invalid Member ID'})
+    return redirect('grouporder')
