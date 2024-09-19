@@ -22,6 +22,9 @@
                         <span class="bg-green-500 text-white px-3 py-1 rounded-full">Info Completed</span>
                     {% else %}
                         <span class="bg-red-500 text-white px-3 py-1 rounded-full">Info Not Completed</span>
+                        {% if member.member_id == current_member.member_id %}
+                            <a href="{% url 'add_group_order_info' group.id %}" class="bg-blue-500 text-white px-3 py-1 rounded-full hover:bg-blue-600 transition duration-300">Add ID Information</a>
+                        {% endif %}
                     {% endif %}
                     {% if member.member_id == group.creator_member_id %}
                         <span class="bg-blue-500 text-white px-3 py-1 rounded-full">Creator</span>
@@ -34,7 +37,7 @@
                             <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition duration-300">Kick</button>
                         </form>
                     {% endif %}
-                    {% if member.member_id == current_member.member_id %}
+                    {% if member.member_id == current_member.member_id and member.member_id != group.creator_member_id %}
                         <form action="{% url 'leave_group' group.id member.id %}" method="post" class="inline">
                             {% csrf_token %}
                             <button type="submit" class="bg-yellow-500 text-white px-3 py-1 rounded-full hover:bg-yellow-600 transition duration-300">Leave</button>
