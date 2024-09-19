@@ -8,7 +8,7 @@ class Order(models.Model):
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50)
-    date_of_birth = models.DateField()
+    date_of_birth = models.CharField(max_length=10)  # Change this line
     state_country = models.CharField(max_length=100)
     height_feet = models.IntegerField()
     height_inches = models.IntegerField()

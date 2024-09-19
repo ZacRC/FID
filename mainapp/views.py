@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 from .models import Order
 import logging
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -34,27 +35,18 @@ def how_to_pay(request):
 @require_POST
 def checkout(request):
     try:
+        # ... other fields ...
+        date_of_birth = request.POST['date_of_birth']
+        # Validate date format
+        try:
+            datetime.strptime(date_of_birth, '%m/%d/%Y')
+        except ValueError:
+            raise ValueError("Invalid date format. Please use MM/DD/YYYY.")
+        
         order = Order(
-            product=request.POST['product'],
-            quantity=int(request.POST['quantity']),
-            first_name=request.POST['first_name'],
-            middle_name=request.POST['middle_name'],
-            last_name=request.POST['last_name'],
-            date_of_birth=request.POST['date_of_birth'],
-            state_country=request.POST['state_country'],
-            height_feet=int(request.POST['height_feet']),
-            height_inches=int(request.POST['height_inches']),
-            weight=int(request.POST['weight']),
-            eyes=request.POST['eyes'],
-            hair=request.POST['hair'],
-            gender=request.POST['gender'],
-            address1=request.POST['address1'],
-            address2=request.POST['address2'],
-            city=request.POST['city'],
-            zip_code=request.POST['zip'],
-            picture=request.FILES['picture'],
-            signature=request.FILES.get('signature'),
-            additional=request.POST['additional']
+            # ... other fields ...
+            date_of_birth=date_of_birth,
+            # ... rest of the fields ...
         )
         order.save()
         request.session['order_id'] = order.id
