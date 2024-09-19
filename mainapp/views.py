@@ -67,7 +67,8 @@ def checkout(request):
         return render(request, 'mainapp/checkout.html', {'order': order})
     except Exception as e:
         logger.error(f"Error in checkout: {str(e)}", exc_info=True)
-        return render(request, 'mainapp/error.html', {'error_message': f'An error occurred during checkout. Please try again. POST data: {request.POST}'})
+        return render(request, 'mainapp/error.html', {'error_message': f'An error occurred during checkout. Please try again. Error: {str(e)}'})
+
 @require_POST
 def payment(request):
     return render(request, 'mainapp/payment.html')
