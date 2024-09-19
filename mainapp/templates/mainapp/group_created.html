@@ -1,0 +1,15 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Group Created - NAFakes{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Group Created</h1>
+    <div class="bg-white shadow-lg rounded-lg p-6 mb-8">
+        <p class="mb-4"><strong>Group ID:</strong> {{ group.id }}</p>
+        <p class="mb-4"><strong>Your Member ID:</strong> {{ member_id }}</p>
+        <p class="mb-4">Please save your Member ID to access your group later.</p>
+        <a href="{% url 'group' group.id %}" class="bg-primary text-secondary px-6 py-3 rounded-full hover:bg-accent transition duration-300">Go to Group</a>
+    </div>
+</div>
+{% endblock %}

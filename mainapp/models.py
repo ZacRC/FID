@@ -30,7 +30,6 @@ class Order(models.Model):
         return f"{self.first_name} {self.last_name}"
 
 class Group(models.Model):
-    creator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_groups')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -38,8 +37,8 @@ class Group(models.Model):
 
 class GroupMember(models.Model):
     group = models.ForeignKey(Group, on_delete=models.CASCADE, related_name='members')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
+    member_id = models.CharField(max_length=8, unique=True)
     joined_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
