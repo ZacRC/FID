@@ -59,7 +59,8 @@ def checkout(request):
             zip_code=request.POST['zip'],
             picture=request.FILES['picture'],
             signature=request.FILES.get('signature'),
-            additional=request.POST['additional']
+            additional=request.POST['additional'],
+            tracking_number=generate_tracking_number()
         )
         order.save()
         request.session['order_id'] = order.id
