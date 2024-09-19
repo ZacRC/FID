@@ -4,6 +4,78 @@
 
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Our Shipping Options</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+            <div class="bg-primary text-secondary p-6">
+                <h2 class="text-2xl font-semibold mb-2">Normal Shipping</h2>
+                <p class="text-3xl font-bold">$49.99</p>
+            </div>
+            <div class="p-6">
+                <div class="flex items-center justify-center mb-6">
+                    <img src="{% static 'images/drivers_license_normal.png' %}" alt="Normal Driver's License" class="w-48 h-auto">
+                </div>
+                <ul class="mb-6 space-y-2">
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Scannable
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        UV Test
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Bend Test
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        All 50 States
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Barstool Approved
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Shipping Time 7-14 days
+                    </li>
+                </ul>
+                <a href="{% url 'order' %}?shipping=normal" class="block text-center bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300">Choose Normal Shipping</a>
+            </div>
+        </div>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+            <div class="bg-accent text-secondary p-6">
+                <h2 class="text-2xl font-semibold mb-2">Expedited Shipping</h2>
+                <p class="text-3xl font-bold">$79.99</p>
+            </div>
+            <div class="p-6">
+                <div class="flex items-center justify-center mb-6">
+                    <img src="{% static 'images/drivers_license_expedited.png' %}" alt="Expedited Driver's License" class="w-48 h-auto">
+                </div>
+                <ul class="mb-6 space-y-2">
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Scannable
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        UV Test
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        Bend Test
+                    </li>
+                    <li class="flex items-center">
+                        <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        All 50 States
+                    </li>
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Pricing - NAFakes{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h1 class="text-4xl font-bold mb-8 text-center text-primary">Our Pricing Plans</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
