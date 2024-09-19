@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST
 from .models import Order
+import logging
+
+logger = logging.getLogger(__name__)
 
 # Create your views here.
 
@@ -46,8 +49,7 @@ def checkout(request):
         request.session['order_id'] = order.id
         return render(request, 'mainapp/checkout.html', {'order': order})
     except Exception as e:
-        # Log the error and return an error response
-        print(f"Error in checkout: {str(e)}")
+        logger.error(f"Error in checkout: {str(e)}", exc_info=True)
         return render(request, 'mainapp/error.html', {'error_message': 'An error occurred during checkout. Please try again.'})
 
 @require_POST
