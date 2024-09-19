@@ -123,6 +123,20 @@ def join_group(request):
             return render(request, 'mainapp/grouporder.html', {'error': 'Name already taken in this group'})
     return redirect('grouporder')
 
+def calculate_price_per_id(member_count):
+    if member_count >= 25:
+        return 40
+    elif member_count >= 10:
+        return 50
+    elif member_count >= 5:
+        return 70
+    elif member_count >= 3:
+        return 90
+    elif member_count >= 2:
+        return 100
+    else:
+        return 120
+
 def group(request, group_id):
     group = get_object_or_404(Group, id=group_id)
     creator = GroupMember.objects.get(member_id=group.creator_member_id)
@@ -130,12 +144,15 @@ def group(request, group_id):
     current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
     
     members = group.members.all().select_related('order_info')
+    member_count = members.count()
+    price_per_id = calculate_price_per_id(member_count)
     
     return render(request, 'mainapp/group.html', {
         'group': group,
         'creator': creator,
         'current_member': current_member,
         'members': members,
+        'price_per_id': price_per_id,
     })
 
 def change_name(request, group_id, member_id):
@@ -267,10 +284,16 @@ def group_id_order(request, group_id):
     current_member_id = request.session.get('member_id')
     current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
     order_info = GroupMemberOrderInfo.objects.get(member=current_member)
+    
+    member_count = group.members.count()
+    price_per_id = calculate_price_per_id(member_count)
+    total_price = price_per_id * order_info.quantity
 
     return render(request, 'mainapp/groupidorder.html', {
         'group': group,
         'order_info': order_info,
+        'price_per_id': price_per_id,
+        'total_price': total_price,
     })
 
 def confirm_group_payment(request, group_id):

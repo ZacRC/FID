@@ -16,6 +16,9 @@
                 <p><strong>State:</strong> {{ order_info.state }}</p>
                 <!-- Add more fields as needed -->
                 
+                <p class="mt-4"><strong>Price per ID:</strong> ${{ price_per_id|floatformat:2 }}</p>
+                <p><strong>Total Price:</strong> ${{ total_price|floatformat:2 }}</p>
+                
                 <div class="mt-6">
                     <label class="inline-flex items-center">
                         <input type="checkbox" id="confirmInfo" class="form-checkbox">

@@ -7,9 +7,15 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="bg-white shadow-xl rounded-lg overflow-hidden">
             <!-- Group Header -->
-            <div class="bg-primary p-6">
-                <h1 class="text-3xl font-bold text-secondary">Group {{ group.id }}</h1>
-                <p class="text-secondary mt-2">Created by: {{ creator.name }}</p>
+            <div class="bg-primary p-6 flex justify-between items-center">
+                <div>
+                    <h1 class="text-3xl font-bold text-secondary">Group {{ group.id }}</h1>
+                    <p class="text-secondary mt-2">Created by: {{ creator.name }}</p>
+                </div>
+                <div class="text-right">
+                    <p class="text-2xl font-bold text-secondary">{{ price_per_id|floatformat:2 }}/Per ID</p>
+                    <p class="text-sm text-secondary">{{ group.members.count }} members</p>
+                </div>
             </div>
 
             <!-- Group Information -->
