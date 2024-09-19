@@ -30,20 +30,25 @@ def how_to_pay(request):
 
 @require_POST
 def checkout(request):
-    order = Order(
-        product=request.POST['product'],
-        quantity=request.POST['quantity'],
-        first_name=request.POST['first_name'],
-        middle_name=request.POST['middle_name'],
-        last_name=request.POST['last_name'],
-        state=request.POST['state'],
-        address=request.POST['address'],
-        id_photo=request.FILES['id_photo'],
-        id_signature=request.FILES['id_signature']
-    )
-    order.save()
-    request.session['order_id'] = order.id
-    return render(request, 'mainapp/checkout.html', {'order': order})
+    try:
+        order = Order(
+            product=request.POST['product'],
+            quantity=request.POST['quantity'],
+            first_name=request.POST['first_name'],
+            middle_name=request.POST['middle_name'],
+            last_name=request.POST['last_name'],
+            state=request.POST['state'],
+            address=request.POST['address'],
+            id_photo=request.FILES['id_photo'],
+            id_signature=request.FILES['id_signature']
+        )
+        order.save()
+        request.session['order_id'] = order.id
+        return render(request, 'mainapp/checkout.html', {'order': order})
+    except Exception as e:
+        # Log the error and return an error response
+        print(f"Error in checkout: {str(e)}")
+        return render(request, 'mainapp/error.html', {'error_message': 'An error occurred during checkout. Please try again.'})
 
 @require_POST
 def payment(request):
