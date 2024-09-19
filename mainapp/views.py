@@ -100,6 +100,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Group, GroupMember
 
+def grouporder(request):
+    return render(request, 'mainapp/grouporder.html')
+
 def create_group(request):
     if request.method == 'POST':
         name = request.POST.get('name')
