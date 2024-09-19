@@ -40,10 +40,21 @@ def checkout(request):
             first_name=request.POST['first_name'],
             middle_name=request.POST['middle_name'],
             last_name=request.POST['last_name'],
-            state=request.POST['state'],
-            address=request.POST['address'],
-            id_photo=request.FILES['id_photo'],
-            id_signature=request.FILES['id_signature']
+            date_of_birth=request.POST['date_of_birth'],
+            state_country=request.POST['state_country'],
+            height_feet=request.POST['height_feet'],
+            height_inches=request.POST['height_inches'],
+            weight=request.POST['weight'],
+            eyes=request.POST['eyes'],
+            hair=request.POST['hair'],
+            gender=request.POST['gender'],
+            address1=request.POST['address1'],
+            address2=request.POST['address2'],
+            city=request.POST['city'],
+            zip_code=request.POST['zip'],
+            picture=request.FILES['picture'],
+            signature=request.FILES.get('signature'),
+            additional=request.POST['additional']
         )
         order.save()
         request.session['order_id'] = order.id

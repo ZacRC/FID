@@ -20,6 +20,68 @@
         <input type="number" id="quantity" name="quantity" min="1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
     </div>
     <div class="mb-4">
+        <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name: *</label>
+        <input type="text" id="first_name" name="first_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    <div class="mb-4">
+        <label for="middle_name" class="block text-sm font-medium text-gray-700 mb-2">Middle Name:</label>
+        <input type="text" id="middle_name" name="middle_name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    <div class="mb-4">
+        <label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">Last Name: *</label>
+        <input type="text" id="last_name" name="last_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    <div class="mb-4">
+        <label for="date_of_birth" class="block text-sm font-medium text-gray-700 mb-2">Date of Birth: *</label>
+        <input type="date" id="date_of_birth" name="date_of_birth" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    <div class="mb-4">
+        <label for="state_country" class="block text-sm font-medium text-gray-700 mb-2">State/Country: *</label>
+        <input type="text" id="state_country" name="state_country" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    <div class="mb-4">
+        <label for="height_feet" class="block text-sm font-medium text-gray-700 mb-2">Height (feet): *</label>
+        <input type="number" id="height_feet" name="height_feet" min="1" max="10" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    <div class="mb-4">
+        <label for="height_inches" class="block text-sm font-medium text-gray-700 mb-2">Height (inches): *</label>
+        <input type="number" id="height_inches" name="height_inches" min="0" max="11" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    <div class="mb-4">
+        <label for="weight" class="block text-sm font-medium text-gray-700 mb-2">Weight: *</label>
+        <input type="number" id="weight" name="weight" min="1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    <div class="mb-4">
+        <label for="eyes" class="block text-sm font-medium text-gray-700 mb-2">Eyes: *</label>
+        <select id="eyes" name="eyes" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="">Choose eye color</option>
+            <option value="Black">Black</option>
+            <option value="Brown">Brown</option>
+            <option value="Blue">Blue</option>
+            <option value="Green">Green</option>
+            <option value="Hazel">Hazel</option>
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Place an Order - NAFakes{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-8">Place Your Order</h1>
+<form action="{% url 'checkout' %}" method="post" enctype="multipart/form-data" class="max-w-md mx-auto bg-white shadow-lg rounded-lg p-6">
+    {% csrf_token %}
+    <div class="mb-4">
+        <label for="product" class="block text-sm font-medium text-gray-700 mb-2">Select Product:</label>
+        <select id="product" name="product" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <option value="">Choose a product</option>
+            <option value="invisible-laptop">Invisible Laptop</option>
+            <option value="procrastination-eraser">Procrastination Eraser</option>
+            <option value="knowledge-pill">Instant Knowledge Pill</option>
+        </select>
+    </div>
+    <div class="mb-4">
+        <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" min="1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+    </div>
+    <div class="mb-4">
         <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name:</label>
         <input type="text" id="first_name" name="first_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
     </div>

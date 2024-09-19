@@ -11,13 +11,31 @@
         <h1 class="text-3xl font-bold mb-8">Checkout</h1>
         <div class="bg-white shadow-lg rounded-lg p-6">
             <h2 class="text-2xl font-semibold mb-4">Order Information</h2>
-            <p><strong>Product:</strong> {{ product }}</p>
-            <p><strong>Quantity:</strong> {{ quantity }}</p>
-            <p><strong>Name:</strong> {{ first_name }} {{ middle_name }} {{ last_name }}</p>
-            <p><strong>State:</strong> {{ state }}</p>
-            <p><strong>Address:</strong> {{ address }}</p>
-            <p><strong>ID Photo:</strong> Uploaded</p>
-            <p><strong>ID Signature:</strong> Uploaded</p>
+            <p><strong>Product:</strong> {{ order.product }}</p>
+            <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+            <p><strong>Name:</strong> {{ order.first_name }} {% if order.middle_name %}{{ order.middle_name }}{% endif %} {{ order.last_name }}</p>
+            <p><strong>Date of Birth:</strong> {{ order.date_of_birth }}</p>
+            <p><strong>State/Country:</strong> {{ order.state_country }}</p>
+            <p><strong>Height:</strong> {{ order.height_feet }}' {{ order.height_inches }}"</p>
+            <p><strong>Weight:</strong> {{ order.weight }} lbs</p>
+            <p><strong>Eyes:</strong> {{ order.eyes }}</p>
+            <p><strong>Hair:</strong> {{ order.hair }}</p>
+            <p><strong>Gender:</strong> {{ order.gender }}</p>
+            {% if order.address1 %}
+                <p><strong>Address 1:</strong> {{ order.address1 }}</p>
+            {% endif %}
+            {% if order.address2 %}
+                <p><strong>Address 2:</strong> {{ order.address2 }}</p>
+            {% endif %}
+            <p><strong>City:</strong> {{ order.city }}</p>
+            <p><strong>Zip Code:</strong> {{ order.zip_code }}</p>
+            <p><strong>Picture:</strong> Uploaded</p>
+            {% if order.signature %}
+                <p><strong>Signature:</strong> Uploaded</p>
+            {% endif %}
+            {% if order.additional %}
+                <p><strong>Additional Information:</strong> {{ order.additional }}</p>
+            {% endif %}
             
             <div class="mt-6">
                 <label class="flex items-center">
