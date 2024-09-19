@@ -46,17 +46,17 @@ def checkout(request):
     try:
         logger.debug(f"POST data: {request.POST}")
         logger.debug(f"FILES data: {request.FILES}")
-
+        
         order = Order(
-            quantity=int(request.POST['quantity']),
+            quantity=request.POST['quantity'],
             first_name=request.POST['first_name'],
             middle_name=request.POST['middle_name'],
             last_name=request.POST['last_name'],
             date_of_birth=request.POST['date_of_birth'],
             state=request.POST['state'],
-            height_feet=int(request.POST['height_feet']),
-            height_inches=int(request.POST['height_inches']),
-            weight=int(request.POST['weight']),
+            height_feet=request.POST['height_feet'],
+            height_inches=request.POST['height_inches'],
+            weight=request.POST['weight'],
             eyes=request.POST['eyes'],
             hair=request.POST['hair'],
             gender=request.POST['gender'],
@@ -67,9 +67,17 @@ def checkout(request):
             picture=request.FILES['picture'],
             signature=request.FILES.get('signature'),
             additional=request.POST['additional'],
-            shipping=request.POST['shipping']
+            shipping=request.POST['shipping'],
+            shipping_name=request.POST['shipping_name'],
+            shipping_email=request.POST['shipping_email'],
+            shipping_address1=request.POST['shipping_address1'],
+            shipping_address2=request.POST['shipping_address2'],
+            shipping_city=request.POST['shipping_city'],
+            shipping_state=request.POST['shipping_state'],
+            shipping_zip=request.POST['shipping_zip'],
         )
         order.save()
+        
         request.session['order_id'] = order.id
         return render(request, 'mainapp/checkout.html', {'order': order})
     except Exception as e:
