@@ -103,13 +103,12 @@ from .models import Group, GroupMember
 def grouporder(request):
     return render(request, 'mainapp/grouporder.html')
 
-@login_required
 def create_group(request):
     if request.method == 'POST':
         name = request.POST.get('name')
-        group = Group.objects.create(creator=request.user)
-        GroupMember.objects.create(group=group, user=request.user, name=name)
-        return redirect('group', group_id=group.id)
+        group = Group.objects.create()
+        member = GroupMember.objects.create(group=group, name=name)
+        return render(request, 'mainapp/group_created.html', {'group': group, 'member_id': member.member_id})
     return render(request, 'mainapp/create_group.html')
 
 @login_required
@@ -171,3 +170,20 @@ def my_group(request):
         except GroupMember.DoesNotExist:
             return render(request, 'mainapp/grouporder.html', {'error': 'Invalid Member ID'})
     return redirect('grouporder')
+
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+
+def user_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('grouporder')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'mainapp/login.html', {'form': form})

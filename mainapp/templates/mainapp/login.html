@@ -1,0 +1,14 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Login - NAFakes{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Login</h1>
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="w-full bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300">Login</button>
+    </form>
+</div>
+{% endblock %}
