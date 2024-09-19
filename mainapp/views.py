@@ -130,10 +130,11 @@ def group(request, group_id):
     group = get_object_or_404(Group, id=group_id)
     creator = group.members.get(member_id=group.creator_member_id)
     current_member_id = request.session.get('member_id')
+    current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
     return render(request, 'mainapp/group.html', {
         'group': group,
         'creator': creator,
-        'current_member_id': current_member_id
+        'current_member': current_member
     })
 
 def change_name(request, group_id, member_id):
@@ -171,6 +172,7 @@ def my_group(request):
         member_id = request.POST.get('member_id')
         try:
             member = GroupMember.objects.get(member_id=member_id)
+            request.session['member_id'] = member_id
             return redirect('group', group_id=member.group.id)
         except GroupMember.DoesNotExist:
             return render(request, 'mainapp/grouporder.html', {'error': 'Invalid Member ID'})
