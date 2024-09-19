@@ -1,0 +1,9 @@
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Error - NAFakes{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-bold mb-8">Error</h1>
+<p class="text-red-500">{{ error_message }}</p>
+<a href="{% url 'order' %}" class="mt-4 inline-block bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Back to Order</a>
+{% endblock %}
