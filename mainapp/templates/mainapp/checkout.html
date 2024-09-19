@@ -43,7 +43,48 @@
                                 <dt class="text-sm font-medium text-gray-500">Name</dt>
                                 <dd class="mt-1 text-sm text-gray-900">{{ order.first_name }} {% if order.middle_name %}{{ order.middle_name }}{% endif %} {{ order.last_name }}</dd>
                             </div>
-                            <!-- Add more fields here following the same pattern -->
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Date of Birth</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.date_of_birth }}</dd>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">State/Country</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.state_country }}</dd>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Height</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.height_feet }}' {{ order.height_inches }}"</dd>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Weight</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.weight }} lbs</dd>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Eyes</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.eyes }}</dd>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Hair</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.hair }}</dd>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Gender</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.gender }}</dd>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <dt class="text-sm font-medium text-gray-500">Address</dt>
+                                <dd class="mt-1 text-sm text-gray-900">
+                                    {{ order.address1 }}
+                                    {% if order.address2 %}<br>{{ order.address2 }}{% endif %}
+                                    <br>{{ order.city }}, {{ order.zip }}
+                                </dd>
+                            </div>
+                            {% if order.additional %}
+                            <div class="sm:col-span-2">
+                                <dt class="text-sm font-medium text-gray-500">Additional Information</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.additional }}</dd>
+                            </div>
+                            {% endif %}
                         </dl>
                     </div>
                 </div>
