@@ -3,13 +3,12 @@ from django.db import models
 # Create your models here.
 
 class Order(models.Model):
-    product = models.CharField(max_length=100)
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=1)
     first_name = models.CharField(max_length=50)
     middle_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50)
-    date_of_birth = models.CharField(max_length=10)  # Change this line
-    state_country = models.CharField(max_length=100)
+    date_of_birth = models.CharField(max_length=10)
+    state = models.CharField(max_length=2)
     height_feet = models.IntegerField()
     height_inches = models.IntegerField()
     weight = models.IntegerField()
@@ -26,4 +25,4 @@ class Order(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name} - {self.product}"
+        return f"{self.first_name} {self.last_name}"

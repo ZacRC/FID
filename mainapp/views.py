@@ -35,18 +35,16 @@ def how_to_pay(request):
 @require_POST
 def checkout(request):
     try:
-        # Add this debugging code
         logger.debug(f"POST data: {request.POST}")
         logger.debug(f"FILES data: {request.FILES}")
 
         order = Order(
-            product=request.POST['product'],
-            quantity=int(request.POST['quantity']),  # Ensure this line is present
+            quantity=int(request.POST['quantity']),
             first_name=request.POST['first_name'],
             middle_name=request.POST['middle_name'],
             last_name=request.POST['last_name'],
             date_of_birth=request.POST['date_of_birth'],
-            state_country=request.POST['state_country'],
+            state=request.POST['state'],
             height_feet=int(request.POST['height_feet']),
             height_inches=int(request.POST['height_inches']),
             weight=int(request.POST['weight']),
@@ -66,9 +64,7 @@ def checkout(request):
         return render(request, 'mainapp/checkout.html', {'order': order})
     except Exception as e:
         logger.error(f"Error in checkout: {str(e)}", exc_info=True)
-        # Add this line to see the full POST data in the error template
         return render(request, 'mainapp/error.html', {'error_message': f'An error occurred during checkout. Please try again. POST data: {request.POST}'})
-
 @require_POST
 def payment(request):
     return render(request, 'mainapp/payment.html')

@@ -8,15 +8,6 @@
     <form action="{% url 'checkout' %}" method="post" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-8">
         {% csrf_token %}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="col-span-2">
-                <label for="product" class="block text-sm font-medium text-gray-700 mb-2">Select Product:</label>
-                <select id="product" name="product" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
-                    <option value="">Choose a product</option>
-                    <option value="invisible-laptop">Invisible Laptop</option>
-                    <option value="procrastination-eraser">Procrastination Eraser</option>
-                    <option value="knowledge-pill">Instant Knowledge Pill</option>
-                </select>
-            </div>
             <div>
                 <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Quantity: *</label>
                 <input type="number" id="quantity" name="quantity" min="1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
@@ -38,8 +29,60 @@
                 <input type="text" id="date_of_birth" name="date_of_birth" required pattern="\d{2}/\d{2}/\d{4}" placeholder="MM/DD/YYYY" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
             <div>
-                <label for="state_country" class="block text-sm font-medium text-gray-700 mb-2">State/Country: *</label>
-                <input type="text" id="state_country" name="state_country" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                <label for="state" class="block text-sm font-medium text-gray-700 mb-2">State: *</label>
+                <select id="state" name="state" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                    <option value="">Choose a state</option>
+                    <option value="AL">Alabama</option>
+                    <option value="AK">Alaska</option>
+                    <option value="AZ">Arizona</option>
+                    <option value="AR">Arkansas</option>
+                    <option value="CA">California</option>
+                    <option value="CO">Colorado</option>
+                    <option value="CT">Connecticut</option>
+                    <option value="DE">Delaware</option>
+                    <option value="FL">Florida</option>
+                    <option value="GA">Georgia</option>
+                    <option value="HI">Hawaii</option>
+                    <option value="ID">Idaho</option>
+                    <option value="IL">Illinois</option>
+                    <option value="IN">Indiana</option>
+                    <option value="IA">Iowa</option>
+                    <option value="KS">Kansas</option>
+                    <option value="KY">Kentucky</option>
+                    <option value="LA">Louisiana</option>
+                    <option value="ME">Maine</option>
+                    <option value="MD">Maryland</option>
+                    <option value="MA">Massachusetts</option>
+                    <option value="MI">Michigan</option>
+                    <option value="MN">Minnesota</option>
+                    <option value="MS">Mississippi</option>
+                    <option value="MO">Missouri</option>
+                    <option value="MT">Montana</option>
+                    <option value="NE">Nebraska</option>
+                    <option value="NV">Nevada</option>
+                    <option value="NH">New Hampshire</option>
+                    <option value="NJ">New Jersey</option>
+                    <option value="NM">New Mexico</option>
+                    <option value="NY">New York</option>
+                    <option value="NC">North Carolina</option>
+                    <option value="ND">North Dakota</option>
+                    <option value="OH">Ohio</option>
+                    <option value="OK">Oklahoma</option>
+                    <option value="OR">Oregon</option>
+                    <option value="PA">Pennsylvania</option>
+                    <option value="RI">Rhode Island</option>
+                    <option value="SC">South Carolina</option>
+                    <option value="SD">South Dakota</option>
+                    <option value="TN">Tennessee</option>
+                    <option value="TX">Texas</option>
+                    <option value="UT">Utah</option>
+                    <option value="VT">Vermont</option>
+                    <option value="VA">Virginia</option>
+                    <option value="WA">Washington</option>
+                    <option value="WV">West Virginia</option>
+                    <option value="WI">Wisconsin</option>
+                    <option value="WY">Wyoming</option>
+                </select>
             </div>
             <div>
                 <label for="height_feet" class="block text-sm font-medium text-gray-700 mb-2">Height (feet): *</label>
