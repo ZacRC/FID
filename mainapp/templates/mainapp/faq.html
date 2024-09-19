@@ -11,43 +11,47 @@
         });
     });
 </script>
-<style>
-    .faq-question::after {
-        content: '+';
-        float: right;
-    }
-    .faq-question.active::after {
-        content: '-';
-    }
-</style>
 {% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold mb-8">Frequently Asked Questions</h1>
-<div class="space-y-4">
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div class="faq-question p-4 cursor-pointer bg-gray-100 hover:bg-gray-200">
-            <h3 class="text-lg font-semibold">What are NAFakes products?</h3>
+<div class="max-w-4xl mx-auto">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Frequently Asked Questions</h1>
+    <div class="space-y-6">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="faq-question p-4 cursor-pointer bg-gray-100 hover:bg-gray-200 flex justify-between items-center">
+                <h3 class="text-lg font-semibold">What are NAFakes products?</h3>
+                <svg class="w-6 h-6 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+            <div class="faq-answer p-4 hidden bg-white">
+                <p>NAFakes products are imaginary items designed to spark creativity, humor, and joy in college students through make-believe concepts.</p>
+            </div>
         </div>
-        <div class="faq-answer p-4 hidden">
-            <p>NAFakes products are imaginary items designed to spark creativity, humor, and joy in college students through make-believe concepts.</p>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="faq-question p-4 cursor-pointer bg-gray-100 hover:bg-gray-200 flex justify-between items-center">
+                <h3 class="text-lg font-semibold">How do I use NAFakes products?</h3>
+                <svg class="w-6 h-6 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+            <div class="faq-answer p-4 hidden bg-white">
+                <p>Simply imagine and enjoy! Our products exist in the realm of imagination, encouraging creative thinking, humor, and stress relief.</p>
+            </div>
         </div>
-    </div>
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div class="faq-question p-4 cursor-pointer bg-gray-100 hover:bg-gray-200">
-            <h3 class="text-lg font-semibold">How do I use NAFakes products?</h3>
-        </div>
-        <div class="faq-answer p-4 hidden">
-            <p>Simply imagine and enjoy! Our products exist in the realm of imagination, encouraging creative thinking, humor, and stress relief.</p>
-        </div>
-    </div>
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div class="faq-question p-4 cursor-pointer bg-gray-100 hover:bg-gray-200">
-            <h3 class="text-lg font-semibold">Are NAFakes products safe for college students?</h3>
-        </div>
-        <div class="faq-answer p-4 hidden">
-            <p>Absolutely! Since our products are imaginary, they pose no physical risks. They're designed to provide mental breaks and boost creativity during stressful college life.</p>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div class="faq-question p-4 cursor-pointer bg-gray-100 hover:bg-gray-200 flex justify-between items-center">
+                <h3 class="text-lg font-semibold">Are NAFakes products safe for college students?</h3>
+                <svg class="w-6 h-6 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </div>
+            <div class="faq-answer p-4 hidden bg-white">
+                <p>Absolutely! Since our products are imaginary, they pose no physical risks. They're designed to provide mental breaks and boost creativity during stressful college life.</p>
+            </div>
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    $('.faq-question').click(function() {
+        $(this).find('svg').toggleClass('rotate-180');
+    });
+</script>
 {% endblock %}

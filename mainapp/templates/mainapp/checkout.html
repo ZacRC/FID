@@ -5,49 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - NAFakes</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a202c',
+                        secondary: '#edf2f7',
+                        accent: '#4a5568',
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto p-8">
-        <h1 class="text-3xl font-bold mb-8">Checkout</h1>
-        <div class="bg-white shadow-lg rounded-lg p-6">
-            <h2 class="text-2xl font-semibold mb-4">Order Information</h2>
-            <p><strong>Product:</strong> {{ order.product }}</p>
-            <p><strong>Quantity:</strong> {{ order.quantity }}</p>
-            <p><strong>Name:</strong> {{ order.first_name }} {% if order.middle_name %}{{ order.middle_name }}{% endif %} {{ order.last_name }}</p>
-            <p><strong>Date of Birth:</strong> {{ order.date_of_birth }}</p>
-            <p><strong>State/Country:</strong> {{ order.state_country }}</p>
-            <p><strong>Height:</strong> {{ order.height_feet }}' {{ order.height_inches }}"</p>
-            <p><strong>Weight:</strong> {{ order.weight }} lbs</p>
-            <p><strong>Eyes:</strong> {{ order.eyes }}</p>
-            <p><strong>Hair:</strong> {{ order.hair }}</p>
-            <p><strong>Gender:</strong> {{ order.gender }}</p>
-            {% if order.address1 %}
-                <p><strong>Address 1:</strong> {{ order.address1 }}</p>
-            {% endif %}
-            {% if order.address2 %}
-                <p><strong>Address 2:</strong> {{ order.address2 }}</p>
-            {% endif %}
-            <p><strong>City:</strong> {{ order.city }}</p>
-            <p><strong>Zip Code:</strong> {{ order.zip_code }}</p>
-            <p><strong>Picture:</strong> Uploaded</p>
-            {% if order.signature %}
-                <p><strong>Signature:</strong> Uploaded</p>
-            {% endif %}
-            {% if order.additional %}
-                <p><strong>Additional Information:</strong> {{ order.additional }}</p>
-            {% endif %}
-            
-            <div class="mt-6">
-                <label class="flex items-center">
-                    <input type="checkbox" required class="form-checkbox">
-                    <span class="ml-2">I confirm that the information above is correct</span>
+<body class="bg-secondary min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg">
+        <div>
+            <h1 class="text-3xl font-extrabold text-center text-primary">Checkout</h1>
+            <p class="mt-2 text-center text-sm text-gray-600">Review your order details below</p>
+        </div>
+        <div class="mt-8 space-y-6">
+            <div class="rounded-md shadow-sm -space-y-px">
+                <div class="grid gap-6">
+                    <div class="col-span-12">
+                        <h2 class="text-xl font-semibold mb-3 text-primary">Order Information</h2>
+                        <dl class="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Product</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.product }}</dd>
+                            </div>
+                            <div class="sm:col-span-1">
+                                <dt class="text-sm font-medium text-gray-500">Quantity</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.quantity }}</dd>
+                            </div>
+                            <div class="sm:col-span-2">
+                                <dt class="text-sm font-medium text-gray-500">Name</dt>
+                                <dd class="mt-1 text-sm text-gray-900">{{ order.first_name }} {% if order.middle_name %}{{ order.middle_name }}{% endif %} {{ order.last_name }}</dd>
+                            </div>
+                            <!-- Add more fields here following the same pattern -->
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <input id="confirm" name="confirm" type="checkbox" required class="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded">
+                <label for="confirm" class="ml-2 block text-sm text-gray-900">
+                    I confirm that the information above is correct
                 </label>
             </div>
-            
-            <form action="{% url 'payment' %}" method="post" class="mt-6">
-                {% csrf_token %}
-                <button type="submit" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Proceed to Payment</button>
-            </form>
+            <div>
+                <form action="{% url 'payment' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                        Proceed to Payment
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </body>

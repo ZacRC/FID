@@ -3,27 +3,56 @@
 {% block title %}Customer Reviews - NAFakes{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold mb-8">Customer Reviews</h1>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-    <div class="bg-white shadow-lg rounded-lg p-6">
-        <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-            <div>
-                <h3 class="font-semibold">Amazing Stress Relief!</h3>
-                <p class="text-sm text-gray-600">By Jane D., Sophomore</p>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Customer Reviews</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white shadow-lg rounded-lg p-6 transition duration-300 ease-in-out transform hover:scale-105">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 overflow-hidden">
+                    <img src="https://source.unsplash.com/random/100x100?portrait" alt="Jane D." class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h3 class="font-semibold text-primary">Amazing Stress Relief!</h3>
+                    <p class="text-sm text-gray-600">By Jane D., Sophomore</p>
+                </div>
+            </div>
+            <p class="text-gray-700">NAFakes products have been a lifesaver during finals week. The Instant Knowledge Pills (placebos) gave me the confidence boost I needed!</p>
+            <div class="mt-4 flex items-center">
+                <div class="flex text-yellow-400">
+                    {% for _ in '12345' %}
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    {% endfor %}
+                </div>
+                <span class="ml-2 text-gray-600">5.0</span>
             </div>
         </div>
-        <p class="text-gray-700">NAFakes products have been a lifesaver during finals week. The Instant Knowledge Pills (placebos) gave me the confidence boost I needed!</p>
-    </div>
-    <div class="bg-white shadow-lg rounded-lg p-6">
-        <div class="flex items-center mb-4">
-            <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-            <div>
-                <h3 class="font-semibold">Best Dorm Room Addition</h3>
-                <p class="text-sm text-gray-600">By John S., Senior</p>
+        <div class="bg-white shadow-lg rounded-lg p-6 transition duration-300 ease-in-out transform hover:scale-105">
+            <div class="flex items-center mb-4">
+                <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 overflow-hidden">
+                    <img src="https://source.unsplash.com/random/100x100?man" alt="John S." class="w-full h-full object-cover">
+                </div>
+                <div>
+                    <h3 class="font-semibold text-primary">Best Dorm Room Addition</h3>
+                    <p class="text-sm text-gray-600">By John S., Senior</p>
+                </div>
+            </div>
+            <p class="text-gray-700">The Invisible Laptop has revolutionized my study sessions. It's so light, I sometimes forget I'm not actually studying!</p>
+            <div class="mt-4 flex items-center">
+                <div class="flex text-yellow-400">
+                    {% for _ in '1234' %}
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    {% endfor %}
+                    <svg class="w-5 h-5 fill-current text-gray-300" viewBox="0 0 24 24">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                </div>
+                <span class="ml-2 text-gray-600">4.0</span>
             </div>
         </div>
-        <p class="text-gray-700">The Invisible Laptop has revolutionized my study sessions. It's so light, I sometimes forget I'm not actually studying!</p>
     </div>
 </div>
 {% endblock %}

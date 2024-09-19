@@ -11,31 +11,76 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#000000',
-                        secondary: '#ffffff',
-                    }
+                        primary: '#1a202c',
+                        secondary: '#edf2f7',
+                        accent: '#4a5568',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
                 }
             }
         }
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-secondary text-primary">
-    <nav class="bg-primary text-secondary p-4">
-        <ul class="flex justify-center space-x-4">
-            <li><a href="{% url 'index' %}" class="hover:underline">Home</a></li>
-            <li><a href="{% url 'about' %}" class="hover:underline">About Us</a></li>
-            <li><a href="{% url 'products' %}" class="hover:underline">Products</a></li>
-            <li><a href="{% url 'pricing' %}" class="hover:underline">Pricing</a></li>
-            <li><a href="{% url 'faq' %}" class="hover:underline">FAQ</a></li>
-            <li><a href="{% url 'reviews' %}" class="hover:underline">Reviews</a></li>
-            <li><a href="{% url 'order' %}" class="hover:underline">Order</a></li>
-            <li><a href="{% url 'how_to_pay' %}" class="hover:underline">How to Pay</a></li>
-        </ul>
-    </nav>
-    <div class="container mx-auto p-8">
+<body class="bg-secondary text-primary font-sans min-h-screen flex flex-col">
+    <header class="bg-primary text-secondary shadow-md">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center justify-between py-4">
+                <a href="{% url 'index' %}" class="text-2xl font-bold">NAFakes</a>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="{% url 'index' %}" class="hover:text-accent transition duration-300">Home</a></li>
+                    <li><a href="{% url 'about' %}" class="hover:text-accent transition duration-300">About Us</a></li>
+                    <li><a href="{% url 'products' %}" class="hover:text-accent transition duration-300">Products</a></li>
+                    <li><a href="{% url 'pricing' %}" class="hover:text-accent transition duration-300">Pricing</a></li>
+                    <li><a href="{% url 'faq' %}" class="hover:text-accent transition duration-300">FAQ</a></li>
+                    <li><a href="{% url 'reviews' %}" class="hover:text-accent transition duration-300">Reviews</a></li>
+                    <li><a href="{% url 'order' %}" class="hover:text-accent transition duration-300">Order</a></li>
+                    <li><a href="{% url 'how_to_pay' %}" class="hover:text-accent transition duration-300">How to Pay</a></li>
+                </ul>
+                <button class="md:hidden text-secondary focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
         {% block content %}{% endblock %}
-    </div>
+    </main>
+
+    <footer class="bg-primary text-secondary py-6">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2024 NAFakes. All rights reserved.</p>
+                <ul class="flex space-x-4 mt-4 md:mt-0">
+                    <li><a href="#" class="hover:text-accent transition duration-300">Privacy Policy</a></li>
+                    <li><a href="#" class="hover:text-accent transition duration-300">Terms of Service</a></li>
+                    <li><a href="#" class="hover:text-accent transition duration-300">Contact Us</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
     {% block extra_scripts %}{% endblock %}
+    <script>
+        // Mobile menu toggle
+        document.querySelector('button').addEventListener('click', function() {
+            const nav = document.querySelector('nav ul');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('flex');
+            nav.classList.toggle('flex-col');
+            nav.classList.toggle('absolute');
+            nav.classList.toggle('top-16');
+            nav.classList.toggle('left-0');
+            nav.classList.toggle('right-0');
+            nav.classList.toggle('bg-primary');
+            nav.classList.toggle('p-4');
+        });
+    </script>
 </body>
 </html>

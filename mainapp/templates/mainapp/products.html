@@ -3,30 +3,47 @@
 {% block title %}Our Products - NAFakes{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-bold mb-8">Our Imaginary Products</h1>
-<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div class="h-48 bg-gray-300"></div>
-        <div class="p-6">
-            <h2 class="text-xl font-semibold mb-2">Invisible Laptop</h2>
-            <p class="text-gray-600 mb-4">The lightest laptop ever! Perfect for pretending to study.</p>
-            <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Buy Now</a>
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Our Imaginary Products</h1>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+            <div class="h-48 bg-gray-300 relative overflow-hidden">
+                <img src="https://source.unsplash.com/random/400x300?tech" alt="Invisible Laptop" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <span class="text-white text-xl font-bold">Invisible Laptop</span>
+                </div>
+            </div>
+            <div class="p-6">
+                <h2 class="text-xl font-semibold mb-2 text-primary">Invisible Laptop</h2>
+                <p class="text-gray-600 mb-4">The lightest laptop ever! Perfect for pretending to study.</p>
+                <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300 inline-block">Buy Now</a>
+            </div>
         </div>
-    </div>
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div class="h-48 bg-gray-300"></div>
-        <div class="p-6">
-            <h2 class="text-xl font-semibold mb-2">Procrastination Eraser</h2>
-            <p class="text-gray-600 mb-4">Erase your procrastination habits with this imaginary tool!</p>
-            <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Buy Now</a>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+            <div class="h-48 bg-gray-300 relative overflow-hidden">
+                <img src="https://source.unsplash.com/random/400x300?eraser" alt="Procrastination Eraser" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <span class="text-white text-xl font-bold">Procrastination Eraser</span>
+                </div>
+            </div>
+            <div class="p-6">
+                <h2 class="text-xl font-semibold mb-2 text-primary">Procrastination Eraser</h2>
+                <p class="text-gray-600 mb-4">Erase your procrastination habits with this imaginary tool!</p>
+                <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300 inline-block">Buy Now</a>
+            </div>
         </div>
-    </div>
-    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
-        <div class="h-48 bg-gray-300"></div>
-        <div class="p-6">
-            <h2 class="text-xl font-semibold mb-2">Instant Knowledge Pill</h2>
-            <p class="text-gray-600 mb-4">Pass any exam with our knowledge pills (placebo effect included)!</p>
-            <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Buy Now</a>
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+            <div class="h-48 bg-gray-300 relative overflow-hidden">
+                <img src="https://source.unsplash.com/random/400x300?pill" alt="Instant Knowledge Pill" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+                    <span class="text-white text-xl font-bold">Instant Knowledge Pill</span>
+                </div>
+            </div>
+            <div class="p-6">
+                <h2 class="text-xl font-semibold mb-2 text-primary">Instant Knowledge Pill</h2>
+                <p class="text-gray-600 mb-4">Pass any exam with our knowledge pills (placebo effect included)!</p>
+                <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300 inline-block">Buy Now</a>
+            </div>
         </div>
     </div>
 </div>

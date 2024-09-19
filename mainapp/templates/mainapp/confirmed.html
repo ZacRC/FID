@@ -5,12 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmed - NAFakes</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a202c',
+                        secondary: '#edf2f7',
+                        accent: '#4a5568',
+                    },
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-gray-100">
-    <div class="container mx-auto p-8 text-center">
-        <h1 class="text-3xl font-bold mb-8">Thank You for Your Order!</h1>
-        <p class="text-xl mb-8">Your imaginary product will be delivered to your imagination shortly.</p>
-        <a href="{% url 'index' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Return to Home</a>
+<body class="bg-secondary min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg text-center">
+        <div>
+            <h1 class="text-3xl font-extrabold text-primary mb-2">Thank You for Your Order!</h1>
+            <p class="text-xl text-gray-600 mb-8">Your imaginary product will be delivered to your imagination shortly.</p>
+            <div class="animate-bounce">
+                <svg class="mx-auto h-16 w-16 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+        </div>
+        <div class="mt-8">
+            <a href="{% url 'index' %}" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-primary hover:bg-accent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                Return to Home
+            </a>
+        </div>
     </div>
 </body>
 </html>

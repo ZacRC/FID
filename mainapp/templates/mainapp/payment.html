@@ -1,28 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment - NAFakes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <div class="container mx-auto p-8">
-        <h1 class="text-3xl font-bold mb-8">Choose Payment Method</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white shadow-lg rounded-lg p-6">
-                <h2 class="text-2xl font-semibold mb-4">Bitcoin</h2>
-                <p>Pay with Bitcoin</p>
-            </div>
-            <div class="bg-white shadow-lg rounded-lg p-6">
-                <h2 class="text-2xl font-semibold mb-4">PayPal</h2>
-                <p>Pay with PayPal</p>
+{% extends 'mainapp/base.html' %}
+
+{% block title %}Payment - NAFakes{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Choose Payment Method</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+            <div class="p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-primary">Imagination Coins</h2>
+                <p class="text-gray-600 mb-4">Pay with our exclusive Imagination Coins!</p>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>Close your eyes</li>
+                    <li>Visualize your payment</li>
+                    <li>Say "Payment Sent" three times</li>
+                </ul>
+                <button onclick="imaginationPayment()" class="w-full bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300">Pay with Imagination</button>
             </div>
         </div>
-        <form action="{% url 'confirmed' %}" method="post" class="mt-8">
+        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
+            <div class="p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-primary">Dream Dollars</h2>
+                <p class="text-gray-600 mb-4">Use your accumulated Dream Dollars!</p>
+                <ul class="list-disc list-inside text-gray-700 mb-4">
+                    <li>Recall your most recent dream</li>
+                    <li>Convert dream content to Dream Dollars</li>
+                    <li>Apply Dream Dollars to your purchase</li>
+                </ul>
+                <button onclick="dreamPayment()" class="w-full bg-accent text-secondary px-4 py-2 rounded-full hover:bg-primary transition duration-300">Pay with Dream Dollars</button>
+            </div>
+        </div>
+    </div>
+    <div class="mt-8 text-center">
+        <form action="{% url 'confirmed' %}" method="post" class="inline-block">
             {% csrf_token %}
-            <button type="submit" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Payment Sent</button>
+            <button type="submit" class="bg-green-500 text-white px-6 py-3 rounded-full hover:bg-green-600 transition duration-300 text-lg font-semibold">Confirm Payment</button>
         </form>
     </div>
-</body>
-</html>
+    <p class="mt-8 text-center text-gray-600 bg-yellow-100 p-4 rounded-lg">Remember, all transactions are imaginary. No real money will be charged.</p>
+</div>
+
+<script>
+    function imaginationPayment() {
+        alert("Close your eyes and imagine your payment being processed. Don't forget to say 'Payment Sent' three times!");
+    }
+
+    function dreamPayment() {
+        alert("Recalling your dreams... Converting to Dream Dollars... Payment processed in your imagination!");
+    }
+</script>
+{% endblock %}
