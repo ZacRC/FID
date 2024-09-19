@@ -10,8 +10,6 @@ services:
       - media_volume:/app/media
     env_file:
       - .env
-    depends_on:
-      - db
     expose:
       - 8000
 
@@ -26,16 +24,6 @@ services:
     depends_on:
       - web
 
-  db:
-    image: postgres:13
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
-
 volumes:
   static_volume:
   media_volume:
-  postgres_data:

@@ -14,8 +14,9 @@ RUN python manage.py collectstatic --noinput
 
 RUN mkdir -p /app/media && chmod 755 /app/media
 
-RUN python manage.py makemigrations
-RUN python manage.py migrate
+# Remove these lines as we'll run migrations in docker-compose
+# RUN python manage.py makemigrations
+# RUN python manage.py migrate
 
 EXPOSE 8000
 
