@@ -102,11 +102,27 @@
                 </div>
                 <div>
                     <label for="eyes" class="block text-sm font-medium text-gray-700 mb-2">Eye Color: *</label>
-                    <input type="text" id="eyes" name="eyes" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.eyes|default:'' }}">
+                    <select id="eyes" name="eyes" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Choose eye color</option>
+                        <option value="Brown" {% if order_info.eyes == 'Brown' %}selected{% endif %}>Brown</option>
+                        <option value="Blue" {% if order_info.eyes == 'Blue' %}selected{% endif %}>Blue</option>
+                        <option value="Green" {% if order_info.eyes == 'Green' %}selected{% endif %}>Green</option>
+                        <option value="Hazel" {% if order_info.eyes == 'Hazel' %}selected{% endif %}>Hazel</option>
+                        <option value="Gray" {% if order_info.eyes == 'Gray' %}selected{% endif %}>Gray</option>
+                        <option value="Other" {% if order_info.eyes == 'Other' %}selected{% endif %}>Other</option>
+                    </select>
                 </div>
                 <div>
                     <label for="hair" class="block text-sm font-medium text-gray-700 mb-2">Hair Color: *</label>
-                    <input type="text" id="hair" name="hair" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ order_info.hair|default:'' }}">
+                    <select id="hair" name="hair" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <option value="">Choose hair color</option>
+                        <option value="Black" {% if order_info.hair == 'Black' %}selected{% endif %}>Black</option>
+                        <option value="Brown" {% if order_info.hair == 'Brown' %}selected{% endif %}>Brown</option>
+                        <option value="Blonde" {% if order_info.hair == 'Blonde' %}selected{% endif %}>Blonde</option>
+                        <option value="Red" {% if order_info.hair == 'Red' %}selected{% endif %}>Red</option>
+                        <option value="Gray" {% if order_info.hair == 'Gray' %}selected{% endif %}>Gray</option>
+                        <option value="Other" {% if order_info.hair == 'Other' %}selected{% endif %}>Other</option>
+                    </select>
                 </div>
                 <div>
                     <label for="gender" class="block text-sm font-medium text-gray-700 mb-2">Gender: *</label>
