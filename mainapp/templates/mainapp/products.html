@@ -3,25 +3,31 @@
 {% block title %}Our Products - NAFakes{% endblock %}
 
 {% block content %}
-<h1>Our Imaginary Products</h1>
-<div class="product-list">
-    <div class="product">
-        <h2>Invisible Bike</h2>
-        <img src="https://via.placeholder.com/300x200" alt="Invisible Bike">
-        <p>Experience the thrill of riding without the hassle of storage!</p>
-        <a href="{% url 'order' %}" class="buy-btn">Buy Now</a>
+<h1 class="text-3xl font-bold mb-8">Our Imaginary Products</h1>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="h-48 bg-gray-300"></div>
+        <div class="p-6">
+            <h2 class="text-xl font-semibold mb-2">Invisible Laptop</h2>
+            <p class="text-gray-600 mb-4">The lightest laptop ever! Perfect for pretending to study.</p>
+            <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Buy Now</a>
+        </div>
     </div>
-    <div class="product">
-        <h2>Imaginary Friend</h2>
-        <img src="https://via.placeholder.com/300x200" alt="Imaginary Friend">
-        <p>The perfect companion for endless adventures!</p>
-        <a href="{% url 'order' %}" class="buy-btn">Buy Now</a>
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="h-48 bg-gray-300"></div>
+        <div class="p-6">
+            <h2 class="text-xl font-semibold mb-2">Procrastination Eraser</h2>
+            <p class="text-gray-600 mb-4">Erase your procrastination habits with this imaginary tool!</p>
+            <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Buy Now</a>
+        </div>
     </div>
-    <div class="product">
-        <h2>Dream Catcher 3000</h2>
-        <img src="https://via.placeholder.com/300x200" alt="Dream Catcher 3000">
-        <p>Capture and replay your wildest dreams!</p>
-        <a href="{% url 'order' %}" class="buy-btn">Buy Now</a>
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div class="h-48 bg-gray-300"></div>
+        <div class="p-6">
+            <h2 class="text-xl font-semibold mb-2">Instant Knowledge Pill</h2>
+            <p class="text-gray-600 mb-4">Pass any exam with our knowledge pills (placebo effect included)!</p>
+            <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Buy Now</a>
+        </div>
     </div>
 </div>
 {% endblock %}

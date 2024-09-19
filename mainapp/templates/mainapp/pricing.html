@@ -3,26 +3,28 @@
 {% block title %}Pricing - NAFakes{% endblock %}
 
 {% block content %}
-<h1>Our Pricing Plans</h1>
-<div class="pricing-plans">
-    <div class="plan">
-        <h2>Basic Imagination</h2>
-        <p class="price">$9.99/month</p>
-        <ul>
-            <li>Access to 5 imaginary products</li>
-            <li>Monthly new product updates</li>
-            <li>Basic support</li>
+<h1 class="text-3xl font-bold mb-8">Our Pricing Plans</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4">Basic Imagination</h2>
+        <p class="text-3xl font-bold mb-6">$9.99<span class="text-sm font-normal">/month</span></p>
+        <ul class="mb-6">
+            <li class="mb-2">✓ Access to 5 imaginary products</li>
+            <li class="mb-2">✓ Monthly new product updates</li>
+            <li class="mb-2">✓ Basic support</li>
         </ul>
+        <a href="{% url 'order' %}" class="block text-center bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Choose Plan</a>
     </div>
-    <div class="plan">
-        <h2>Premium Fantasies</h2>
-        <p class="price">$19.99/month</p>
-        <ul>
-            <li>Access to all imaginary products</li>
-            <li>Weekly new product updates</li>
-            <li>Priority support</li>
-            <li>Exclusive virtual events</li>
+    <div class="bg-white shadow-lg rounded-lg p-6">
+        <h2 class="text-2xl font-semibold mb-4">Premium Fantasies</h2>
+        <p class="text-3xl font-bold mb-6">$19.99<span class="text-sm font-normal">/month</span></p>
+        <ul class="mb-6">
+            <li class="mb-2">✓ Access to all imaginary products</li>
+            <li class="mb-2">✓ Weekly new product updates</li>
+            <li class="mb-2">✓ Priority support</li>
+            <li class="mb-2">✓ Exclusive virtual events</li>
         </ul>
+        <a href="{% url 'order' %}" class="block text-center bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Choose Plan</a>
     </div>
 </div>
 {% endblock %}

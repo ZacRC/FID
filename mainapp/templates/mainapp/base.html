@@ -4,46 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}NAFakes{% endblock %}</title>
-    <style>
-        /* ... (keep existing styles) ... */
-        .navbar {
-            background-color: #333;
-            padding: 1rem;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#000000',
+                        secondary: '#ffffff',
+                    }
+                }
+            }
         }
-        .navbar ul {
-            list-style-type: none;
-            display: flex;
-            justify-content: center;
-        }
-        .navbar li {
-            margin: 0 1rem;
-        }
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .content {
-            padding: 2rem;
-        }
-    </style>
-    {% block extra_styles %}{% endblock %}
+    </script>
+    {% block extra_head %}{% endblock %}
 </head>
-<body>
-    <nav class="navbar">
-        <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'about' %}">About Us</a></li>
-            <li><a href="{% url 'products' %}">Products</a></li>
-            <li><a href="{% url 'pricing' %}">Pricing</a></li>
-            <li><a href="{% url 'faq' %}">FAQ</a></li>
-            <li><a href="{% url 'reviews' %}">Reviews</a></li>
-            <li><a href="{% url 'order' %}">Order</a></li>
-            <li><a href="{% url 'how_to_pay' %}">How to Pay</a></li>
+<body class="bg-secondary text-primary">
+    <nav class="bg-primary text-secondary p-4">
+        <ul class="flex justify-center space-x-4">
+            <li><a href="{% url 'index' %}" class="hover:underline">Home</a></li>
+            <li><a href="{% url 'about' %}" class="hover:underline">About Us</a></li>
+            <li><a href="{% url 'products' %}" class="hover:underline">Products</a></li>
+            <li><a href="{% url 'pricing' %}" class="hover:underline">Pricing</a></li>
+            <li><a href="{% url 'faq' %}" class="hover:underline">FAQ</a></li>
+            <li><a href="{% url 'reviews' %}" class="hover:underline">Reviews</a></li>
+            <li><a href="{% url 'order' %}" class="hover:underline">Order</a></li>
+            <li><a href="{% url 'how_to_pay' %}" class="hover:underline">How to Pay</a></li>
         </ul>
     </nav>
-    <div class="content">
+    <div class="container mx-auto p-8">
         {% block content %}{% endblock %}
     </div>
+    {% block extra_scripts %}{% endblock %}
 </body>
 </html>

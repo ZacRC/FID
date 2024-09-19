@@ -1,24 +1,24 @@
 {% extends 'mainapp/base.html' %}
 
-{% block title %}NAFakes - Premium Fake Products for Kids{% endblock %}
+{% block title %}NAFakes - Premium Fake Products for Students{% endblock %}
 
-{% block extra_styles %}
+{% block extra_head %}
 <style>
-    /* ... (keep existing styles) ... */
+    .hero-image {
+        background-image: url('https://source.unsplash.com/random/800x600?abstract');
+        background-size: cover;
+        background-position: center;
+    }
 </style>
 {% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-container">
-        <div class="hero-content">
-            <h1>Welcome to NAFakes</h1>
-            <p>Discover premium, imaginary products that spark joy and creativity in children. Our not-so-real items are perfect for make-believe play!</p>
-            <a href="#" class="cta-button">Explore Collection</a>
-        </div>
-        <img src="https://via.placeholder.com/500x400" alt="NAFakes Products" class="hero-image">
+<div class="flex flex-col md:flex-row items-center justify-between">
+    <div class="md:w-1/2 mb-8 md:mb-0">
+        <h1 class="text-4xl font-bold mb-4">Welcome to NAFakes</h1>
+        <p class="text-xl mb-6">Discover premium, imaginary products that spark creativity and humor. Perfect for college life and beyond!</p>
+        <a href="{% url 'products' %}" class="bg-primary text-secondary px-6 py-3 rounded-full hover:bg-gray-800 transition duration-300">Explore Collection</a>
     </div>
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-</section>
+    <div class="md:w-1/2 hero-image h-64 w-full rounded-lg shadow-lg"></div>
+</div>
 {% endblock %}

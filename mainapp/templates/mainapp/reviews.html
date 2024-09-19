@@ -3,17 +3,27 @@
 {% block title %}Customer Reviews - NAFakes{% endblock %}
 
 {% block content %}
-<h1>Customer Reviews</h1>
-<div class="reviews-list">
-    <div class="review">
-        <h3>Amazing Imagination Boost!</h3>
-        <p class="author">By Jane D.</p>
-        <p>My kids love their NAFakes products. It's incredible how much creativity these non-existent toys have sparked!</p>
+<h1 class="text-3xl font-bold mb-8">Customer Reviews</h1>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="bg-white shadow-lg rounded-lg p-6">
+        <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+            <div>
+                <h3 class="font-semibold">Amazing Stress Relief!</h3>
+                <p class="text-sm text-gray-600">By Jane D., Sophomore</p>
+            </div>
+        </div>
+        <p class="text-gray-700">NAFakes products have been a lifesaver during finals week. The Instant Knowledge Pills (placebos) gave me the confidence boost I needed!</p>
     </div>
-    <div class="review">
-        <h3>Best Investment in Make-Believe</h3>
-        <p class="author">By John S.</p>
-        <p>NAFakes has revolutionized playtime in our household. The kids are constantly coming up with new adventures!</p>
+    <div class="bg-white shadow-lg rounded-lg p-6">
+        <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
+            <div>
+                <h3 class="font-semibold">Best Dorm Room Addition</h3>
+                <p class="text-sm text-gray-600">By John S., Senior</p>
+            </div>
+        </div>
+        <p class="text-gray-700">The Invisible Laptop has revolutionized my study sessions. It's so light, I sometimes forget I'm not actually studying!</p>
     </div>
 </div>
 {% endblock %}
