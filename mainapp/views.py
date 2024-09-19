@@ -1,11 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-from .models import Order, Group, GroupMember, GroupMemberOrderInfo
+from .models import Order, Group, GroupMember, GroupMemberOrderInfo, VenmoPayment
 import logging
 from datetime import datetime
 import random
 import string
 from django.contrib import messages
+import json
+from django.http import JsonResponse
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
+from .models import Order, Group, GroupMember, GroupMemberOrderInfo, VenmoPayment
 
 logger = logging.getLogger(__name__)
 
@@ -348,19 +353,68 @@ def confirm_group_purchase(request, group_id):
         current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
 
         if current_member.member_id != group.creator_member_id:
-            messages.error(request, "Only the group creator can purchase group orders.")
-            return redirect('group', group_id=group_id)
+            return JsonResponse({'success': False, 'error': "Only the group creator can purchase group orders."})
 
         payment_method = request.POST.get('payment_method')
+        
+        if payment_method == 'venmo':
+            order_id = request.POST.get('order_id')
+            screenshot = request.FILES.get('screenshot')
+            
+            if not screenshot:
+                return JsonResponse({'success': False, 'error': 'No screenshot provided'})
+            
+            VenmoPayment.objects.create(
+                group=group,
+                member=current_member,
+                order_id=order_id,
+                screenshot=screenshot
+            )
 
-        # Here you would typically process the payment
-        # For this example, we'll just mark all unpaid members as paid
+        # Mark all unpaid members as paid
         unpaid_members = GroupMember.objects.filter(group=group, order_info_completed=True, paid=False)
         for member in unpaid_members:
             member.paid = True
             member.save()
 
-        messages.success(request, f'Group order payment confirmed using {payment_method}. All members have been marked as paid.')
-        return redirect('group', group_id=group_id)
+        return JsonResponse({'success': True, 'message': f'Group order payment confirmed using {payment_method}. All members have been marked as paid.'})
 
-    return redirect('group', group_id=group_id)
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+import json
+from django.http import JsonResponse
+
+def confirm_venmo_payment(request, group_id):
+    if request.method == 'POST':
+        group = get_object_or_404(Group, id=group_id)
+        current_member_id = request.session.get('member_id')
+        current_member = GroupMember.objects.get(member_id=current_member_id, group=group)
+
+        order_id = request.POST.get('order_id')
+        screenshot = request.FILES.get('screenshot')
+
+        # Save the screenshot and update the payment status
+        if screenshot:
+            payment = VenmoPayment.objects.create(
+                group=group,
+                member=current_member,
+                order_id=order_id,
+                screenshot=screenshot
+            )
+            
+            if current_member.member_id == group.creator_member_id:
+                # Mark all unpaid members as paid for group purchase
+                unpaid_members = GroupMember.objects.filter(group=group, order_info_completed=True, paid=False)
+                for member in unpaid_members:
+                    member.paid = True
+                    member.save()
+            else:
+                # Mark only the current member as paid for individual purchase
+                current_member.paid = True
+                current_member.save()
+
+            return JsonResponse({'success': True})
+        else:
+            return JsonResponse({'success': False, 'error': 'No screenshot provided'})
+
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})

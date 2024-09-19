@@ -29,4 +29,5 @@ urlpatterns = [
     path('group/<int:group_id>/confirm-payment/', views.confirm_group_payment, name='confirm_group_payment'),
     path('group/<int:group_id>/purchase-order/', views.purchase_group_order, name='purchase_group_order'),
     path('group/<int:group_id>/confirm-purchase/', views.confirm_group_purchase, name='confirm_group_purchase'),
+    path('group/<int:group_id>/confirm-venmo-payment/', views.confirm_venmo_payment, name='confirm_venmo_payment'),
 ]

@@ -25,9 +25,9 @@
             </div>
             <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
                 <div class="p-6">
-                    <h2 class="text-2xl font-semibold mb-4 text-primary">PayPal</h2>
-                    <p class="text-gray-600 mb-4">Use your PayPal account!</p>
-                    <button onclick="selectPayment('paypal')" class="w-full bg-accent text-secondary px-4 py-2 rounded-full hover:bg-primary transition duration-300">Pay with PayPal</button>
+                    <h2 class="text-2xl font-semibold mb-4 text-primary">Venmo</h2>
+                    <p class="text-gray-600 mb-4">Pay with Venmo!</p>
+                    <button onclick="showVenmoModal('group')" class="w-full bg-accent text-secondary px-4 py-2 rounded-full hover:bg-primary transition duration-300">Pay with Venmo</button>
                 </div>
             </div>
         </div>
@@ -42,9 +42,89 @@
     </div>
 </div>
 
+<!-- Venmo Modal -->
+<div id="venmoModal" class="fixed z-10 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+        <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+        <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+        <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+            <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                    Venmo Payment Instructions
+                </h3>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-500">
+                        1. Send payment to: <strong>@NAIDOrder</strong> or use this link: <a href="https://www.venmo.com/u/NAIDOrder" target="_blank" class="text-blue-500">https://www.venmo.com/u/NAIDOrder</a>
+                    </p>
+                    <p class="text-sm text-gray-500 mt-2">
+                        2. Include this Order ID in the payment message: <strong id="orderId"></strong>
+                    </p>
+                    <p class="text-sm text-gray-500 mt-2">
+                        3. Screenshot your payment confirmation and upload it below:
+                    </p>
+                    <input type="file" id="paymentScreenshot" accept="image/*" class="mt-2">
+                </div>
+            </div>
+            <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <button type="button" onclick="confirmVenmoPayment()" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+                    Confirm Payment
+                </button>
+                <button type="button" onclick="closeVenmoModal()" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function selectPayment(method) {
         document.getElementById('paymentMethod').value = method;
+    }
+
+    function showVenmoModal(type) {
+        const modal = document.getElementById('venmoModal');
+        modal.classList.remove('hidden');
+        const orderId = generateOrderId();
+        document.getElementById('orderId').textContent = orderId;
+    }
+
+    function closeVenmoModal() {
+        const modal = document.getElementById('venmoModal');
+        modal.classList.add('hidden');
+    }
+
+    function generateOrderId() {
+        return 'GRP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+    }
+
+    function confirmVenmoPayment() {
+        const screenshot = document.getElementById('paymentScreenshot').files[0];
+        if (!screenshot) {
+            alert('Please upload a screenshot of your payment confirmation.');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('payment_method', 'venmo');
+        formData.append('order_id', document.getElementById('orderId').textContent);
+        formData.append('screenshot', screenshot);
+
+        fetch('{% url 'confirm_group_purchase' group.id %}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        }).then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Payment confirmed successfully!');
+                window.location.href = '{% url 'group' group.id %}';
+            } else {
+                alert('Error confirming payment. Please try again.');
+            }
+        });
     }
 </script>
 {% endblock %}
