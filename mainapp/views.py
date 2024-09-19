@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
+from .models import Order
 
 # Create your views here.
 
@@ -25,3 +27,28 @@ def order(request):
 
 def how_to_pay(request):
     return render(request, 'mainapp/howtopay.html')
+
+@require_POST
+def checkout(request):
+    order = Order(
+        product=request.POST['product'],
+        quantity=request.POST['quantity'],
+        first_name=request.POST['first_name'],
+        middle_name=request.POST['middle_name'],
+        last_name=request.POST['last_name'],
+        state=request.POST['state'],
+        address=request.POST['address'],
+        id_photo=request.FILES['id_photo'],
+        id_signature=request.FILES['id_signature']
+    )
+    order.save()
+    request.session['order_id'] = order.id
+    return render(request, 'mainapp/checkout.html', {'order': order})
+
+@require_POST
+def payment(request):
+    return render(request, 'mainapp/payment.html')
+
+@require_POST
+def confirmed(request):
+    return render(request, 'mainapp/confirmed.html')

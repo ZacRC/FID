@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - NAFakes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-8">Checkout</h1>
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-2xl font-semibold mb-4">Order Information</h2>
+            <p><strong>Product:</strong> {{ product }}</p>
+            <p><strong>Quantity:</strong> {{ quantity }}</p>
+            <p><strong>Name:</strong> {{ first_name }} {{ middle_name }} {{ last_name }}</p>
+            <p><strong>State:</strong> {{ state }}</p>
+            <p><strong>Address:</strong> {{ address }}</p>
+            <p><strong>ID Photo:</strong> Uploaded</p>
+            <p><strong>ID Signature:</strong> Uploaded</p>
+            
+            <div class="mt-6">
+                <label class="flex items-center">
+                    <input type="checkbox" required class="form-checkbox">
+                    <span class="ml-2">I confirm that the information above is correct</span>
+                </label>
+            </div>
+            
+            <form action="{% url 'payment' %}" method="post" class="mt-6">
+                {% csrf_token %}
+                <button type="submit" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

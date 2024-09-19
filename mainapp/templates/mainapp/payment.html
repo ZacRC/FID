@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - NAFakes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-8">Choose Payment Method</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white shadow-lg rounded-lg p-6">
+                <h2 class="text-2xl font-semibold mb-4">Bitcoin</h2>
+                <p>Pay with Bitcoin</p>
+            </div>
+            <div class="bg-white shadow-lg rounded-lg p-6">
+                <h2 class="text-2xl font-semibold mb-4">PayPal</h2>
+                <p>Pay with PayPal</p>
+            </div>
+        </div>
+        <form action="{% url 'confirmed' %}" method="post" class="mt-8">
+            {% csrf_token %}
+            <button type="submit" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-gray-800 transition duration-300">Payment Sent</button>
+        </form>
+    </div>
+</body>
+</html>
