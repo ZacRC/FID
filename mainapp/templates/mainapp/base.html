@@ -11,39 +11,38 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#1a202c',
-                        secondary: '#edf2f7',
-                        accent: '#4a5568',
+                        primary: '#1e40af', // Deep blue
+                        secondary: '#f0f9ff', // Light blue background
+                        accent: '#3b82f6', // Bright blue for accents
+                        dark: '#1e293b', // Dark slate for text
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Poppins', 'sans-serif'],
                     },
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     {% block extra_head %}{% endblock %}
 </head>
-<body class="bg-secondary text-primary font-sans min-h-screen flex flex-col">
-    <header class="bg-primary text-secondary shadow-md">
+<body class="bg-secondary text-dark font-sans min-h-screen flex flex-col">
+    <header class="bg-primary text-white shadow-lg">
         <div class="container mx-auto px-4">
             <nav class="flex items-center justify-between py-4">
-                <a href="{% url 'index' %}" class="text-2xl font-bold">NAFakes</a>
+                <a href="{% url 'index' %}" class="text-3xl font-bold tracking-tight">NAFakes</a>
                 <ul class="hidden md:flex space-x-6">
                     <li><a href="{% url 'index' %}" class="hover:text-accent transition duration-300">Home</a></li>
-                    <li><a href="{% url 'about' %}" class="hover:text-accent transition duration-300">About Us</a></li>
+                    <li><a href="{% url 'about' %}" class="hover:text-accent transition duration-300">About</a></li>
                     <li><a href="{% url 'products' %}" class="hover:text-accent transition duration-300">Products</a></li>
-                    <li><a href="{% url 'pricing' %}" class="hover:text-accent transition duration-300">Pricing</a></li>
-                    <li><a href="{% url 'faq' %}" class="hover:text-accent transition duration-300">FAQ</a></li>
-                    <li><a href="{% url 'reviews' %}" class="hover:text-accent transition duration-300">Reviews</a></li>
-                    <li><a href="{% url 'order' %}" class="hover:text-accent transition duration-300">Order</a></li>
-                    <li><a href="{% url 'how_to_pay' %}" class="hover:text-accent transition duration-300">How to Pay</a></li>
-                    <li><a href="{% url 'track' %}" class="hover:text-accent transition duration-300">Track Order</a></li>
-                    <li><a href="{% url 'grouporder' %}" class="hover:text-accent transition duration-300">Group Order</a></li>
+                    <li><a href="{% url 'pricing' %}" class="font-semibold hover:text-accent transition duration-300">Pricing</a></li>
+                    <li><a href="{% url 'faq' %}" class="font-semibold hover:text-accent transition duration-300">FAQ</a></li>
+                    <li><a href="{% url 'reviews' %}" class="font-semibold hover:text-accent transition duration-300">Reviews</a></li>
+                    <li><a href="{% url 'order' %}" class="font-semibold bg-accent text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Order</a></li>
+                    <li><a href="{% url 'grouporder' %}" class="font-semibold bg-accent text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Group Order</a></li>
                 </ul>
-                <button class="md:hidden text-secondary focus:outline-none">
+                <button class="md:hidden text-white focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
@@ -56,11 +55,14 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-primary text-secondary py-6">
+    <footer class="bg-dark text-white py-8">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <p>&copy; 2024 NAFakes. All rights reserved.</p>
-                <ul class="flex space-x-4 mt-4 md:mt-0">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-2xl font-bold mb-2">NAFakes</h3>
+                    <p class="text-sm">&copy; 2024 NAFakes. All rights reserved.</p>
+                </div>
+                <ul class="flex flex-wrap justify-center space-x-6">
                     <li><a href="#" class="hover:text-accent transition duration-300">Privacy Policy</a></li>
                     <li><a href="#" class="hover:text-accent transition duration-300">Terms of Service</a></li>
                     <li><a href="#" class="hover:text-accent transition duration-300">Contact Us</a></li>
@@ -83,6 +85,9 @@
             nav.classList.toggle('right-0');
             nav.classList.toggle('bg-primary');
             nav.classList.toggle('p-4');
+            nav.classList.toggle('shadow-lg');
+            nav.classList.toggle('rounded-b-lg');
+            nav.classList.toggle('z-50');
         });
     </script>
 </body>
