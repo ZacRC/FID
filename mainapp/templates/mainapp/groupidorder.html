@@ -29,7 +29,14 @@
             </div>
         </div>
 
-        <div id="paymentOptions" class="hidden">
+        <div class="bg-white shadow-xl rounded-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold mb-4 text-primary">Price Information</h2>
+            <p class="text-lg"><strong>Price per ID:</strong> ${{ price_per_id|floatformat:2 }}</p>
+            <p class="text-lg"><strong>Your Quantity:</strong> {{ order_info.quantity }}</p>
+            <p class="text-lg"><strong>Total Price:</strong> ${{ total_price|floatformat:2 }}</p>
+        </div>
+
+        <div id="paymentOptions">
             <h2 class="text-2xl font-semibold mb-4 text-primary">Choose Payment Method</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
