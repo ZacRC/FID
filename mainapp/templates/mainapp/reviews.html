@@ -37,14 +37,20 @@
         { title: "Passed All Tests", content: "passed the tests" },
     ];
 
-    function getRandomOrderNumber() {
-        return Math.floor(Math.random() * 10) + 1;
+    function getUniqueRandomOrderNumbers(count, min, max) {
+        const numbers = new Set();
+        while(numbers.size < count) {
+            numbers.add(Math.floor(Math.random() * (max - min + 1)) + min);
+        }
+        return Array.from(numbers);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
         const reviewsContainer = document.querySelector('.grid');
-        reviews.forEach(review => {
-            const orderNumber = getRandomOrderNumber();
+        const orderNumbers = getUniqueRandomOrderNumbers(reviews.length, 25, 500);
+        
+        reviews.forEach((review, index) => {
+            const orderNumber = orderNumbers[index];
             const reviewElement = document.createElement('div');
             reviewElement.innerHTML = `
                 <div class="bg-white shadow-lg rounded-lg p-6 transition duration-300 ease-in-out transform hover:scale-105">
