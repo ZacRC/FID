@@ -6,30 +6,7 @@
 <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <h1 class="text-4xl font-bold mb-8 text-center text-primary">Customer Reviews</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {% for review in reviews %}
-        <div class="bg-white shadow-lg rounded-lg p-6 transition duration-300 ease-in-out transform hover:scale-105">
-            <div class="flex items-center mb-4">
-                <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 flex items-center justify-center">
-                    <span class="text-2xl font-bold text-gray-600">{{ review.name|first }}</span>
-                </div>
-                <div>
-                    <h3 class="font-semibold text-primary">{{ review.title }}</h3>
-                    <p class="text-sm text-gray-600">By {{ review.name }}</p>
-                </div>
-            </div>
-            <p class="text-gray-700">{{ review.content }}</p>
-            <div class="mt-4 flex items-center">
-                <div class="flex text-yellow-400">
-                    {% for _ in '12345' %}
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                    </svg>
-                    {% endfor %}
-                </div>
-                <span class="ml-2 text-gray-600">5.0</span>
-            </div>
-        </div>
-        {% endfor %}
+        <!-- Reviews will be dynamically inserted here -->
     </div>
 
     <div class="mt-16 bg-white shadow-lg rounded-lg p-8 text-center">
@@ -50,30 +27,30 @@
 
 <script>
     const reviews = [
-        { name: "Anonymous User 1", title: "Scannable", content: "scannable" },
-        { name: "Anonymous User 2", title: "Got Us Through", content: "got us through" },
-        { name: "Anonymous User 3", title: "Better Than Others", content: "better then IDempire" },
-        { name: "Anonymous User 4", title: "The GOAT", content: "the goat" },
-        { name: "Anonymous User 5", title: "Fast Shipping", content: "3 day shipping <3" },
-        { name: "Anonymous User 6", title: "Much Love", content: "Love you" },
-        { name: "Anonymous User 7", title: "Reliable", content: "they did not get taken!!" },
-        { name: "Anonymous User 8", title: "Passed All Tests", content: "passed the tests" },
+        { title: "Scannable", content: "scannable" },
+        { title: "Got Us Through", content: "got us through" },
+        { title: "Better Than Others", content: "better then IDempire" },
+        { title: "The GOAT", content: "the goat" },
+        { title: "Fast Shipping", content: "3 day shipping <3" },
+        { title: "Much Love", content: "Love you" },
+        { title: "Reliable", content: "they did not get taken!!" },
+        { title: "Passed All Tests", content: "passed the tests" },
     ];
+
+    function getRandomOrderNumber() {
+        return Math.floor(Math.random() * 10) + 1;
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
         const reviewsContainer = document.querySelector('.grid');
         reviews.forEach(review => {
+            const orderNumber = getRandomOrderNumber();
             const reviewElement = document.createElement('div');
             reviewElement.innerHTML = `
                 <div class="bg-white shadow-lg rounded-lg p-6 transition duration-300 ease-in-out transform hover:scale-105">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gray-300 rounded-full mr-4 flex items-center justify-center">
-                            <span class="text-2xl font-bold text-gray-600">${review.name[0]}</span>
-                        </div>
-                        <div>
-                            <h3 class="font-semibold text-primary">${review.title}</h3>
-                            <p class="text-sm text-gray-600">By ${review.name}</p>
-                        </div>
+                    <div class="mb-4">
+                        <h3 class="font-semibold text-primary">${review.title}</h3>
+                        <p class="text-sm text-gray-600">Order #: ${orderNumber}</p>
                     </div>
                     <p class="text-gray-700">${review.content}</p>
                     <div class="mt-4 flex items-center">
