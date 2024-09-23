@@ -1,11 +1,11 @@
 {% extends 'mainapp/base.html' %}
 
-{% block title %}Premium Scannable IDs - Pass UV & Bend Tests{% endblock %}
+{% block title %}NAFakes - Premium Fake IDs{% endblock %}
 
 {% block extra_head %}
 <style>
     .hero-image {
-        background-image: url('https://source.unsplash.com/random/1920x1080?hologram');
+        background-image: url('https://source.unsplash.com/random/1920x1080?abstract');
         background-size: cover;
         background-position: center;
     }
@@ -14,60 +14,37 @@
 
 {% block content %}
 <div class="relative overflow-hidden">
-    <div class="hero-image absolute inset-0 z-0 opacity-30"></div>
+    <div class="hero-image absolute inset-0 z-0 opacity-50"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
         <div class="text-center">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-primary">Premium Scannable IDs</h1>
-            <p class="text-xl md:text-2xl mb-8 text-gray-700">High-quality, scannable IDs that pass UV and bend tests. Each order includes 2 duplicate IDs!</p>
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-primary">Welcome to NAFakes</h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-700">Premium, High-Quality Fake IDs Since 2018</p>
             <div class="space-x-4">
-                <a href="{% url 'order' %}" class="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">Order Now</a>
-                <a href="{% url 'features' %}" class="bg-white text-primary px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300 inline-block">Learn More</a>
+                <a href="{% url 'products' %}" class="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">View Products</a>
+                <a href="{% url 'order' %}" class="bg-accent text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">Order Now</a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="bg-gray-100 py-16">
+<div class="bg-white py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-4xl font-bold mb-8 text-center text-primary">Premium Features</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
                 <div class="text-3xl mb-4 text-accent">🔍</div>
                 <h3 class="text-xl font-semibold mb-2">Scannable</h3>
-                <p class="text-gray-600">Our IDs are fully scannable and will pass any electronic verification.</p>
+                <p class="text-gray-600">Our IDs pass all scanning tests, ensuring they work everywhere.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
                 <div class="text-3xl mb-4 text-accent">💡</div>
                 <h3 class="text-xl font-semibold mb-2">UV Test</h3>
-                <p class="text-gray-600">Advanced UV features that will pass any ultraviolet light inspection.</p>
+                <p class="text-gray-600">All our IDs include accurate UV features that pass blacklight tests.</p>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="text-3xl mb-4 text-accent">↩️</div>
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                <div class="text-3xl mb-4 text-accent">💪</div>
                 <h3 class="text-xl font-semibold mb-2">Bend Test</h3>
-                <p class="text-gray-600">High-quality materials ensure our IDs pass the bend test with flying colors.</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="py-16">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold mb-8 text-center text-primary">Example Products</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <img src="https://i2.paste.pics/65db2880c52399b66d82ba50375ee59f.png?rand=YmxQNpMhLv" alt="ID Example 1" class="w-full h-64 object-cover rounded-lg mb-4">
-                <h3 class="text-xl font-semibold mb-2">Standard ID</h3>
-                <p class="text-gray-600">Our most popular option, perfect for everyday use.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <img src="https://i2.paste.pics/54db3917411403806505fd2190fcc4bf.png?rand=JkFKRcxgPG" alt="ID Example 2" class="w-full h-64 object-cover rounded-lg mb-4">
-                <h3 class="text-xl font-semibold mb-2">Enhanced Security ID</h3>
-                <p class="text-gray-600">Features advanced holograms and microprinting.</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg">
-                <img src="https://i2.paste.pics/af26abc2fabc133d45be1d87647fed8b.png?rand=1uexkE3Ml7" alt="ID Example 3" class="w-full h-64 object-cover rounded-lg mb-4">
-                <h3 class="text-xl font-semibold mb-2">Premium ID</h3>
-                <p class="text-gray-600">Our top-tier option with all available security features.</p>
+                <p class="text-gray-600">Our IDs are made with high-quality materials that pass the bend test.</p>
             </div>
         </div>
     </div>
@@ -75,24 +52,56 @@
 
 <div class="bg-gray-100 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold mb-8 text-center text-primary">Why Choose Us?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <h2 class="text-4xl font-bold mb-8 text-center text-primary">Why Choose NAFakes?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="text-3xl mb-4 text-accent">🔒</div>
-                <h3 class="text-xl font-semibold mb-2">Top-notch Security</h3>
-                <p class="text-gray-600">Our IDs feature the latest in security technology, ensuring they pass all tests.</p>
+                <h3 class="text-xl font-semibold mb-2">100% Accuracy</h3>
+                <p class="text-gray-600">Our IDs are crafted with the utmost attention to detail, ensuring they're indistinguishable from real ones.</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="text-3xl mb-4 text-accent">🎁</div>
-                <h3 class="text-xl font-semibold mb-2">2 Duplicates</h3>
-                <p class="text-gray-600">Every order includes two identical duplicate IDs at no extra cost.</p>
+                <h3 class="text-xl font-semibold mb-2">Two Duplicate IDs</h3>
+                <p class="text-gray-600">Every order comes with two identical IDs, giving you a backup for peace of mind.</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="text-3xl mb-4 text-accent">🚚</div>
-                <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
-                <p class="text-gray-600">Quick and discreet shipping to ensure you receive your order promptly.</p>
+                <h3 class="text-xl font-semibold mb-2">Updated Features</h3>
+                <p class="text-gray-600">We constantly update our templates to match the latest security features and designs.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <h3 class="text-xl font-semibold mb-2">Fast & Safe Shipping</h3>
+                <p class="text-gray-600">Discreet packaging and quick delivery to ensure your privacy and satisfaction.</p>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="bg-white py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold mb-8 text-center text-primary">Our Products</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                <img src="https://i2.paste.pics/65db2880c52399b66d82ba50375ee59f.png?rand=YmxQNpMhLv" alt="ID Example 1" class="w-full h-auto mb-4 rounded">
+                <h3 class="text-xl font-semibold mb-2">State ID 1</h3>
+                <p class="text-gray-600">High-quality state ID with advanced security features.</p>
+            </div>
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                <img src="https://i2.paste.pics/54db3917411403806505fd2190fcc4bf.png?rand=JkFKRcxgPG" alt="ID Example 2" class="w-full h-auto mb-4 rounded">
+                <h3 class="text-xl font-semibold mb-2">State ID 2</h3>
+                <p class="text-gray-600">Premium state ID with holographic elements and UV features.</p>
+            </div>
+            <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                <img src="https://i2.paste.pics/af26abc2fabc133d45be1d87647fed8b.png?rand=1uexkE3Ml7" alt="ID Example 3" class="w-full h-auto mb-4 rounded">
+                <h3 class="text-xl font-semibold mb-2">State ID 3</h3>
+                <p class="text-gray-600">Top-tier state ID with the latest security implementations.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-gray-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold mb-8 text-primary">Ready to Order?</h2>
+        <p class="text-xl mb-8 text-gray-700">Get your premium, high-quality fake ID today!</p>
+        <a href="{% url 'order' %}" class="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">Place Your Order</a>
     </div>
 </div>
 {% endblock %}
