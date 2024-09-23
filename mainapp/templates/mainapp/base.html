@@ -30,19 +30,19 @@
 <body class="bg-secondary text-dark font-sans min-h-screen flex flex-col">
     <header class="bg-primary text-white shadow-lg">
         <div class="container mx-auto px-4">
-            <nav class="flex items-center justify-between py-4">
-                <a href="{% url 'index' %}" class="text-3xl font-bold tracking-tight">NAFakes</a>
-                <ul class="hidden md:flex space-x-6">
-                    <li><a href="{% url 'index' %}" class="hover:text-accent transition duration-300">Home</a></li>
-                    <li><a href="{% url 'about' %}" class="hover:text-accent transition duration-300">About</a></li>
-                    <li><a href="{% url 'products' %}" class="hover:text-accent transition duration-300">Products</a></li>
-                    <li><a href="{% url 'pricing' %}" class="font-semibold hover:text-accent transition duration-300">Pricing</a></li>
-                    <li><a href="{% url 'faq' %}" class="font-semibold hover:text-accent transition duration-300">FAQ</a></li>
-                    <li><a href="{% url 'reviews' %}" class="font-semibold hover:text-accent transition duration-300">Reviews</a></li>
-                    <li><a href="{% url 'order' %}" class="font-semibold bg-accent text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Order</a></li>
-                    <li><a href="{% url 'grouporder' %}" class="font-semibold bg-accent text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Group Order</a></li>
+            <nav class="relative flex items-center justify-between py-4">
+                <a href="{% url 'index' %}" class="text-2xl sm:text-3xl font-bold tracking-tight">NAFakes</a>
+                <ul id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-primary flex-col items-center space-y-4 py-4 md:relative md:flex md:flex-row md:space-y-0 md:space-x-6 md:py-0">
+                    <li><a href="{% url 'index' %}" class="block px-4 py-2 hover:bg-accent md:hover:bg-transparent md:hover:text-accent transition duration-300">Home</a></li>
+                    <li><a href="{% url 'about' %}" class="block px-4 py-2 hover:bg-accent md:hover:bg-transparent md:hover:text-accent transition duration-300">About</a></li>
+                    <li><a href="{% url 'products' %}" class="block px-4 py-2 hover:bg-accent md:hover:bg-transparent md:hover:text-accent transition duration-300">Products</a></li>
+                    <li><a href="{% url 'pricing' %}" class="block px-4 py-2 hover:bg-accent md:hover:bg-transparent md:hover:text-accent transition duration-300 font-semibold">Pricing</a></li>
+                    <li><a href="{% url 'faq' %}" class="block px-4 py-2 hover:bg-accent md:hover:bg-transparent md:hover:text-accent transition duration-300 font-semibold">FAQ</a></li>
+                    <li><a href="{% url 'reviews' %}" class="block px-4 py-2 hover:bg-accent md:hover:bg-transparent md:hover:text-accent transition duration-300 font-semibold">Reviews</a></li>
+                    <li><a href="{% url 'order' %}" class="block px-4 py-2 bg-accent text-white md:rounded-full hover:bg-blue-600 transition duration-300 font-semibold">Order</a></li>
+                    <li><a href="{% url 'grouporder' %}" class="block px-4 py-2 bg-accent text-white md:rounded-full hover:bg-blue-600 transition duration-300 font-semibold">Group Order</a></li>
                 </ul>
-                <button class="md:hidden text-white focus:outline-none">
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
@@ -74,20 +74,23 @@
     {% block extra_scripts %}{% endblock %}
     <script>
         // Mobile menu toggle
-        document.querySelector('button').addEventListener('click', function() {
-            const nav = document.querySelector('nav ul');
-            nav.classList.toggle('hidden');
-            nav.classList.toggle('flex');
-            nav.classList.toggle('flex-col');
-            nav.classList.toggle('absolute');
-            nav.classList.toggle('top-16');
-            nav.classList.toggle('left-0');
-            nav.classList.toggle('right-0');
-            nav.classList.toggle('bg-primary');
-            nav.classList.toggle('p-4');
-            nav.classList.toggle('shadow-lg');
-            nav.classList.toggle('rounded-b-lg');
-            nav.classList.toggle('z-50');
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideMenu = mobileMenu.contains(event.target);
+            const isClickOnButton = mobileMenuButton.contains(event.target);
+
+            if (!isClickInsideMenu && !isClickOnButton && !mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+            }
         });
     </script>
 </body>

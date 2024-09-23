@@ -3,34 +3,34 @@
 {% block title %}Place an Order - NAFakes{% endblock %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <h1 class="text-4xl font-bold mb-8 text-center text-primary">Place Your Order</h1>
-    <form action="{% url 'checkout' %}" method="post" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-8">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-center text-primary">Place Your Order</h1>
+    <form action="{% url 'checkout' %}" method="post" enctype="multipart/form-data" class="bg-white shadow-lg rounded-lg p-4 sm:p-8">
         {% csrf_token %}
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-                <label for="quantity" class="block text-sm font-medium text-gray-700 mb-2">Quantity: *</label>
-                <input type="number" id="quantity" name="quantity" min="1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Quantity: *</label>
+                <input type="number" id="quantity" name="quantity" min="1" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-2">First Name: *</label>
-                <input type="text" id="first_name" name="first_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">First Name: *</label>
+                <input type="text" id="first_name" name="first_name" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="middle_name" class="block text-sm font-medium text-gray-700 mb-2">Middle Name:</label>
-                <input type="text" id="middle_name" name="middle_name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="middle_name" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Middle Name:</label>
+                <input type="text" id="middle_name" name="middle_name" class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-2">Last Name: *</label>
-                <input type="text" id="last_name" name="last_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="last_name" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Last Name: *</label>
+                <input type="text" id="last_name" name="last_name" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="date_of_birth" class="block text-sm font-medium text-gray-700 mb-2">Date of Birth (MM/DD/YYYY): *</label>
-                <input type="text" id="date_of_birth" name="date_of_birth" required pattern="\d{2}/\d{2}/\d{4}" placeholder="MM/DD/YYYY" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="date_of_birth" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Date of Birth (MM/DD/YYYY): *</label>
+                <input type="text" id="date_of_birth" name="date_of_birth" required pattern="\d{2}/\d{2}/\d{4}" placeholder="MM/DD/YYYY" class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="state" class="block text-sm font-medium text-gray-700 mb-2">State: *</label>
-                <select id="state" name="state" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="state" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">State: *</label>
+                <select id="state" name="state" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                     <option value="">Choose a state</option>
                     <option value="AL">Alabama</option>
                     <option value="AK">Alaska</option>
@@ -84,21 +84,21 @@
                     <option value="WY">Wyoming</option>
                 </select>
             </div>
-            <div>
-                <label for="height_feet" class="block text-sm font-medium text-gray-700 mb-2">Height (feet): *</label>
-                <input type="number" id="height_feet" name="height_feet" min="1" max="10" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="height_feet" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Height (feet): *</label>
+                <input type="number" id="height_feet" name="height_feet" min="1" max="10" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="height_inches" class="block text-sm font-medium text-gray-700 mb-2">Height (inches): *</label>
-                <input type="number" id="height_inches" name="height_inches" min="0" max="11" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="height_inches" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Height (inches): *</label>
+                <input type="number" id="height_inches" name="height_inches" min="0" max="11" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="weight" class="block text-sm font-medium text-gray-700 mb-2">Weight: *</label>
-                <input type="number" id="weight" name="weight" min="1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="weight" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Weight: *</label>
+                <input type="number" id="weight" name="weight" min="1" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="eyes" class="block text-sm font-medium text-gray-700 mb-2">Eyes: *</label>
-                <select id="eyes" name="eyes" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="eyes" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Eyes: *</label>
+                <select id="eyes" name="eyes" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                     <option value="">Choose eye color</option>
                     <option value="Black">Black</option>
                     <option value="Brown">Brown</option>
@@ -107,9 +107,9 @@
                     <option value="Hazel">Hazel</option>
                 </select>
             </div>
-            <div>
-                <label for="hair" class="block text-sm font-medium text-gray-700 mb-2">Hair: *</label>
-                <select id="hair" name="hair" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="hair" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Hair: *</label>
+                <select id="hair" name="hair" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                     <option value="">Choose hair type</option>
                     <option value="Bald">Bald</option>
                     <option value="Black">Black</option>
@@ -119,70 +119,70 @@
                     <option value="Gray">Gray</option>
                 </select>
             </div>
-            <div>
-                <label for="gender" class="block text-sm font-medium text-gray-700 mb-2">Gender: *</label>
-                <select id="gender" name="gender" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="gender" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Gender: *</label>
+                <select id="gender" name="gender" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                     <option value="">Choose gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                 </select>
             </div>
-            <div>
-                <label for="address1" class="block text-sm font-medium text-gray-700 mb-2">Address1:</label>
-                <input type="text" id="address1" name="address1" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="address1" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Address1:</label>
+                <input type="text" id="address1" name="address1" class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="address2" class="block text-sm font-medium text-gray-700 mb-2">Address2:</label>
-                <input type="text" id="address2" name="address2" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="address2" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Address2:</label>
+                <input type="text" id="address2" name="address2" class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="city" class="block text-sm font-medium text-gray-700 mb-2">City: *</label>
-                <input type="text" id="city" name="city" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="city" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">City: *</label>
+                <input type="text" id="city" name="city" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="zip" class="block text-sm font-medium text-gray-700 mb-2">Zip: *</label>
-                <input type="text" id="zip" name="zip" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="zip" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Zip: *</label>
+                <input type="text" id="zip" name="zip" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="picture" class="block text-sm font-medium text-gray-700 mb-2">Picture: *</label>
-                <input type="file" id="picture" name="picture" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="picture" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Picture: *</label>
+                <input type="file" id="picture" name="picture" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div>
-                <label for="signature" class="block text-sm font-medium text-gray-700 mb-2">Signature:</label>
-                <input type="file" id="signature" name="signature" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+            <div class="col-span-1 sm:col-span-2 md:col-span-1">
+                <label for="signature" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Signature:</label>
+                <input type="file" id="signature" name="signature" class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
             </div>
-            <div class="col-span-2">
-                <label for="additional" class="block text-sm font-medium text-gray-700 mb-2">Additional:</label>
-                <textarea id="additional" name="additional" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
+            <div class="col-span-1 sm:col-span-2">
+                <label for="additional" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Additional:</label>
+                <textarea id="additional" name="additional" rows="3" class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary"></textarea>
             </div>
         </div>
-        <div class="mt-8">
-            <h2 class="text-xl font-semibold mb-4 text-primary">Shipping Information</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="mt-6 sm:mt-8">
+            <h2 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-primary">Shipping Information</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
-                    <label for="shipping_name" class="block text-sm font-medium text-gray-700 mb-2">Full Name: *</label>
-                    <input type="text" id="shipping_name" name="shipping_name" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                    <label for="shipping_name" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Full Name: *</label>
+                    <input type="text" id="shipping_name" name="shipping_name" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                 </div>
                 <div>
-                    <label for="shipping_email" class="block text-sm font-medium text-gray-700 mb-2">Email: *</label>
-                    <input type="email" id="shipping_email" name="shipping_email" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                    <label for="shipping_email" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Email: *</label>
+                    <input type="email" id="shipping_email" name="shipping_email" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                 </div>
                 <div>
-                    <label for="shipping_address1" class="block text-sm font-medium text-gray-700 mb-2">Address 1: *</label>
-                    <input type="text" id="shipping_address1" name="shipping_address1" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                    <label for="shipping_address1" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Address 1: *</label>
+                    <input type="text" id="shipping_address1" name="shipping_address1" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                 </div>
                 <div>
-                    <label for="shipping_address2" class="block text-sm font-medium text-gray-700 mb-2">Address 2:</label>
-                    <input type="text" id="shipping_address2" name="shipping_address2" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                    <label for="shipping_address2" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Address 2:</label>
+                    <input type="text" id="shipping_address2" name="shipping_address2" class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                 </div>
                 <div>
-                    <label for="shipping_city" class="block text-sm font-medium text-gray-700 mb-2">City: *</label>
-                    <input type="text" id="shipping_city" name="shipping_city" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                    <label for="shipping_city" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">City: *</label>
+                    <input type="text" id="shipping_city" name="shipping_city" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                 </div>
                 <div>
-                    <label for="shipping_state" class="block text-sm font-medium text-gray-700 mb-2">State: *</label>
-                    <select id="shipping_state" name="shipping_state" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                    <label for="shipping_state" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">State: *</label>
+                    <select id="shipping_state" name="shipping_state" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                         <option value="">Choose a state</option>
                         <option value="AL">Alabama</option>
                         <option value="AK">Alaska</option>
@@ -237,26 +237,26 @@
                     </select>
                 </div>
                 <div>
-                    <label for="shipping_zip" class="block text-sm font-medium text-gray-700 mb-2">Zip: *</label>
-                    <input type="text" id="shipping_zip" name="shipping_zip" required class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
+                    <label for="shipping_zip" class="block text-sm font-medium text-gray-700 mb-1 sm:mb-2">Zip: *</label>
+                    <input type="text" id="shipping_zip" name="shipping_zip" required class="w-full px-3 py-2 text-sm sm:text-base border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary">
                 </div>
             </div>
         </div>
-        <div class="mt-8">
-            <h2 class="text-xl font-semibold mb-4 text-primary">Shipping Options</h2>
-            <div class="flex items-center space-x-4">
+        <div class="mt-6 sm:mt-8">
+            <h2 class="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-primary">Shipping Options</h2>
+            <div class="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0">
                 <label class="flex items-center">
                     <input type="radio" name="shipping" value="normal" required class="mr-2">
-                    <span>Normal Shipping (1-2 weeks) - $100</span>
+                    <span class="text-sm sm:text-base">Normal Shipping (1-2 weeks) - $100</span>
                 </label>
                 <label class="flex items-center">
                     <input type="radio" name="shipping" value="expedited" required class="mr-2">
-                    <span>Expedited Shipping (2-5 days) - $120</span>
+                    <span class="text-sm sm:text-base">Expedited Shipping (2-5 days) - $120</span>
                 </label>
             </div>
         </div>
-        <div class="mt-8">
-            <button type="submit" class="w-full bg-primary text-secondary px-6 py-3 rounded-full hover:bg-accent transition duration-300 text-lg font-semibold">Proceed to Checkout</button>
+        <div class="mt-6 sm:mt-8">
+            <button type="submit" class="w-full bg-primary text-secondary px-6 py-3 rounded-full hover:bg-accent transition duration-300 text-base sm:text-lg font-semibold">Proceed to Checkout</button>
         </div>
     </form>
 </div>
