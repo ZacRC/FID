@@ -1,11 +1,11 @@
 {% extends 'mainapp/base.html' %}
 
-{% block title %}NAFakes - Premium Fake Products for Students{% endblock %}
+{% block title %}Premium Scannable IDs - Pass UV & Bend Tests{% endblock %}
 
 {% block extra_head %}
 <style>
     .hero-image {
-        background-image: url('https://source.unsplash.com/random/1920x1080?abstract');
+        background-image: url('https://source.unsplash.com/random/1920x1080?hologram');
         background-size: cover;
         background-position: center;
     }
@@ -14,25 +14,14 @@
 
 {% block content %}
 <div class="relative overflow-hidden">
-    <div class="hero-image absolute inset-0 z-0 opacity-50"></div>
+    <div class="hero-image absolute inset-0 z-0 opacity-30"></div>
     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
-        <div class="flex flex-col md:flex-row items-center justify-between">
-            <div class="md:w-1/2 mb-8 md:mb-0">
-                <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-primary">Welcome to NAFakes</h1>
-                <p class="text-xl md:text-2xl mb-8 text-gray-700">Discover premium, imaginary products that spark creativity and humor. Perfect for college life and beyond!</p>
-                <div class="space-x-4">
-                    <a href="{% url 'products' %}" class="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">Explore Collection</a>
-                    <a href="{% url 'about' %}" class="bg-white text-primary px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300 inline-block">Learn More</a>
-                </div>
-            </div>
-            <div class="md:w-1/2">
-                <div class="bg-white p-8 rounded-lg shadow-2xl">
-                    <h2 class="text-3xl font-bold mb-4 text-primary">Featured Product</h2>
-                    <div class="bg-gray-200 h-64 rounded-lg mb-4"></div>
-                    <h3 class="text-xl font-semibold mb-2">Invisible Laptop</h3>
-                    <p class="text-gray-600 mb-4">The lightest laptop ever! Perfect for pretending to study.</p>
-                    <a href="{% url 'order' %}" class="bg-accent text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-opacity-90 transition duration-300 inline-block">Order Now</a>
-                </div>
+        <div class="text-center">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 text-primary">Premium Scannable IDs</h1>
+            <p class="text-xl md:text-2xl mb-8 text-gray-700">High-quality, scannable IDs that pass UV and bend tests. Each order includes 2 duplicate IDs!</p>
+            <div class="space-x-4">
+                <a href="{% url 'order' %}" class="bg-primary text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">Order Now</a>
+                <a href="{% url 'features' %}" class="bg-white text-primary px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300 inline-block">Learn More</a>
             </div>
         </div>
     </div>
@@ -40,22 +29,22 @@
 
 <div class="bg-gray-100 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold mb-8 text-center text-primary">Why Choose NAFakes?</h2>
+        <h2 class="text-4xl font-bold mb-8 text-center text-primary">Premium Features</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="text-3xl mb-4 text-accent">🎨</div>
-                <h3 class="text-xl font-semibold mb-2">Boost Creativity</h3>
-                <p class="text-gray-600">Our imaginary products inspire innovative thinking and problem-solving skills.</p>
+                <div class="text-3xl mb-4 text-accent">🔍</div>
+                <h3 class="text-xl font-semibold mb-2">Scannable</h3>
+                <p class="text-gray-600">Our IDs are fully scannable and will pass any electronic verification.</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="text-3xl mb-4 text-accent">😂</div>
-                <h3 class="text-xl font-semibold mb-2">Stress Relief</h3>
-                <p class="text-gray-600">Laugh away your college stress with our humorous and witty product concepts.</p>
+                <div class="text-3xl mb-4 text-accent">💡</div>
+                <h3 class="text-xl font-semibold mb-2">UV Test</h3>
+                <p class="text-gray-600">Advanced UV features that will pass any ultraviolet light inspection.</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <div class="text-3xl mb-4 text-accent">🌟</div>
-                <h3 class="text-xl font-semibold mb-2">Unique Experience</h3>
-                <p class="text-gray-600">Enjoy a one-of-a-kind shopping experience that exists only in your imagination.</p>
+                <div class="text-3xl mb-4 text-accent">↩️</div>
+                <h3 class="text-xl font-semibold mb-2">Bend Test</h3>
+                <p class="text-gray-600">High-quality materials ensure our IDs pass the bend test with flying colors.</p>
             </div>
         </div>
     </div>
@@ -63,19 +52,45 @@
 
 <div class="py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold mb-8 text-center text-primary">What Our Customers Say</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <h2 class="text-4xl font-bold mb-8 text-center text-primary">Example Products</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <p class="text-gray-600 mb-4">"The Invisible Laptop changed my life! Now I can pretend to study anywhere!"</p>
-                <p class="font-semibold">- Sarah, Procrastination Major</p>
+                <img src="https://i2.paste.pics/65db2880c52399b66d82ba50375ee59f.png?rand=YmxQNpMhLv" alt="ID Example 1" class="w-full h-64 object-cover rounded-lg mb-4">
+                <h3 class="text-xl font-semibold mb-2">Standard ID</h3>
+                <p class="text-gray-600">Our most popular option, perfect for everyday use.</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <p class="text-gray-600 mb-4">"Thanks to NAFakes, I finally have an excuse for my empty fridge!"</p>
-                <p class="font-semibold">- Mike, Culinary Illusions</p>
+                <img src="https://i2.paste.pics/54db3917411403806505fd2190fcc4bf.png?rand=JkFKRcxgPG" alt="ID Example 2" class="w-full h-64 object-cover rounded-lg mb-4">
+                <h3 class="text-xl font-semibold mb-2">Enhanced Security ID</h3>
+                <p class="text-gray-600">Features advanced holograms and microprinting.</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow-lg">
-                <p class="text-gray-600 mb-4">"The Procrastination Eraser is a game-changer. I'll start using it... tomorrow."</p>
-                <p class="font-semibold">- Emily, Professional Daydreamer</p>
+                <img src="https://i2.paste.pics/af26abc2fabc133d45be1d87647fed8b.png?rand=1uexkE3Ml7" alt="ID Example 3" class="w-full h-64 object-cover rounded-lg mb-4">
+                <h3 class="text-xl font-semibold mb-2">Premium ID</h3>
+                <p class="text-gray-600">Our top-tier option with all available security features.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="bg-gray-100 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-4xl font-bold mb-8 text-center text-primary">Why Choose Us?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="text-3xl mb-4 text-accent">🔒</div>
+                <h3 class="text-xl font-semibold mb-2">Top-notch Security</h3>
+                <p class="text-gray-600">Our IDs feature the latest in security technology, ensuring they pass all tests.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="text-3xl mb-4 text-accent">🎁</div>
+                <h3 class="text-xl font-semibold mb-2">2 Duplicates</h3>
+                <p class="text-gray-600">Every order includes two identical duplicate IDs at no extra cost.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg">
+                <div class="text-3xl mb-4 text-accent">🚚</div>
+                <h3 class="text-xl font-semibold mb-2">Fast Delivery</h3>
+                <p class="text-gray-600">Quick and discreet shipping to ensure you receive your order promptly.</p>
             </div>
         </div>
     </div>
