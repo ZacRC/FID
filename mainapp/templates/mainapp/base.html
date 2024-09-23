@@ -28,11 +28,11 @@
     {% block extra_head %}{% endblock %}
 </head>
 <body class="bg-secondary text-dark font-sans min-h-screen flex flex-col">
-    <header class="bg-primary text-white shadow-lg">
+    <header class="bg-primary text-white shadow-lg relative z-50">
         <div class="container mx-auto px-4">
             <nav class="relative flex items-center justify-between py-4">
                 <a href="{% url 'index' %}" class="text-2xl sm:text-3xl font-bold tracking-tight">NAFakes</a>
-                <ul id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-primary flex-col items-center space-y-4 py-4 md:relative md:flex md:flex-row md:space-y-0 md:space-x-6 md:py-0">
+                <ul id="mobile-menu" class="hidden absolute top-full left-0 right-0 bg-primary flex-col items-center space-y-4 py-4 md:relative md:flex md:flex-row md:space-y-0 md:space-x-6 md:py-0 z-50">
                     <li><a href="{% url 'index' %}" class="block px-4 py-2 hover:bg-accent md:hover:bg-transparent md:hover:text-accent transition duration-300">Home</a></li>
                     <li><a href="{% url 'about' %}" class="block px-4 py-2 hover:bg-accent md:hover:bg-transparent md:hover:text-accent transition duration-300">About</a></li>
                     <li><a href="{% url 'products' %}" class="block px-4 py-2 hover:bg-accent md:hover:bg-transparent md:hover:text-accent transition duration-300">Products</a></li>
@@ -42,7 +42,7 @@
                     <li><a href="{% url 'order' %}" class="block px-4 py-2 bg-accent text-white md:rounded-full hover:bg-blue-600 transition duration-300 font-semibold">Order</a></li>
                     <li><a href="{% url 'grouporder' %}" class="block px-4 py-2 bg-accent text-white md:rounded-full hover:bg-blue-600 transition duration-300 font-semibold">Group Order</a></li>
                 </ul>
-                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none z-50">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
@@ -51,11 +51,11 @@
         </div>
     </header>
 
-    <main class="flex-grow container mx-auto px-4 py-8">
+    <main class="flex-grow container mx-auto px-4 py-8 relative z-0">
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-dark text-white py-8">
+    <footer class="bg-dark text-white py-8 relative z-0">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="mb-4 md:mb-0">
