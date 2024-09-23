@@ -33,7 +33,27 @@ def reviews(request):
     return render(request, 'mainapp/reviews.html')
 
 def products(request):
-    return render(request, 'mainapp/products.html')
+    image_urls = [
+        "https://i2.paste.pics/65db2880c52399b66d82ba50375ee59f.png?rand=YmxQNpMhLv",
+        "https://i2.paste.pics/54db3917411403806505fd2190fcc4bf.png?rand=JkFKRcxgPG",
+        "https://i2.paste.pics/af26abc2fabc133d45be1d87647fed8b.png?rand=1uexkE3Ml7",
+        "https://i2.paste.pics/7dfa819c0ece2dab9fb444b5aec0f213.png?rand=UzrW5iV1ag",
+        "https://i2.paste.pics/f11b7926a96fc1e471d4d1cfde1af695.png?rand=NE2rXaSmq4",
+        "https://i2.paste.pics/375cb20c97a7e9057776e335977c12cc.png?rand=avJUq3eycG",
+        "https://i2.paste.pics/930f751cc5a204792fbfc6a82b90ada1.png?rand=LXysZxA4iM",
+        "https://i2.paste.pics/54cf77ab9b02a834e0496bb26867a902.png?rand=3u1A7kgKN6",
+        "https://i2.paste.pics/642f6c3d4af74944387f9ca07a6516e0.png?rand=Tfd8oies9h",
+        "https://i2.paste.pics/766da6059e88d5cdd7023550d0688443.png?rand=f0mxsq95ot",
+        "https://i2.paste.pics/a7730b900f9eae3a94546d4da9cb5cfe.png?trs=c78d6c299eb295e412d652481d6bcfda99b00e18f6cbe0ad33c87c02fad8600f&rand=wFtCKduDEV",
+        "https://i2.paste.pics/157240e193495821c8ad2b0a084ccda2.png?trs=c78d6c299eb295e412d652481d6bcfda99b00e18f6cbe0ad33c87c02fad8600f&rand=u7j2w9NSQE",
+        "https://i2.paste.pics/b9666cf0d74a7a476b367f607dfd7157.png?trs=c78d6c299eb295e412d652481d6bcfda99b00e18f6cbe0ad33c87c02fad8600f&rand=Um1N3Gw0Pe",
+        "https://i2.paste.pics/59f830f156ca44b163a8fa3345e1729d.png?trs=c78d6c299eb295e412d652481d6bcfda99b00e18f6cbe0ad33c87c02fad8600f&rand=HwZ5jdyugA",
+        "https://i2.paste.pics/9faea0e6f3f9519c8d67f8fddbd96e1c.png?trs=c78d6c299eb295e412d652481d6bcfda99b00e18f6cbe0ad33c87c02fad8600f&rand=3uXShofdmJ",
+        "https://i2.paste.pics/c879cdc34dce3f8a83db95c6a1fe3f97.png?trs=c78d6c299eb295e412d652481d6bcfda99b00e18f6cbe0ad33c87c02fad8600f&rand=HB8Pmy4S1b",
+        "https://i2.paste.pics/af52ce72ed265558113b936096ac443b.png?trs=c78d6c299eb295e412d652481d6bcfda99b00e18f6cbe0ad33c87c02fad8600f&rand=gDN4Wf9r8a",
+        "https://i2.paste.pics/75a1b0b4b842422e1cca2fd858a458fe.png?trs=c78d6c299eb295e412d652481d6bcfda99b00e18f6cbe0ad33c87c02fad8600f&rand=q0eLP15p43",
+    ]
+    return render(request, 'mainapp/products.html', {'image_urls': image_urls})
 
 def order(request):
     return render(request, 'mainapp/order.html')
