@@ -8,12 +8,8 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {% for image_url in image_urls %}
         <div class="bg-white shadow-lg rounded-lg overflow-hidden transition duration-300 ease-in-out transform hover:scale-105">
-            <div class="h-48 bg-gray-300 relative overflow-hidden">
+            <div class="aspect-w-1 aspect-h-1">
                 <img src="{{ image_url }}" alt="Product Image" class="w-full h-full object-cover">
-            </div>
-            <div class="p-4">
-                <h2 class="text-lg font-semibold mb-2 text-primary">Product {{ forloop.counter }}</h2>
-                <a href="{% url 'order' %}" class="bg-primary text-secondary px-4 py-2 rounded-full hover:bg-accent transition duration-300 inline-block text-sm">Buy Now</a>
             </div>
         </div>
         {% endfor %}
