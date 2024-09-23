@@ -159,12 +159,12 @@ def join_group(request):
         
         if group.members.count() >= 10:
             messages.error(request, 'This group is already full.')
-            return redirect('group', group_id=group_id)
+            return redirect('grouporder')
 
         # Check if the name is already taken in this group
         if GroupMember.objects.filter(group=group, name=name).exists():
             messages.error(request, 'This name is already taken in the group. Please choose a different name.')
-            return redirect('group', group_id=group_id)
+            return redirect('grouporder')
 
         member = GroupMember.objects.create(
             group=group,
