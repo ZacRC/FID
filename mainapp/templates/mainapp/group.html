@@ -71,70 +71,55 @@
             <!-- Members List -->
             <div class="p-4 sm:p-6">
                 <h2 class="text-xl font-semibold mb-4 text-primary">Members</h2>
-                <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
-                            <tr>
-                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                <th class="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
-                            {% for member in members %}
-                            <tr>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
-                                    <div class="flex items-center">
-                                        <div class="text-sm font-medium text-gray-900">
-                                            {{ member.name }}
-                                            {% if member.member_id == group.creator_member_id %}
-                                                <span class="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-primary text-secondary">Creator</span>
-                                            {% endif %}
-                                        </div>
-                                    </div>
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap">
-                                    {% if member.order_info_completed %}
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Info Completed</span>
-                                    {% else %}
-                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Info Not Completed</span>
+                <div class="space-y-4">
+                    {% for member in members %}
+                    <div class="bg-white shadow rounded-lg p-4">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2">
+                            <div class="text-sm font-medium text-gray-900 mb-2 sm:mb-0">
+                                {{ member.name }}
+                                {% if member.member_id == group.creator_member_id %}
+                                    <span class="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-primary text-secondary">Creator</span>
+                                {% endif %}
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                {% if member.order_info_completed %}
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Info Completed</span>
+                                {% else %}
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Info Not Completed</span>
+                                {% endif %}
+                                {% if member.paid %}
+                                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Paid ✓</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            {% if member.member_id == current_member.member_id %}
+                                {% if member.order_info_completed %}
+                                    <a href="{% url 'edit_group_order_info' group.id %}" class="bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300 text-sm">Edit Info</a>
+                                    {% if not member.paid %}
+                                        <a href="{% url 'group_id_order' group.id %}" class="bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300 text-sm">Order ID</a>
                                     {% endif %}
-                                    {% if member.paid %}
-                                        <span class="ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Paid ✓</span>
-                                    {% endif %}
-                                </td>
-                                <td class="px-4 sm:px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                    <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                                        {% if member.member_id == current_member.member_id %}
-                                            {% if member.order_info_completed %}
-                                                <a href="{% url 'edit_group_order_info' group.id %}" class="bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300">Edit Info</a>
-                                                {% if not member.paid %}
-                                                    <a href="{% url 'group_id_order' group.id %}" class="bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300">Order ID</a>
-                                                {% endif %}
-                                            {% else %}
-                                                <a href="{% url 'add_group_order_info' group.id %}" class="bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300">Add Info</a>
-                                            {% endif %}
-                                        {% endif %}
-                                        {% if current_member.member_id == group.creator_member_id and member.member_id != group.creator_member_id %}
-                                            <button class="change-name-btn bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300" data-member-id="{{ member.id }}">Change Name</button>
-                                            <form action="{% url 'kick_member' group.id member.id %}" method="post" class="inline">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="member_id" value="{{ current_member.member_id }}">
-                                                <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition duration-300">Kick</button>
-                                            </form>
-                                        {% endif %}
-                                        {% if member.member_id == current_member.member_id and member.member_id != group.creator_member_id %}
-                                            <form action="{% url 'leave_group' group.id member.id %}" method="post" class="inline">
-                                                {% csrf_token %}
-                                                <button type="submit" class="bg-yellow-500 text-white px-3 py-1 rounded-full hover:bg-yellow-600 transition duration-300">Leave</button>
-                                            </form>
-                                        {% endif %}
-                                    </div>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                                {% else %}
+                                    <a href="{% url 'add_group_order_info' group.id %}" class="bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300 text-sm">Add Info</a>
+                                {% endif %}
+                            {% endif %}
+                            {% if current_member.member_id == group.creator_member_id and member.member_id != group.creator_member_id %}
+                                <button class="change-name-btn bg-primary text-secondary px-3 py-1 rounded-full hover:bg-accent transition duration-300 text-sm" data-member-id="{{ member.id }}">Change Name</button>
+                                <form action="{% url 'kick_member' group.id member.id %}" method="post" class="inline">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="member_id" value="{{ current_member.member_id }}">
+                                    <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded-full hover:bg-red-600 transition duration-300 text-sm">Kick</button>
+                                </form>
+                            {% endif %}
+                            {% if member.member_id == current_member.member_id and member.member_id != group.creator_member_id %}
+                                <form action="{% url 'leave_group' group.id member.id %}" method="post" class="inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="bg-yellow-500 text-white px-3 py-1 rounded-full hover:bg-yellow-600 transition duration-300 text-sm">Leave</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
 
